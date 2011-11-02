@@ -1,6 +1,5 @@
 //
 //  SubRip.h
-//  TIMSSVideos
 //
 /*
  This software is licensed under the terms of the BSD license:
