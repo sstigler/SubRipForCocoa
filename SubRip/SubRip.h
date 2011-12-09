@@ -17,6 +17,7 @@
 
 #import <Foundation/Foundation.h>
 #import <CoreMedia/CMTime.h>
+#import <AVFoundation/AVTime.h>
 
 typedef enum {
     SubRipScanPositionArrayIndex,
@@ -24,7 +25,7 @@ typedef enum {
     SubRipScanPositionText
 } SubRipScanPosition;
 
-@interface SubRip : NSObject {
+@interface SubRip : NSObject < NSCoding > {
     NSMutableArray *subtitleItems;
 }
 
@@ -32,6 +33,7 @@ typedef enum {
 @property(readonly) NSUInteger totalCharacterCountOfText;
 
 -(SubRip *)initWithFile:(NSString *)filePath;
+-(SubRip *)initWithData:(NSData *)data;
 -(SubRip *)initWithString:(NSString *)str;
 -(BOOL)_populateFromString:(NSString *)str;
 
@@ -43,9 +45,12 @@ typedef enum {
 
 -(NSUInteger)totalCharacterCountOfText;
 
+-(void)encodeWithCoder:(NSCoder *)encoder;
+-(id)initWithCoder:(NSCoder *)decoder;
+
 @end
 
-@interface SubRipItem : NSObject {
+@interface SubRipItem : NSObject < NSCoding > {
     CMTime startTime;
     CMTime endTime;
     NSString *text;
@@ -69,5 +74,8 @@ typedef enum {
 -(NSInteger)endTimeInSeconds;
 
 -(BOOL)containsString:(NSString *)str;
+
+-(void)encodeWithCoder:(NSCoder *)encoder;
+-(id)initWithCoder:(NSCoder *)decoder;
 
 @end

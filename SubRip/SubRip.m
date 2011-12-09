@@ -38,9 +38,23 @@
     }
 }
 
+-(SubRip *)initWithData:(NSData *)data {
+    self = [super init];
+    if (self) {
+        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
+        self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
+        BOOL success = [self _populateFromString:str];
+        if (!success) {
+            return nil;
+        }
+    }
+    return self;
+}
+
 -(SubRip *)initWithString:(NSString *)str {
     self = [super init];
     if (self) {
+        self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
         BOOL success = [self _populateFromString:str];
         if (!success) {
             return nil;
@@ -142,6 +156,16 @@
     return totalLength;
 }
 
+-(void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeObject:subtitleItems forKey:@"subtitleItems"];
+}
+
+-(id)initWithCoder:(NSCoder *)decoder {
+    self = [self initWithCoder:decoder];
+    self.subtitleItems = [decoder decodeObjectForKey:@"subtitleItems"];
+    return self;
+}
+
 @end
 
 @implementation SubRipItem
@@ -214,6 +238,20 @@
     } else {
         return true;
     }
+}
+
+-(void)encodeWithCoder:(NSCoder *)encoder {
+    [encoder encodeCMTime:startTime forKey:@"startTime"];
+    [encoder encodeCMTime:endTime forKey:@"endTime"];
+    [encoder encodeObject:text forKey:@"text"];
+}
+
+-(id)initWithCoder:(NSCoder *)decoder {
+    self = [self initWithCoder:decoder];
+    self.startTime = [decoder decodeCMTimeForKey:@"startTime"];
+    self.endTime = [decoder decodeCMTimeForKey:@"endTime"];
+    self.text = [decoder decodeObjectForKey:@"text"];
+    return self;
 }
             
 @end
