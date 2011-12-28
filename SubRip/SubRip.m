@@ -161,7 +161,7 @@
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
-    self = [self initWithCoder:decoder];
+    self = [self init];
     self.subtitleItems = [decoder decodeObjectForKey:@"subtitleItems"];
     return self;
 }
@@ -170,8 +170,16 @@
 
 @implementation SubRipItem
 
-@synthesize startTime, endTime, text;
+@synthesize startTime, endTime, text, uniqueID;
 @dynamic startTimeString, endTimeString;
+
+- (id)init {
+    self = [super init];
+    if (self) {
+        uniqueID = [[NSProcessInfo processInfo] globallyUniqueString];
+    }
+    return self;
+}
 
 -(NSString *)startTimeString {
     return [self _convertCMTimeToString:self.startTime];
@@ -208,7 +216,7 @@
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, self.text];
 }
-                     
+            
 -(NSInteger)startTimeInSeconds {
     return self.startTime.value / self.startTime.timescale;
 }
@@ -247,7 +255,7 @@
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
-    self = [self initWithCoder:decoder];
+    self = [self init];
     self.startTime = [decoder decodeCMTimeForKey:@"startTime"];
     self.endTime = [decoder decodeCMTimeForKey:@"endTime"];
     self.text = [decoder decodeObjectForKey:@"text"];

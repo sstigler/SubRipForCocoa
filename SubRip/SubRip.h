@@ -25,6 +25,38 @@ typedef enum {
     SubRipScanPositionText
 } SubRipScanPosition;
 
+@interface SubRipItem : NSObject < NSCoding > {
+    CMTime startTime;
+    CMTime endTime;
+    NSString *text;
+    NSString *uniqueID;
+}
+
+@property(assign) CMTime startTime;
+@property(assign) CMTime endTime;
+@property(copy) NSString *text;
+
+@property(readonly, getter = startTimeString) NSString *startTimeString;
+@property(readonly, getter = endTimeString) NSString *endTimeString;
+@property(readonly) NSString *uniqueID;
+
+-(NSString *)startTimeString;
+-(NSString *)endTimeString;
+
+-(NSString *)_convertCMTimeToString:(CMTime)theTime;
+
+-(NSString *)description;
+
+-(NSInteger)startTimeInSeconds;
+-(NSInteger)endTimeInSeconds;
+
+-(BOOL)containsString:(NSString *)str;
+
+-(void)encodeWithCoder:(NSCoder *)encoder;
+-(id)initWithCoder:(NSCoder *)decoder;
+
+@end
+
 @interface SubRip : NSObject < NSCoding > {
     NSMutableArray *subtitleItems;
 }
@@ -44,36 +76,6 @@ typedef enum {
 -(NSUInteger)indexOfSubRipItemWithCharacterIndex:(NSUInteger)idx;
 
 -(NSUInteger)totalCharacterCountOfText;
-
--(void)encodeWithCoder:(NSCoder *)encoder;
--(id)initWithCoder:(NSCoder *)decoder;
-
-@end
-
-@interface SubRipItem : NSObject < NSCoding > {
-    CMTime startTime;
-    CMTime endTime;
-    NSString *text;
-}
-
-@property(assign) CMTime startTime;
-@property(assign) CMTime endTime;
-@property(copy) NSString *text;
-
-@property(readonly, getter = startTimeString) NSString *startTimeString;
-@property(readonly, getter = endTimeString) NSString *endTimeString;
-
--(NSString *)startTimeString;
--(NSString *)endTimeString;
-
--(NSString *)_convertCMTimeToString:(CMTime)theTime;
-
--(NSString *)description;
-
--(NSInteger)startTimeInSeconds;
--(NSInteger)endTimeInSeconds;
-
--(BOOL)containsString:(NSString *)str;
 
 -(void)encodeWithCoder:(NSCoder *)encoder;
 -(id)initWithCoder:(NSCoder *)decoder;
