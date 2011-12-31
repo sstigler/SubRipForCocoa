@@ -23,7 +23,9 @@
 
 -(SubRip *)initWithFile:(NSString *)filePath {
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSString *srt = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
+        NSError *err = nil;
+        NSStringEncoding enc;
+        NSString *srt = [NSString stringWithContentsOfURL:[NSURL fileURLWithPath:filePath] usedEncoding:&enc error:&err];
         self = [super init];
         if (self) {
             self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
@@ -66,6 +68,9 @@
 // returns YES if successful, NO if not succesful.
 // assumes that str is a correctly-formatted SRT file.
 -(BOOL)_populateFromString:(NSString *)str {
+    if (str == nil) {
+        return NO;
+    }
     SubRipItem __block *cur = [SubRipItem new];
     SubRipScanPosition __block scanPosition = SubRipScanPositionArrayIndex;
     [str enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
@@ -124,7 +129,7 @@
 }
 
 -(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)theTime {
-    NSInteger __block desiredTimeInSeconds = theTime.value / theTime.timescale;
+    NSInteger __block desiredTimeInSeconds = CMTimeGetSeconds(theTime);
     return [self.subtitleItems indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         if ((desiredTimeInSeconds >= [(SubRipItem *)obj startTimeInSeconds]) && (desiredTimeInSeconds <= [(SubRipItem *)obj endTimeInSeconds])) {
             return true;
@@ -191,7 +196,7 @@
 
 -(NSString *)_convertCMTimeToString:(CMTime)theTime {
     // Need a string of format "hh:mm:ss". (No milliseconds.)
-    NSInteger seconds = theTime.value / theTime.timescale;
+    NSInteger seconds = CMTimeGetSeconds(theTime);
     NSDate *date1 = [NSDate new];
     NSDate *date2 = [NSDate dateWithTimeInterval:seconds sinceDate:date1];
     unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
@@ -218,11 +223,11 @@
 }
             
 -(NSInteger)startTimeInSeconds {
-    return self.startTime.value / self.startTime.timescale;
+    return CMTimeGetSeconds(self.startTime);
 }
 
 -(NSInteger)endTimeInSeconds {
-    return self.endTime.value / self.endTime.timescale;
+    return CMTimeGetSeconds(self.endTime);
 }
 
 -(BOOL)containsString:(NSString *)str {
@@ -252,13 +257,17 @@
     [encoder encodeCMTime:startTime forKey:@"startTime"];
     [encoder encodeCMTime:endTime forKey:@"endTime"];
     [encoder encodeObject:text forKey:@"text"];
+    [encoder encodeObject:uniqueID forKey:@"uniqueID"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
-    self = [self init];
-    self.startTime = [decoder decodeCMTimeForKey:@"startTime"];
-    self.endTime = [decoder decodeCMTimeForKey:@"endTime"];
-    self.text = [decoder decodeObjectForKey:@"text"];
+    self = [super init];
+    if (self) {
+        self.startTime = [decoder decodeCMTimeForKey:@"startTime"];
+        self.endTime = [decoder decodeCMTimeForKey:@"endTime"];
+        self.text = [decoder decodeObjectForKey:@"text"];
+        uniqueID = [decoder decodeObjectForKey:@"uniqueID"];
+    }
     return self;
 }
             
