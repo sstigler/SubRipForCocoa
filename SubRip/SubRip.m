@@ -219,7 +219,7 @@
 }
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, self.text];
+    return [NSString stringWithFormat:@"%@ ---> %@\n%@", CMTimeCopyDescription(kCFAllocatorDefault, self.startTime), CMTimeCopyDescription(kCFAllocatorDefault, self.endTime), self.text];
 }
             
 -(NSInteger)startTimeInSeconds {
@@ -269,6 +269,10 @@
         uniqueID = [decoder decodeObjectForKey:@"uniqueID"];
     }
     return self;
+}
+
+-(NSDictionary *)dictionaryRepresentation {
+    return [NSDictionary dictionaryWithObjectsAndKeys:[NSNumber numberWithInteger:CMTimeGetSeconds(startTime)], @"timecode", text, @"subtitle", nil];
 }
             
 @end

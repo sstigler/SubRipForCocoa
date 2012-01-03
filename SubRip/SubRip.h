@@ -55,6 +55,8 @@ typedef enum {
 -(void)encodeWithCoder:(NSCoder *)encoder;
 -(id)initWithCoder:(NSCoder *)decoder;
 
+-(NSDictionary *)dictionaryRepresentation; // returns a subtitle dictionary suitable for use with AV Foundation.
+
 @end
 
 @interface SubRip : NSObject < NSCoding > {
