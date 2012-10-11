@@ -140,7 +140,8 @@
 -(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)theTime {
     NSInteger __block desiredTimeInSeconds = theTime.value / theTime.timescale;
     return [self.subtitleItems indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
-        if ((desiredTimeInSeconds >= [(SubRipItem *)obj startTimeInSeconds]) && (desiredTimeInSeconds <= [(SubRipItem *)obj endTimeInSeconds])) {
+        if ((desiredTimeInSeconds >= [(SubRipItem *)obj startTimeInSeconds]) &&
+			(desiredTimeInSeconds <= [(SubRipItem *)obj endTimeInSeconds])) {
             return true;
         } else {
             return false;
@@ -152,6 +153,7 @@
     if (idx >= self.totalCharacterCountOfText) {
         return NSNotFound;
     }
+	
     NSUInteger currentCharacterCount = 0;
     NSUInteger currentItemIndex = 0;
     SubRipItem *cur = [self.subtitleItems objectAtIndex:currentItemIndex];
@@ -159,6 +161,7 @@
         currentCharacterCount += cur.text.length;
         currentItemIndex++;
     }
+	
     return currentItemIndex;
 }
 
