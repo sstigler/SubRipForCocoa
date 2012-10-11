@@ -65,6 +65,7 @@ typedef enum {
 @property(readonly) NSUInteger totalCharacterCountOfText;
 
 -(SubRip *)initWithFile:(NSString *)filePath;
+-(SubRip *)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
 -(SubRip *)initWithData:(NSData *)data;
 -(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 -(SubRip *)initWithString:(NSString *)str;

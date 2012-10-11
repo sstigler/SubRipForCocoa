@@ -30,6 +30,17 @@
     }
 }
 
+-(SubRip *)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
+	if ([fileURL checkResourceIsReachableAndReturnError:error] == YES) {
+        NSData *data = [NSData dataWithContentsOfURL:fileURL
+											 options:NSDataReadingMappedIfSafe
+											   error:error];
+		return [self initWithData:data encoding:encoding];
+    } else {
+        return nil;
+    }
+}
+
 -(SubRip *)initWithData:(NSData *)data {
     return [self initWithData:data encoding:NSUTF8StringEncoding];
 }
