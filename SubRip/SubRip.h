@@ -66,6 +66,7 @@ typedef enum {
 
 -(SubRip *)initWithFile:(NSString *)filePath;
 -(SubRip *)initWithData:(NSData *)data;
+-(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 -(SubRip *)initWithString:(NSString *)str;
 -(BOOL)_populateFromString:(NSString *)str;
 

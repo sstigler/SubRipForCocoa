@@ -23,36 +23,25 @@
 
 -(SubRip *)initWithFile:(NSString *)filePath {
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSString *srt = [NSString stringWithContentsOfFile:filePath encoding:NSUTF8StringEncoding error:NULL];
-        self = [super init];
-        if (self) {
-            self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
-            BOOL success = [self _populateFromString:srt];
-            if (!success) {
-                return nil;
-            }
-        }
-        return self;
+        NSData *data = [NSData dataWithContentsOfFile:filePath];
+		return [self initWithData:data encoding:NSUTF8StringEncoding];
     } else {
         return nil;
     }
 }
 
 -(SubRip *)initWithData:(NSData *)data {
-    self = [super init];
-    if (self) {
-        NSString *str = [[NSString alloc] initWithData:data encoding:NSUTF8StringEncoding];
-        self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
-        BOOL success = [self _populateFromString:str];
-        if (!success) {
-            return nil;
-        }
-    }
-    return self;
+    return [self initWithData:data encoding:NSUTF8StringEncoding];
+}
+
+-(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
+	NSString *str = [[NSString alloc] initWithData:data encoding:encoding];
+    return [self initWithString:str];
 }
 
 -(SubRip *)initWithString:(NSString *)str {
     self = [super init];
+	
     if (self) {
         self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
         BOOL success = [self _populateFromString:str];
@@ -60,6 +49,7 @@
             return nil;
         }
     }
+	
     return self;
 }
   
