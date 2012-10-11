@@ -50,6 +50,10 @@ typedef enum {
 -(NSInteger)startTimeInSeconds;
 -(NSInteger)endTimeInSeconds;
 
+// These methods are for development only due to the issues involving floating-point arithmetic.
+-(double)startTimeDouble;
+-(double)endTimeDouble;
+
 -(BOOL)containsString:(NSString *)str;
 
 -(void)encodeWithCoder:(NSCoder *)encoder;

@@ -242,6 +242,14 @@
     return _endTime.value / _endTime.timescale;
 }
 
+-(double)startTimeDouble {
+    return (double)_startTime.value / _startTime.timescale;
+}
+
+-(double)endTimeDouble {
+    return (double)_endTime.value / _endTime.timescale;
+}
+
 -(BOOL)containsString:(NSString *)str {
     NSRange searchResult = [_text rangeOfString:str options:NSCaseInsensitiveSearch];
     if (searchResult.location == NSNotFound) {
