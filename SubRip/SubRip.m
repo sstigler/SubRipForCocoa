@@ -218,15 +218,15 @@
     if ([converted hour] < 10) {
         [str appendString:@"0"];
     }
-    [str appendFormat:@"%ld:", [converted hour]];
+    [str appendFormat:@"%ld:", (long)[converted hour]];
     if ([converted minute] < 10) {
         [str appendString:@"0"];
     }
-    [str appendFormat:@"%ld:", [converted minute]];
+    [str appendFormat:@"%ld:", (long)[converted minute]];
     if ([converted second] < 10) {
         [str appendString:@"0"];
     }
-    [str appendFormat:@"%ld", [converted second]];
+    [str appendFormat:@"%ld", (long)[converted second]];
     return str;
 }
 
