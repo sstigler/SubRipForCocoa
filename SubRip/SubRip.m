@@ -123,11 +123,19 @@
             }
             
             if ((scanPosition == SubRipScanPositionText) && (!actionAlreadyTaken)) {
-                cur.text = line;
-                [subtitleItems addObject:cur];
-                cur = [SubRipItem new];
-                scanPosition = SubRipScanPositionArrayIndex;
+                NSString *prevText = cur.text;
+                if (prevText == nil) {
+                    cur.text = line;
+                } else {
+                    cur.text = [cur.text stringByAppendingFormat:@"\n%@", line];
+                }
+                scanPosition = SubRipScanPositionText;
             }
+        }
+        else {
+            [subtitleItems addObject:cur];
+            cur = [SubRipItem new];
+            scanPosition = SubRipScanPositionArrayIndex;
         }
     }];
     return YES;
