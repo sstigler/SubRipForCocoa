@@ -170,23 +170,23 @@
 
 @implementation SubRipItem
 
-@synthesize startTime, endTime, text, uniqueID;
+@synthesize startTime = _startTime, endTime = _endTime, text = _text, uniqueID = _uniqueID;
 @dynamic startTimeString, endTimeString;
 
 - (id)init {
     self = [super init];
     if (self) {
-        uniqueID = [[NSProcessInfo processInfo] globallyUniqueString];
+        _uniqueID = [[NSProcessInfo processInfo] globallyUniqueString];
     }
     return self;
 }
 
 -(NSString *)startTimeString {
-    return [self _convertCMTimeToString:self.startTime];
+    return [self _convertCMTimeToString:_startTime];
 }
 
 -(NSString *)endTimeString {
-    return [self _convertCMTimeToString:self.endTime];
+    return [self _convertCMTimeToString:_endTime];
 }
 
 -(NSString *)_convertCMTimeToString:(CMTime)theTime {
@@ -218,15 +218,15 @@
 }
             
 -(NSInteger)startTimeInSeconds {
-    return self.startTime.value / self.startTime.timescale;
+    return _startTime.value / _startTime.timescale;
 }
 
 -(NSInteger)endTimeInSeconds {
-    return self.endTime.value / self.endTime.timescale;
+    return _endTime.value / _endTime.timescale;
 }
 
 -(BOOL)containsString:(NSString *)str {
-    NSRange searchResult = [self.text rangeOfString:str options:NSCaseInsensitiveSearch];
+    NSRange searchResult = [_text rangeOfString:str options:NSCaseInsensitiveSearch];
     if (searchResult.location == NSNotFound) {
         if ([str length] < 9) {
             searchResult = [[self startTimeString] rangeOfString:str options:NSCaseInsensitiveSearch];
@@ -249,15 +249,15 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeCMTime:startTime forKey:@"startTime"];
-    [encoder encodeCMTime:endTime forKey:@"endTime"];
-    [encoder encodeObject:text forKey:@"text"];
+    [encoder encodeCMTime:_startTime forKey:@"startTime"];
+    [encoder encodeCMTime:_endTime forKey:@"endTime"];
+    [encoder encodeObject:_text forKey:@"text"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {
     self = [self init];
-    self.startTime = [decoder decodeCMTimeForKey:@"startTime"];
-    self.endTime = [decoder decodeCMTimeForKey:@"endTime"];
+    _startTime = [decoder decodeCMTimeForKey:@"startTime"];
+    _endTime = [decoder decodeCMTimeForKey:@"endTime"];
     self.text = [decoder decodeObjectForKey:@"text"];
     return self;
 }

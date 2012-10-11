@@ -26,10 +26,10 @@ typedef enum {
 } SubRipScanPosition;
 
 @interface SubRipItem : NSObject < NSCoding > {
-    CMTime startTime;
-    CMTime endTime;
-    NSString *text;
-    NSString *uniqueID;
+    CMTime _startTime;
+    CMTime _endTime;
+    NSString *_text;
+    NSString *_uniqueID;
 }
 
 @property(assign) CMTime startTime;
