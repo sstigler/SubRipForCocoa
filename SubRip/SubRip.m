@@ -64,51 +64,64 @@
     return self;
 }
   
+- (void)parse:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
+    NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
+	
+    NSInteger hours = [(NSString *)[timeComponents objectAtIndex:0] integerValue];
+    NSInteger minutes = [(NSString *)[timeComponents objectAtIndex:1] integerValue];
+	
+    NSArray *secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@","];
+    NSInteger seconds = [(NSString *)[secondsComponents objectAtIndex:0] integerValue];
+	
+    *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] integerValue];
+    *totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
+}
+
+- (CMTime)parseIntoCMTime:(NSString *)timecodeString {
+	NSInteger milliseconds;
+	NSInteger totalNumSeconds;
+	
+	[self parse:timecodeString
+	intoSeconds:&totalNumSeconds
+   milliseconds:&milliseconds];
+	
+	CMTime startSeconds = CMTimeMake(totalNumSeconds, 1);
+	CMTime millisecondsCMTime = CMTimeMake(milliseconds, 1000);
+	CMTime time = CMTimeAdd(startSeconds, millisecondsCMTime);
+	
+	return time;
+}
+
 // returns YES if successful, NO if not succesful.
 // assumes that str is a correctly-formatted SRT file.
 -(BOOL)_populateFromString:(NSString *)str {
+	NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
+	
     SubRipItem __block *cur = [SubRipItem new];
     SubRipScanPosition __block scanPosition = SubRipScanPositionArrayIndex;
     [str enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
         // skip over blank lines.
-        NSRange r = [line rangeOfCharacterFromSet:[NSCharacterSet alphanumericCharacterSet]];
+        NSRange r = [line rangeOfCharacterFromSet:alphanumericCharacterSet];
         if (r.location != NSNotFound) {
             BOOL actionAlreadyTaken = NO;
+			
             if (scanPosition == SubRipScanPositionArrayIndex) {
                 scanPosition = SubRipScanPositionTimes; // skip past the array index number.
                 actionAlreadyTaken = YES;
             }
+			
             if ((scanPosition == SubRipScanPositionTimes) && (!actionAlreadyTaken)) {
                 NSArray *times = [line componentsSeparatedByString:@" --> "];
                 NSString *beginning = [times objectAtIndex:0];
                 NSString *ending = [times objectAtIndex:1];
                 
-                // working with the beginning first...
-                NSArray *timeComponents = [beginning componentsSeparatedByString:@":"];
-                NSInteger hours = [(NSString *)[timeComponents objectAtIndex:0] integerValue];
-                NSInteger minutes = [(NSString *)[timeComponents objectAtIndex:1] integerValue];
-                NSArray *secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@","];
-                NSInteger seconds = [(NSString *)[secondsComponents objectAtIndex:0] integerValue];
-                NSInteger milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] integerValue];
-                NSInteger totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
-                CMTime startSeconds = CMTimeMake(totalNumSeconds, 1);
-                CMTime millisecondsCMTime = CMTimeMake(milliseconds, 1000);
-                cur.startTime = CMTimeAdd(startSeconds, millisecondsCMTime);
-                
-                // and then the end:
-                timeComponents = [ending componentsSeparatedByString:@":"];
-                hours = [(NSString *)[timeComponents objectAtIndex:0] integerValue];
-                minutes = [(NSString *)[timeComponents objectAtIndex:1] integerValue];
-                secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@","];
-                seconds = [(NSString *)[secondsComponents objectAtIndex:0] integerValue];
-                milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] integerValue];
-                totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
-                CMTime endSeconds = CMTimeMake(totalNumSeconds, 1);
-                millisecondsCMTime = CMTimeMake(milliseconds, 1000);
-                cur.endTime = CMTimeAdd(endSeconds, millisecondsCMTime);
+                cur.startTime = [self parseIntoCMTime:beginning];
+                cur.endTime = [self parseIntoCMTime:ending];
+				
                 scanPosition = SubRipScanPositionText;
                 actionAlreadyTaken = YES;
             }
+			
             if ((scanPosition == SubRipScanPositionText) && (!actionAlreadyTaken)) {
                 cur.text = line;
                 [subtitleItems addObject:cur];
