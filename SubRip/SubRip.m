@@ -138,6 +138,11 @@
             scanPosition = SubRipScanPositionArrayIndex;
         }
     }];
+    
+    if (scanPosition == SubRipScanPositionText) {
+        [subtitleItems addObject:cur];
+    }
+    
     return YES;
 }
 
