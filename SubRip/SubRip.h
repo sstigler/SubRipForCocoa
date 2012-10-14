@@ -26,10 +26,10 @@ typedef enum {
 } SubRipScanPosition;
 
 @interface SubRipItem : NSObject < NSCoding > {
-    CMTime startTime;
-    CMTime endTime;
-    NSString *text;
-    NSString *uniqueID;
+    CMTime _startTime;
+    CMTime _endTime;
+    NSString *_text;
+    NSString *_uniqueID;
 }
 
 @property(assign) CMTime startTime;
@@ -50,6 +50,10 @@ typedef enum {
 -(NSInteger)startTimeInSeconds;
 -(NSInteger)endTimeInSeconds;
 
+// These methods are for development only due to the issues involving floating-point arithmetic.
+-(double)startTimeDouble;
+-(double)endTimeDouble;
+
 -(BOOL)containsString:(NSString *)str;
 
 -(void)encodeWithCoder:(NSCoder *)encoder;
@@ -65,7 +69,9 @@ typedef enum {
 @property(readonly) NSUInteger totalCharacterCountOfText;
 
 -(SubRip *)initWithFile:(NSString *)filePath;
+-(SubRip *)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
 -(SubRip *)initWithData:(NSData *)data;
+-(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 -(SubRip *)initWithString:(NSString *)str;
 -(BOOL)_populateFromString:(NSString *)str;
 
