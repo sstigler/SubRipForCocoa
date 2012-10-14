@@ -19,6 +19,8 @@
 #import <CoreMedia/CMTime.h>
 #import <AVFoundation/AVTime.h>
 
+#import "JXArcCompatibilityMacros.h"
+
 typedef enum {
     SubRipScanPositionArrayIndex,
     SubRipScanPositionTimes,
@@ -65,7 +67,7 @@ typedef enum {
     NSMutableArray *subtitleItems;
 }
 
-@property(strong) NSMutableArray *subtitleItems;
+@property(JX_STRONG) NSMutableArray *subtitleItems;
 @property(readonly) NSUInteger totalCharacterCountOfText;
 
 -(SubRip *)initWithFile:(NSString *)filePath;

@@ -46,7 +46,7 @@
 }
 
 -(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
-    NSString *str = [[NSString alloc] initWithData:data encoding:encoding];
+    NSString *str = JX_AUTORELEASE([[NSString alloc] initWithData:data encoding:encoding]);
     return [self initWithString:str];
 }
 
@@ -97,8 +97,8 @@
 -(BOOL)_populateFromString:(NSString *)str {
     NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
     
-    SubRipItem __block *cur = [SubRipItem new];
-    SubRipScanPosition __block scanPosition = SubRipScanPositionArrayIndex;
+    __block SubRipItem *cur = [SubRipItem new];
+    __block SubRipScanPosition scanPosition = SubRipScanPositionArrayIndex;
     [str enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
         // skip over blank lines.
         NSRange r = [line rangeOfCharacterFromSet:alphanumericCharacterSet];
@@ -134,13 +134,24 @@
         }
         else {
             [subtitleItems addObject:cur];
+            JX_RELEASE(cur);
             cur = [SubRipItem new];
             scanPosition = SubRipScanPositionArrayIndex;
         }
     }];
     
-    if (scanPosition == SubRipScanPositionText) {
-        [subtitleItems addObject:cur];
+    switch (scanPosition) {
+        case SubRipScanPositionArrayIndex:
+            JX_RELEASE(cur);
+            break;
+            
+        case SubRipScanPositionText:
+            [subtitleItems addObject:cur];
+            JX_RELEASE(cur);
+            break;
+            
+        default:
+            break;
     }
     
     return YES;
@@ -220,7 +231,7 @@
 -(NSString *)_convertCMTimeToString:(CMTime)theTime {
     // Need a string of format "hh:mm:ss". (No milliseconds.)
     NSInteger seconds = theTime.value / theTime.timescale;
-    NSDate *date1 = [NSDate new];
+    NSDate *date1 = JX_AUTORELEASE([NSDate new]);
     NSDate *date2 = [NSDate dateWithTimeInterval:seconds sinceDate:date1];
     unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     NSDateComponents *converted = [[NSCalendar currentCalendar] components:unitFlags fromDate:date1 toDate:date2 options:0];
@@ -294,7 +305,7 @@
     self = [self init];
     _startTime = [decoder decodeCMTimeForKey:@"startTime"];
     _endTime = [decoder decodeCMTimeForKey:@"endTime"];
-    _text = [decoder decodeObjectForKey:@"text"];
+    self.text = [decoder decodeObjectForKey:@"text"];
     return self;
 }
             
