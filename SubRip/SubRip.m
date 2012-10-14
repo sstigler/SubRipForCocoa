@@ -64,7 +64,7 @@
     return self;
 }
   
-- (void)parse:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
+- (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
     NSInteger hours = [(NSString *)[timeComponents objectAtIndex:0] integerValue];
@@ -81,9 +81,9 @@
     NSInteger milliseconds;
     NSInteger totalNumSeconds;
     
-    [self parse:timecodeString
-    intoSeconds:&totalNumSeconds
-   milliseconds:&milliseconds];
+    [self parseTimecodeString:timecodeString
+                  intoSeconds:&totalNumSeconds
+                 milliseconds:&milliseconds];
     
     CMTime startSeconds = CMTimeMake(totalNumSeconds, 1);
     CMTime millisecondsCMTime = CMTimeMake(milliseconds, 1000);
@@ -166,7 +166,6 @@
     if (idx >= self.totalCharacterCountOfText) {
         return NSNotFound;
     }
-    
     NSUInteger currentCharacterCount = 0;
     NSUInteger currentItemIndex = 0;
     SubRipItem *cur = [self.subtitleItems objectAtIndex:currentItemIndex];
@@ -174,7 +173,6 @@
         currentCharacterCount += cur.text.length;
         currentItemIndex++;
     }
-    
     return currentItemIndex;
 }
 
@@ -296,7 +294,7 @@
     self = [self init];
     _startTime = [decoder decodeCMTimeForKey:@"startTime"];
     _endTime = [decoder decodeCMTimeForKey:@"endTime"];
-    self.text = [decoder decodeObjectForKey:@"text"];
+    _text = [decoder decodeObjectForKey:@"text"];
     return self;
 }
             
