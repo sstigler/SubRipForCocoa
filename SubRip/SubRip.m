@@ -257,19 +257,19 @@
 }
             
 -(NSInteger)startTimeInSeconds {
-    return _startTime.value / _startTime.timescale;
+    return (NSInteger)CMTimeGetSeconds(_startTime);
 }
 
 -(NSInteger)endTimeInSeconds {
-    return _endTime.value / _endTime.timescale;
+    return (NSInteger)CMTimeGetSeconds(_endTime);
 }
 
 -(double)startTimeDouble {
-    return (double)_startTime.value / _startTime.timescale;
+    return (double)CMTimeGetSeconds(_startTime);
 }
 
 -(double)endTimeDouble {
-    return (double)_endTime.value / _endTime.timescale;
+    return (double)CMTimeGetSeconds(_endTime);
 }
 
 -(BOOL)containsString:(NSString *)str {
