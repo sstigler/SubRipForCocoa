@@ -230,25 +230,16 @@
 
 -(NSString *)_convertCMTimeToString:(CMTime)theTime {
     // Need a string of format "hh:mm:ss". (No milliseconds.)
-    NSInteger seconds = theTime.value / theTime.timescale;
+    NSTimeInterval seconds = (NSTimeInterval)CMTimeGetSeconds(theTime);
     NSDate *date1 = JX_AUTORELEASE([NSDate new]);
     NSDate *date2 = [NSDate dateWithTimeInterval:seconds sinceDate:date1];
     unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     NSDateComponents *converted = [[NSCalendar currentCalendar] components:unitFlags fromDate:date1 toDate:date2 options:0];
     
-    NSMutableString *str = [NSMutableString stringWithCapacity:6];
-    if ([converted hour] < 10) {
-        [str appendString:@"0"];
-    }
-    [str appendFormat:@"%ld:", (long)[converted hour]];
-    if ([converted minute] < 10) {
-        [str appendString:@"0"];
-    }
-    [str appendFormat:@"%ld:", (long)[converted minute]];
-    if ([converted second] < 10) {
-        [str appendString:@"0"];
-    }
-    [str appendFormat:@"%ld", (long)[converted second]];
+    NSString *str = [NSString stringWithFormat:@"%02d:%02d:%02d",
+                     (int)[converted hour],
+                     (int)[converted minute],
+                     (int)[converted second]];
     return str;
 }
 
