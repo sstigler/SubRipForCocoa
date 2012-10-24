@@ -70,11 +70,11 @@ typedef enum {
 @property(JX_STRONG) NSMutableArray *subtitleItems;
 @property(readonly) NSUInteger totalCharacterCountOfText;
 
--(SubRip *)initWithFile:(NSString *)filePath;
--(SubRip *)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
--(SubRip *)initWithData:(NSData *)data;
--(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
--(SubRip *)initWithString:(NSString *)str;
+-(id)initWithFile:(NSString *)filePath;
+-(id)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
+-(id)initWithData:(NSData *)data;
+-(id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
+-(id)initWithString:(NSString *)str;
 -(BOOL)_populateFromString:(NSString *)str;
 
 -(NSString *)description;

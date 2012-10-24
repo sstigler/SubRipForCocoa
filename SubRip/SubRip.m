@@ -21,7 +21,7 @@
 @dynamic totalCharacterCountOfText;
 @synthesize subtitleItems;
 
--(SubRip *)initWithFile:(NSString *)filePath {
+-(id)initWithFile:(NSString *)filePath {
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         return [self initWithData:data encoding:NSUTF8StringEncoding];
@@ -30,7 +30,7 @@
     }
 }
 
--(SubRip *)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
+-(id)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
     if ([fileURL checkResourceIsReachableAndReturnError:error] == YES) {
         NSData *data = [NSData dataWithContentsOfURL:fileURL
                                              options:NSDataReadingMappedIfSafe
@@ -41,16 +41,16 @@
     }
 }
 
--(SubRip *)initWithData:(NSData *)data {
+-(id)initWithData:(NSData *)data {
     return [self initWithData:data encoding:NSUTF8StringEncoding];
 }
 
--(SubRip *)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
+-(id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
     NSString *str = JX_AUTORELEASE([[NSString alloc] initWithData:data encoding:encoding]);
     return [self initWithString:str];
 }
 
--(SubRip *)initWithString:(NSString *)str {
+-(id)initWithString:(NSString *)str {
     self = [super init];
     
     if (self) {
