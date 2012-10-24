@@ -75,6 +75,8 @@ typedef enum {
 -(id)initWithData:(NSData *)data;
 -(id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 -(id)initWithString:(NSString *)str;
+-(id)initWithSubtitleItems:(NSMutableArray *)subtitleItems;
+
 -(BOOL)_populateFromString:(NSString *)str;
 
 -(NSString *)srtString;

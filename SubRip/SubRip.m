@@ -65,6 +65,16 @@
     return self;
 }
   
+-(id)initWithSubtitleItems:(NSMutableArray *)subtitleItems {
+    self = [super init];
+    
+    if (self) {
+        self.subtitleItems = subtitleItems;
+    }
+    
+    return self;
+}
+
 - (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
