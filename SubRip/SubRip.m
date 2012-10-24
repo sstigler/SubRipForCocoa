@@ -19,7 +19,7 @@
 @implementation SubRip
 
 @dynamic totalCharacterCountOfText;
-@synthesize subtitleItems;
+@synthesize subtitleItems = _subtitleItems;
 
 -(id)initWithFile:(NSString *)filePath {
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
@@ -134,7 +134,7 @@
             }
         }
         else {
-            [subtitleItems addObject:cur];
+            [_subtitleItems addObject:cur];
             JX_RELEASE(cur);
             cur = [SubRipItem new];
             scanPosition = SubRipScanPositionArrayIndex;
@@ -147,7 +147,7 @@
             break;
             
         case SubRipScanPositionText:
-            [subtitleItems addObject:cur];
+            [_subtitleItems addObject:cur];
             JX_RELEASE(cur);
             break;
             
@@ -197,7 +197,7 @@
 }
 
 -(void)encodeWithCoder:(NSCoder *)encoder {
-    [encoder encodeObject:subtitleItems forKey:@"subtitleItems"];
+    [encoder encodeObject:_subtitleItems forKey:@"subtitleItems"];
 }
 
 -(id)initWithCoder:(NSCoder *)decoder {

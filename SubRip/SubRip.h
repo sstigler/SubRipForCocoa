@@ -64,7 +64,7 @@ typedef enum {
 @end
 
 @interface SubRip : NSObject < NSCoding > {
-    NSMutableArray *subtitleItems;
+    NSMutableArray *_subtitleItems;
 }
 
 @property(JX_STRONG) NSMutableArray *subtitleItems;
