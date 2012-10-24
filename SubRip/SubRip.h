@@ -77,6 +77,9 @@ typedef enum {
 -(id)initWithString:(NSString *)str;
 -(BOOL)_populateFromString:(NSString *)str;
 
+-(NSString *)srtString;
+-(NSString *)srtStringWithLineBreaksInSubtitlesAllowed:(BOOL)lineBreaksAllowed;
+
 -(NSString *)description;
 
 -(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)theTime;

@@ -158,6 +158,65 @@
     return YES;
 }
 
+NSString * srtTimecodeStringForCMTime(CMTime time) {
+	double seconds = CMTimeGetSeconds(time);
+	double seconds_floor = floor(seconds);
+	long long seconds_floor_int = (long long)seconds_floor;
+	return [NSString stringWithFormat:@"%02d:%02d:%02d,%03d",
+			(int)floor(seconds / 60 / 60),						// H
+			(int)floor(seconds / 60),							// M
+			(int)floor(seconds_floor_int % 60),					// S
+			(int)round((seconds - seconds_floor) * 1000.0f)];	// cs
+
+}
+
+NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowed) {
+    NSString *srtText = item.text;
+    if (lineBreaksAllowed == NO) {
+        srtText = [srtText stringByReplacingOccurrencesOfString:@"\n"
+                                                     withString:@"|"];
+    }
+    
+    NSString *srtBlock = [NSString stringWithFormat:@"%@ --> %@\n%@",
+            srtTimecodeStringForCMTime(item.startTime),
+            srtTimecodeStringForCMTime(item.endTime), srtText];
+    
+    return srtBlock;
+}
+
+-(NSString *)srtString {
+    return [self srtStringWithLineBreaksInSubtitlesAllowed:YES];
+}
+
+-(NSString *)srtStringWithLineBreaksInSubtitlesAllowed:(BOOL)lineBreaksAllowed {
+    if (_subtitleItems == nil)  return nil;
+    
+    NSMutableArray *srtBlocks = [NSMutableArray array];
+    
+    void (^block)(id obj, NSUInteger idx, BOOL *stop) = ^(SubRipItem *item, NSUInteger idx, BOOL *stop) {
+        [srtBlocks addObject:subRipItem2SRTBlock(item, lineBreaksAllowed)];
+    };
+    
+    Class NSArrayClass = [NSArray class];
+    [_subtitleItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
+        if ([obj isKindOfClass:NSArrayClass]) {
+            NSArray *subArray = obj;
+            [subArray enumerateObjectsUsingBlock:block];
+        } else {
+            SubRipItem *item = obj;
+            block(item, idx, stop);
+        }
+        
+    }];
+    
+    NSMutableString *srtText = [NSMutableString string];
+    [srtBlocks enumerateObjectsUsingBlock:^(NSString *srtBlock, NSUInteger idx, BOOL *stop) {
+        [srtText appendFormat:@"%lu\n%@\n\n", (unsigned long)(idx+1), srtBlock];
+    }];
+    
+    return srtText;
+}
+
 -(NSString *)description {
     return [NSString stringWithFormat:@"SRT file: %@", self.subtitleItems];
 }
