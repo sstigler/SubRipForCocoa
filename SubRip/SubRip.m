@@ -57,6 +57,7 @@
         self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
         BOOL success = [self _populateFromString:str];
         if (!success) {
+            JX_RELEASE(self);
             return nil;
         }
     }
