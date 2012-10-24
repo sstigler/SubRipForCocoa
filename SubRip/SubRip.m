@@ -75,6 +75,15 @@
     return self;
 }
 
+#if (JX_HAS_ARC == 0)
+- (void)dealloc
+{
+	self.subtitleItems = nil;
+	
+	[super dealloc];
+}
+#endif
+
 - (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
@@ -276,6 +285,16 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     }
     return self;
 }
+
+#if (JX_HAS_ARC == 0)
+- (void)dealloc
+{
+	[_text release];
+	[_uniqueID release];
+	
+	[super dealloc];
+}
+#endif
 
 -(NSString *)startTimeString {
     return [self _convertCMTimeToString:_startTime];
