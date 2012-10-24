@@ -191,28 +191,15 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 -(NSString *)srtStringWithLineBreaksInSubtitlesAllowed:(BOOL)lineBreaksAllowed {
     if (_subtitleItems == nil)  return nil;
     
-    NSMutableArray *srtBlocks = [NSMutableArray array];
-    
-    void (^block)(id obj, NSUInteger idx, BOOL *stop) = ^(SubRipItem *item, NSUInteger idx, BOOL *stop) {
-        [srtBlocks addObject:subRipItem2SRTBlock(item, lineBreaksAllowed)];
-    };
-    
-    Class NSArrayClass = [NSArray class];
-    [_subtitleItems enumerateObjectsUsingBlock:^(id obj, NSUInteger idx, BOOL *stop) {
-        if ([obj isKindOfClass:NSArrayClass]) {
-            NSArray *subArray = obj;
-            [subArray enumerateObjectsUsingBlock:block];
-        } else {
-            SubRipItem *item = obj;
-            block(item, idx, stop);
-        }
-        
-    }];
-    
     NSMutableString *srtText = [NSMutableString string];
-    [srtBlocks enumerateObjectsUsingBlock:^(NSString *srtBlock, NSUInteger idx, BOOL *stop) {
-        [srtText appendFormat:@"%lu\n%@\n\n", (unsigned long)(idx+1), srtBlock];
-    }];
+    NSUInteger srtNum = 1;
+    for (SubRipItem *item in _subtitleItems) {
+        [srtText appendFormat:@"%lu\n%@\n\n",
+         (unsigned long)srtNum,
+         subRipItem2SRTBlock(item, lineBreaksAllowed)];
+        
+        srtNum++;
+    }
     
     return srtText;
 }
