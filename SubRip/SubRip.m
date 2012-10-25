@@ -281,7 +281,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 - (id)init {
     self = [super init];
     if (self) {
-        _uniqueID = [[NSProcessInfo processInfo] globallyUniqueString];
+        _uniqueID = JX_RETAIN([[NSProcessInfo processInfo] globallyUniqueString]);
     }
     return self;
 }
