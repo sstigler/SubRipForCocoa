@@ -286,6 +286,18 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return self;
 }
 
+- (id)initWithText:(NSString *)text
+         startTime:(CMTime)startTime
+           endTime:(CMTime)endTime {
+    self = [self init];
+    if (self) {
+        self.text = text;
+        _startTime = startTime;
+        _endTime = endTime;
+    }
+    return self;
+}
+
 #if (JX_HAS_ARC == 0)
 - (void)dealloc
 {

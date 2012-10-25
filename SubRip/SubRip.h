@@ -42,6 +42,10 @@ typedef enum {
 @property(readonly, getter = endTimeString) NSString *endTimeString;
 @property(readonly) NSString *uniqueID;
 
+- (id)initWithText:(NSString *)text
+         startTime:(CMTime)startTime
+           endTime:(CMTime)endTime;
+
 -(NSString *)startTimeString;
 -(NSString *)endTimeString;
 
