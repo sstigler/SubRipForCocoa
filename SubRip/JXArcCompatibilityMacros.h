@@ -37,6 +37,8 @@ The above have usual problems with nesting. Don’t use them with “Replace all
 #define JX_AUTORELEASE(_o) (_o)
 
 #define JX_BRIDGED_CAST(_type, _o) (__bridge _type)(_o)
+#define JX_TRANSFER_OBJC_TO_CF(_type, _o) (__bridge_retained _type)(_o)
+#define JX_TRANSFER_CF_TO_OBJC(_type, _o) (__bridge_transfer _type)(_o)
 
 #else
 
@@ -46,6 +48,8 @@ The above have usual problems with nesting. Don’t use them with “Replace all
 #define JX_AUTORELEASE(_o) [(_o) autorelease]
 
 #define JX_BRIDGED_CAST(_type, _o) (_type)(_o)
+#define JX_TRANSFER_OBJC_TO_CF(_type, _o) (_type)((_o) ? CFRetain((CFTypeRef)(_o)) : NULL)
+#define JX_TRANSFER_CF_TO_OBJC(_type, _o) [(_type)CFMakeCollectable(_o) autorelease]
 
 #endif
 
