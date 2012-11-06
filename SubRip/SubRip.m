@@ -120,7 +120,7 @@
     __block SubRipItem *cur = [SubRipItem new];
     __block SubRipScanPosition scanPosition = SubRipScanPositionArrayIndex;
     [str enumerateLinesUsingBlock:^(NSString *line, BOOL *stop) {
-		// Blank lines are delimiters.
+        // Blank lines are delimiters.
         NSRange r = [line rangeOfCharacterFromSet:alphanumericCharacterSet];
         if (r.location != NSNotFound) {
             BOOL actionAlreadyTaken = NO;
