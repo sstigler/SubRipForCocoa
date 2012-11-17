@@ -88,7 +88,9 @@ typedef enum {
 
 -(NSString *)description;
 
--(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)theTime;
+-(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)desiredTime DEPRECATED_ATTRIBUTE; // The name of this method doesn’t match what it does.
+-(NSUInteger)indexOfSubRipItemForPointInTime:(CMTime)desiredTime;
+
 
 -(NSUInteger)indexOfSubRipItemWithCharacterIndex:(NSUInteger)idx;
 
