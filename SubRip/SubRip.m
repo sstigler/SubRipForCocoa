@@ -84,7 +84,7 @@
 }
 #endif
 
-- (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
++ (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
     NSInteger hours = [(NSString *)[timeComponents objectAtIndex:0] integerValue];
@@ -97,11 +97,11 @@
     *totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
 }
 
-- (CMTime)parseIntoCMTime:(NSString *)timecodeString {
++ (CMTime)parseIntoCMTime:(NSString *)timecodeString {
     NSInteger milliseconds;
     NSInteger totalNumSeconds;
     
-    [self parseTimecodeString:timecodeString
+    [SubRip parseTimecodeString:timecodeString
                   intoSeconds:&totalNumSeconds
                  milliseconds:&milliseconds];
     
@@ -135,8 +135,8 @@
                 NSString *beginning = [times objectAtIndex:0];
                 NSString *ending = [times objectAtIndex:1];
                 
-                cur.startTime = [self parseIntoCMTime:beginning];
-                cur.endTime = [self parseIntoCMTime:ending];
+                cur.startTime = [SubRip parseIntoCMTime:beginning];
+                cur.endTime = [SubRip parseIntoCMTime:ending];
                 
                 scanPosition = SubRipScanPositionText;
                 actionAlreadyTaken = YES;
@@ -357,6 +357,16 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 -(double)endTimeDouble {
     return (double)CMTimeGetSeconds(_endTime);
 }
+
+
+-(void)setStartTimeFromString:(NSString *)timecodeString {
+    self.startTime = [SubRip parseIntoCMTime:timecodeString];
+}
+
+-(void)setEndTimeFromString:(NSString *)timecodeString {
+    self.endTime = [SubRip parseIntoCMTime:timecodeString];
+}
+
 
 -(BOOL)containsString:(NSString *)str {
     NSRange searchResult = [_text rangeOfString:str options:NSCaseInsensitiveSearch];

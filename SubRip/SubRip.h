@@ -60,6 +60,9 @@ typedef enum {
 -(double)startTimeDouble;
 -(double)endTimeDouble;
 
+-(void)setStartTimeFromString:(NSString *)timecodeString;
+-(void)setEndTimeFromString:(NSString *)timecodeString;
+
 -(BOOL)containsString:(NSString *)str;
 
 -(void)encodeWithCoder:(NSCoder *)encoder;
