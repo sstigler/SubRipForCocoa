@@ -21,7 +21,7 @@
 @dynamic totalCharacterCountOfText;
 @synthesize subtitleItems = _subtitleItems;
 
--(id)initWithFile:(NSString *)filePath {
+-(instancetype)initWithFile:(NSString *)filePath {
     if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
         NSData *data = [NSData dataWithContentsOfFile:filePath];
         return [self initWithData:data encoding:NSUTF8StringEncoding];
@@ -30,7 +30,7 @@
     }
 }
 
--(id)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
+-(instancetype)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
     if ([fileURL checkResourceIsReachableAndReturnError:error] == YES) {
         NSData *data = [NSData dataWithContentsOfURL:fileURL
                                              options:NSDataReadingMappedIfSafe
@@ -41,16 +41,16 @@
     }
 }
 
--(id)initWithData:(NSData *)data {
+-(instancetype)initWithData:(NSData *)data {
     return [self initWithData:data encoding:NSUTF8StringEncoding];
 }
 
--(id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
+-(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
     NSString *str = JX_AUTORELEASE([[NSString alloc] initWithData:data encoding:encoding]);
     return [self initWithString:str];
 }
 
--(id)initWithString:(NSString *)str {
+-(instancetype)initWithString:(NSString *)str {
     self = [super init];
     
     if (self) {
@@ -65,7 +65,7 @@
     return self;
 }
   
--(id)initWithSubtitleItems:(NSMutableArray *)subtitleItems {
+-(instancetype)initWithSubtitleItems:(NSMutableArray *)subtitleItems {
     self = [super init];
     
     if (self) {
@@ -272,7 +272,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     [encoder encodeObject:_subtitleItems forKey:@"subtitleItems"];
 }
 
--(id)initWithCoder:(NSCoder *)decoder {
+-(instancetype)initWithCoder:(NSCoder *)decoder {
     self = [self init];
     self.subtitleItems = [decoder decodeObjectForKey:@"subtitleItems"];
     return self;
@@ -285,7 +285,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 @synthesize startTime = _startTime, endTime = _endTime, text = _text, uniqueID = _uniqueID;
 @dynamic startTimeString, endTimeString;
 
-- (id)init {
+- (instancetype)init {
     self = [super init];
     if (self) {
         _uniqueID = JX_RETAIN([[NSProcessInfo processInfo] globallyUniqueString]);
@@ -293,9 +293,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return self;
 }
 
-- (id)initWithText:(NSString *)text
-         startTime:(CMTime)startTime
-           endTime:(CMTime)endTime {
+- (instancetype)initWithText:(NSString *)text
+                   startTime:(CMTime)startTime
+                     endTime:(CMTime)endTime {
     self = [self init];
     if (self) {
         self.text = text;
@@ -387,7 +387,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     [encoder encodeObject:_text forKey:@"text"];
 }
 
--(id)initWithCoder:(NSCoder *)decoder {
+-(instancetype)initWithCoder:(NSCoder *)decoder {
     self = [self init];
     _startTime = [decoder decodeCMTimeForKey:@"startTime"];
     _endTime = [decoder decodeCMTimeForKey:@"endTime"];

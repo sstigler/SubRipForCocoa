@@ -42,9 +42,9 @@ typedef enum {
 @property(readonly, getter = endTimeString) NSString *endTimeString;
 @property(readonly) NSString *uniqueID;
 
-- (id)initWithText:(NSString *)text
-         startTime:(CMTime)startTime
-           endTime:(CMTime)endTime;
+- (instancetype)initWithText:(NSString *)text
+                   startTime:(CMTime)startTime
+                     endTime:(CMTime)endTime;
 
 -(NSString *)startTimeString;
 -(NSString *)endTimeString;
@@ -63,7 +63,7 @@ typedef enum {
 -(BOOL)containsString:(NSString *)str;
 
 -(void)encodeWithCoder:(NSCoder *)encoder;
--(id)initWithCoder:(NSCoder *)decoder;
+-(instancetype)initWithCoder:(NSCoder *)decoder;
 
 @end
 
@@ -74,12 +74,12 @@ typedef enum {
 @property(JX_STRONG) NSMutableArray *subtitleItems;
 @property(readonly) NSUInteger totalCharacterCountOfText;
 
--(id)initWithFile:(NSString *)filePath;
--(id)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
--(id)initWithData:(NSData *)data;
--(id)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
--(id)initWithString:(NSString *)str;
--(id)initWithSubtitleItems:(NSMutableArray *)subtitleItems;
+-(instancetype)initWithFile:(NSString *)filePath;
+-(instancetype)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
+-(instancetype)initWithData:(NSData *)data;
+-(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
+-(instancetype)initWithString:(NSString *)str;
+-(instancetype)initWithSubtitleItems:(NSMutableArray *)subtitleItems;
 
 -(BOOL)_populateFromString:(NSString *)str;
 
@@ -97,6 +97,6 @@ typedef enum {
 -(NSUInteger)totalCharacterCountOfText;
 
 -(void)encodeWithCoder:(NSCoder *)encoder;
--(id)initWithCoder:(NSCoder *)decoder;
+-(instancetype)initWithCoder:(NSCoder *)decoder;
 
 @end
