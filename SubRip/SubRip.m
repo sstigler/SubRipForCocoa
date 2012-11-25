@@ -323,6 +323,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return [self _convertCMTimeToString:_endTime];
 }
 
+
 -(NSString *)_convertCMTimeToString:(CMTime)theTime {
     // Need a string of format "hh:mm:ss". (No milliseconds.)
     NSTimeInterval seconds = (NSTimeInterval)CMTimeGetSeconds(theTime);
@@ -338,10 +339,12 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return str;
 }
 
+
 -(NSString *)description {
     return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, self.text];
 }
-            
+
+
 -(NSInteger)startTimeInSeconds {
     return (NSInteger)CMTimeGetSeconds(_startTime);
 }
