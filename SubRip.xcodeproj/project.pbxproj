@@ -7,13 +7,37 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		3D41819A166504CF006DC6F4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D418199166504CF006DC6F4 /* SenTestingKit.framework */; };
+		3D41819B166504CF006DC6F4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A69146112D100E22EA4 /* Cocoa.framework */; };
+		3D4181A1166504CF006DC6F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D41819F166504CF006DC6F4 /* InfoPlist.strings */; };
+		3D4181A4166504CF006DC6F4 /* SubRipTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4181A3166504CF006DC6F4 /* SubRipTest.m */; };
+		3D4181AB166506AB006DC6F4 /* SubRip.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A66146112D100E22EA4 /* SubRip.dylib */; };
+		3D4181AE166506D3006DC6F4 /* test.srt in Resources */ = {isa = PBXBuildFile; fileRef = 3D4181AD166506D3006DC6F4 /* test.srt */; };
 		E7237A6A146112D100E22EA4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A69146112D100E22EA4 /* Cocoa.framework */; };
 		E7237A74146112D100E22EA4 /* SubRip.m in Sources */ = {isa = PBXBuildFile; fileRef = E7237A73146112D100E22EA4 /* SubRip.m */; };
 		E74B2155146113F800267DAD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E74B2154146113F800267DAD /* CoreMedia.framework */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXContainerItemProxy section */
+		3D4181A91665069F006DC6F4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E7237A5D146112D100E22EA4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7237A65146112D100E22EA4;
+			remoteInfo = SubRip;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		3D41816A166503DC006DC6F4 /* JXArcCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXArcCompatibilityMacros.h; sourceTree = "<group>"; };
+		3D418198166504CF006DC6F4 /* SubRipTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubRipTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
+		3D418199166504CF006DC6F4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		3D41819E166504CF006DC6F4 /* SubRipTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SubRipTest-Info.plist"; sourceTree = "<group>"; };
+		3D4181A0166504CF006DC6F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		3D4181A2166504CF006DC6F4 /* SubRipTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubRipTest.h; sourceTree = "<group>"; };
+		3D4181A3166504CF006DC6F4 /* SubRipTest.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubRipTest.m; sourceTree = "<group>"; };
+		3D4181A5166504CF006DC6F4 /* SubRipTest-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SubRipTest-Prefix.pch"; sourceTree = "<group>"; };
+		3D4181AD166506D3006DC6F4 /* test.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.srt; sourceTree = "<group>"; };
 		E7237A66146112D100E22EA4 /* SubRip.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = SubRip.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7237A69146112D100E22EA4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E7237A6C146112D100E22EA4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -26,6 +50,16 @@
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
+		3D418194166504CF006DC6F4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D4181AB166506AB006DC6F4 /* SubRip.dylib in Frameworks */,
+				3D41819A166504CF006DC6F4 /* SenTestingKit.framework in Frameworks */,
+				3D41819B166504CF006DC6F4 /* Cocoa.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7237A63146112D100E22EA4 /* Frameworks */ = {
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
@@ -38,10 +72,40 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		3D41819C166504CF006DC6F4 /* SubRipTest */ = {
+			isa = PBXGroup;
+			children = (
+				3D4181A2166504CF006DC6F4 /* SubRipTest.h */,
+				3D4181A3166504CF006DC6F4 /* SubRipTest.m */,
+				3D41819D166504CF006DC6F4 /* Supporting Files */,
+				3D4181AC166506D3006DC6F4 /* Test Files */,
+			);
+			path = SubRipTest;
+			sourceTree = "<group>";
+		};
+		3D41819D166504CF006DC6F4 /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				3D41819E166504CF006DC6F4 /* SubRipTest-Info.plist */,
+				3D41819F166504CF006DC6F4 /* InfoPlist.strings */,
+				3D4181A5166504CF006DC6F4 /* SubRipTest-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3D4181AC166506D3006DC6F4 /* Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				3D4181AD166506D3006DC6F4 /* test.srt */,
+			);
+			path = "Test Files";
+			sourceTree = "<group>";
+		};
 		E7237A5B146112D100E22EA4 = {
 			isa = PBXGroup;
 			children = (
 				E7237A6F146112D100E22EA4 /* SubRip */,
+				3D41819C166504CF006DC6F4 /* SubRipTest */,
 				E7237A68146112D100E22EA4 /* Frameworks */,
 				E7237A67146112D100E22EA4 /* Products */,
 			);
@@ -51,6 +115,7 @@
 			isa = PBXGroup;
 			children = (
 				E7237A66146112D100E22EA4 /* SubRip.dylib */,
+				3D418198166504CF006DC6F4 /* SubRipTest.octest */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -60,6 +125,7 @@
 			children = (
 				E74B2154146113F800267DAD /* CoreMedia.framework */,
 				E7237A69146112D100E22EA4 /* Cocoa.framework */,
+				3D418199166504CF006DC6F4 /* SenTestingKit.framework */,
 				E7237A6B146112D100E22EA4 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -107,6 +173,25 @@
 /* End PBXHeadersBuildPhase section */
 
 /* Begin PBXNativeTarget section */
+		3D418197166504CF006DC6F4 /* SubRipTest */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 3D4181A6166504CF006DC6F4 /* Build configuration list for PBXNativeTarget "SubRipTest" */;
+			buildPhases = (
+				3D418193166504CF006DC6F4 /* Sources */,
+				3D418194166504CF006DC6F4 /* Frameworks */,
+				3D418195166504CF006DC6F4 /* Resources */,
+				3D418196166504CF006DC6F4 /* ShellScript */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				3D4181AA1665069F006DC6F4 /* PBXTargetDependency */,
+			);
+			name = SubRipTest;
+			productName = SubRipTest;
+			productReference = 3D418198166504CF006DC6F4 /* SubRipTest.octest */;
+			productType = "com.apple.product-type.bundle";
+		};
 		E7237A65146112D100E22EA4 /* SubRip */ = {
 			isa = PBXNativeTarget;
 			buildConfigurationList = E7237A77146112D100E22EA4 /* Build configuration list for PBXNativeTarget "SubRip" */;
@@ -145,11 +230,48 @@
 			projectRoot = "";
 			targets = (
 				E7237A65146112D100E22EA4 /* SubRip */,
+				3D418197166504CF006DC6F4 /* SubRipTest */,
 			);
 		};
 /* End PBXProject section */
 
+/* Begin PBXResourcesBuildPhase section */
+		3D418195166504CF006DC6F4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D4181A1166504CF006DC6F4 /* InfoPlist.strings in Resources */,
+				3D4181AE166506D3006DC6F4 /* test.srt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3D418196166504CF006DC6F4 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Run the unit tests in this test bundle.\n\"${SYSTEM_DEVELOPER_DIR}/Tools/RunUnitTests\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
+		3D418193166504CF006DC6F4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				3D4181A4166504CF006DC6F4 /* SubRipTest.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
 		E7237A62146112D100E22EA4 /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
@@ -160,7 +282,58 @@
 		};
 /* End PBXSourcesBuildPhase section */
 
+/* Begin PBXTargetDependency section */
+		3D4181AA1665069F006DC6F4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7237A65146112D100E22EA4 /* SubRip */;
+			targetProxy = 3D4181A91665069F006DC6F4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		3D41819F166504CF006DC6F4 /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				3D4181A0166504CF006DC6F4 /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
 /* Begin XCBuildConfiguration section */
+		3D4181A7166504CF006DC6F4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SubRipTest/SubRipTest-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "SubRipTest/SubRipTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Debug;
+		};
+		3D4181A8166504CF006DC6F4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COMBINE_HIDPI_IMAGES = YES;
+				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SubRipTest/SubRipTest-Prefix.pch";
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				INFOPLIST_FILE = "SubRipTest/SubRipTest-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = octest;
+			};
+			name = Release;
+		};
 		E7237A75146112D100E22EA4 /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
@@ -233,6 +406,14 @@
 /* End XCBuildConfiguration section */
 
 /* Begin XCConfigurationList section */
+		3D4181A6166504CF006DC6F4 /* Build configuration list for PBXNativeTarget "SubRipTest" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				3D4181A7166504CF006DC6F4 /* Debug */,
+				3D4181A8166504CF006DC6F4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
 		E7237A60146112D100E22EA4 /* Build configuration list for PBXProject "SubRip" */ = {
 			isa = XCConfigurationList;
 			buildConfigurations = (
