@@ -13,6 +13,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		3D41816A166503DC006DC6F4 /* JXArcCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXArcCompatibilityMacros.h; sourceTree = "<group>"; };
 		E7237A66146112D100E22EA4 /* SubRip.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = SubRip.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7237A69146112D100E22EA4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E7237A6C146112D100E22EA4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -77,6 +78,7 @@
 		E7237A6F146112D100E22EA4 /* SubRip */ = {
 			isa = PBXGroup;
 			children = (
+				3D41816A166503DC006DC6F4 /* JXArcCompatibilityMacros.h */,
 				E7237A72146112D100E22EA4 /* SubRip.h */,
 				E7237A73146112D100E22EA4 /* SubRip.m */,
 				E7237A70146112D100E22EA4 /* Supporting Files */,
