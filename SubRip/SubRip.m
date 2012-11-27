@@ -5,6 +5,7 @@
  This software is licensed under the terms of the BSD license:
  
  Copyright (c) 2011, Sam Stigler
+ Copyright (c) 2012, Jan Weiß
  All rights reserved.
  
  Redistribution and use in source and binary forms, with or without modification, are permitted provided that the following conditions are met:

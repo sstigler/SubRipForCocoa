@@ -10,7 +10,7 @@
 
 #import <CoreMedia/CMTime.h>
 
-#import "SubRip.h"
+#import <SubRip/SubRip.h>
 
 static NSString *testString1;
 
