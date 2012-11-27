@@ -344,6 +344,38 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, self.text];
 }
 
+- (BOOL)isEqual:(id)obj
+{
+	if (obj == nil) {
+		return NO;
+	}
+	
+	if (![obj isKindOfClass:[SubRipItem class]]) {
+		return NO;
+	}
+
+	SubRipItem *other = (SubRipItem *)obj;
+	
+	id otherText = other.text;
+	
+	return ((CMTimeCompare(other.startTime, _startTime) == 0) &&
+			(CMTimeCompare(other.endTime, _endTime) == 0) &&
+			((otherText == _text) || [otherText isEqualTo:_text]));
+}
+
+- (BOOL)isEqualToSubRipItem:(SubRipItem *)other
+{
+	if (other == nil) {
+		return NO;
+	}
+	
+	id otherText = other.text;
+	
+	return ((CMTimeCompare(other.startTime, _startTime) == 0) &&
+			(CMTimeCompare(other.endTime, _endTime) == 0) &&
+			((otherText == _text) || [otherText isEqualTo:_text]));
+}
+
 
 -(NSInteger)startTimeInSeconds {
     return (NSInteger)CMTimeGetSeconds(_startTime);

@@ -8,6 +8,8 @@
 
 #import "SubRipTest.h"
 
+#import <CoreMedia/CMTime.h>
+
 #import "SubRip.h"
 
 static NSString *testString1;
@@ -28,6 +30,11 @@ static NSString *testString1;
 	if (testString1 == nil) {
 		NSLog(@"%@", error);
 	}
+#if 0
+	else {
+		NSLog(@"%@", subRip);
+	}
+#endif
 }
 
 - (void)tearDown
@@ -41,14 +48,20 @@ static NSString *testString1;
 {
 	NSError *error = nil;
 	
+	SubRipItem *expectedItem1 = [[SubRipItem alloc] initWithText:@"This is the first subtitle"
+													   startTime:CMTimeMakeWithSeconds(12.000, 1000)
+														 endTime:CMTimeMakeWithSeconds(15.123, 1000)];
+	
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
 		STFail(@"Couldn’t parse testString1.");
 	}
 	
-	//subtitleItems = subRip.subtitleItems;
-	NSLog(@"%@", subRip);
+	NSArray *subtitleItems = subRip.subtitleItems;
+	SubRipItem *item1 = subtitleItems[0];
+	STAssertEqualObjects(item1, expectedItem1, @"Item 1 doesn’t match expectations.");
+	
 }
 
 @end
