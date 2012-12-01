@@ -92,6 +92,9 @@
     NSInteger minutes = [(NSString *)[timeComponents objectAtIndex:1] integerValue];
     
     NSArray *secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@","];
+#if SUBRIP_SUBVIEWER_SUPPORT
+	if (secondsComponents.count < 2)  secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@"."];
+#endif
     NSInteger seconds = [(NSString *)[secondsComponents objectAtIndex:0] integerValue];
     
     *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] integerValue];
@@ -154,7 +157,26 @@
             }
         }
         else {
-            [_subtitleItems addObject:cur];
+#if SUBRIP_SUBVIEWER_SUPPORT
+			NSString *currentText = cur.text;
+			NSRange currentTextRange = NSMakeRange(0, currentText.length);
+			NSString *subViewerLineBreak = @"[br]";
+			NSRange subViewerLineBreakRange = [currentText rangeOfString:subViewerLineBreak
+																 options:NSLiteralSearch
+																   range:currentTextRange];
+			
+            if (subViewerLineBreakRange.location != NSNotFound) {
+				NSRange subViewerLineBreakSearchRange = NSMakeRange(subViewerLineBreakRange.location,
+																	(currentTextRange.length - subViewerLineBreakRange.location));
+				
+				cur.text = [currentText stringByReplacingOccurrencesOfString:subViewerLineBreak
+																  withString:@"\n"
+																	 options:NSLiteralSearch
+																	   range:subViewerLineBreakSearchRange];
+			}
+#endif
+			
+			[_subtitleItems addObject:cur];
             JX_RELEASE(cur);
             cur = [SubRipItem new];
             scanPosition = SubRipScanPositionArrayIndex;
