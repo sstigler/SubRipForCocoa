@@ -178,6 +178,16 @@
     return YES;
 }
 
+#if SUBRIP_TAG_SUPPORT
+- (void)parseTags;
+{
+    for (SubRipItem *item in _subtitleItems) {
+        [item parseTags];
+    }
+}
+#endif
+
+
 NSString * srtTimecodeStringForCMTime(CMTime time) {
 	double seconds = CMTimeGetSeconds(time);
 	double seconds_floor = floor(seconds);
@@ -284,6 +294,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 @implementation SubRipItem
 
 @synthesize startTime = _startTime, endTime = _endTime, text = _text, uniqueID = _uniqueID;
+#if SUBRIP_TAG_SUPPORT
+@synthesize attributedText = _attributedText;
+#endif
 @dynamic startTimeString, endTimeString;
 
 - (instancetype)init {
@@ -315,6 +328,15 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 	[super dealloc];
 }
 #endif
+
+
+#if SUBRIP_TAG_SUPPORT
+- (void)parseTags;
+{
+
+}
+#endif
+
 
 -(NSString *)startTimeString {
     return [self _convertCMTimeToString:_startTime];
