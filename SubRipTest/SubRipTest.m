@@ -14,6 +14,7 @@
 #import "NSMutableAttributedString+SRTString.h"
 
 static NSString *testString1;
+static NSString *testTaggedSRTString1;
 
 @implementation SubRipTest
 
@@ -36,6 +37,12 @@ static NSString *testString1;
 		NSLog(@"%@", subRip);
 	}
 #endif
+	
+	testTaggedSRTString1 = @""
+	"Another subtitle demonstrating tags:\n"
+	"<b>bold</b>, <i>italic</i>, <u>underlined</u>\n"
+	"<font color=\"#ff0000\">red text</font>";
+
 }
 
 - (void)tearDown
@@ -81,7 +88,7 @@ static NSString *testString1;
 		STFail(@"Couldn’t parse testString1.");
 	}
 	
-	[subRip parseTags];
+	[subRip parseTags]; // 	[subRip parseTagsWithOptions:];
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
@@ -89,14 +96,26 @@ static NSString *testString1;
 	
 }
 
+- (void)testTagGenerationSupport
+{
+	NSString *expectedText = testTaggedSRTString1;
+	
+	SubRipItem *item1 = [[SubRipItem alloc] initWithText:nil
+											   startTime:CMTimeMakeWithSeconds(16.000, 1000)
+												 endTime:CMTimeMakeWithSeconds(18.000, 1000)];
+	
+	// This will also set item1.text to text with tags generated from the attributes.
+	item1.attributedText = [[NSMutableAttributedString alloc] initWithSRTString:testTaggedSRTString1
+																	 attributes:nil];
+	
+	STAssertEqualObjects(item1.text, expectedText, @"Tag generation #1 from attributedText failed.");
+}
+
 #define VERBOSE_TEST	0
 
 - (void)testSRTString
 {
-	NSString *sourceSRTString = @""
-	"Another subtitle demonstrating tags:\n"
-	"<b>bold</b>, <i>italic</i>, <u>underlined</u>\n"
-	"<font color=\"#ff0000\">red text</font>";
+	NSString *sourceSRTString = testTaggedSRTString1;
 	
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
 																				  attributes:nil];
