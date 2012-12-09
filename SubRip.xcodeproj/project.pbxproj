@@ -22,6 +22,30 @@
 		3D4181D2166518BB006DC6F4 /* SubRip.h in Headers */ = {isa = PBXBuildFile; fileRef = E7237A72146112D100E22EA4 /* SubRip.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D4181D3166518C0006DC6F4 /* JXArcCompatibilityMacros.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D41816A166503DC006DC6F4 /* JXArcCompatibilityMacros.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D4181D61665193B006DC6F4 /* SubRip.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D4181BE16651769006DC6F4 /* SubRip.framework */; };
+		3D708B2F1674B05A00AD7DEC /* DTCoreText.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B261674B05A00AD7DEC /* DTCoreText.h */; };
+		3D708B301674B05A00AD7DEC /* JXSRTElement.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B271674B05A00AD7DEC /* JXSRTElement.h */; };
+		3D708B311674B05A00AD7DEC /* JXSRTElement.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B281674B05A00AD7DEC /* JXSRTElement.m */; };
+		3D708B321674B05A00AD7DEC /* JXSRTTagsSupport.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B291674B05A00AD7DEC /* JXSRTTagsSupport.h */; };
+		3D708B331674B05A00AD7DEC /* NSMutableAttributedString+SRTString.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B2A1674B05A00AD7DEC /* NSMutableAttributedString+SRTString.h */; };
+		3D708B341674B05A00AD7DEC /* NSMutableAttributedString+SRTString.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B2B1674B05A00AD7DEC /* NSMutableAttributedString+SRTString.m */; };
+		3D708B351674B05A00AD7DEC /* NSScanner+SRTTags.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B2C1674B05A00AD7DEC /* NSScanner+SRTTags.h */; };
+		3D708B361674B05A00AD7DEC /* NSScanner+SRTTags.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B2D1674B05A00AD7DEC /* NSScanner+SRTTags.m */; };
+		3D708B4A1674B07400AD7DEC /* DTColor+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3A1674B07400AD7DEC /* DTColor+HTML.h */; };
+		3D708B4B1674B07400AD7DEC /* DTColor+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B3B1674B07400AD7DEC /* DTColor+HTML.m */; };
+		3D708B4C1674B07400AD7DEC /* DTCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3C1674B07400AD7DEC /* DTCompatibility.h */; };
+		3D708B4D1674B07400AD7DEC /* DTCoreTextConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3D1674B07400AD7DEC /* DTCoreTextConstants.h */; };
+		3D708B4E1674B07400AD7DEC /* DTCoreTextConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B3E1674B07400AD7DEC /* DTCoreTextConstants.m */; };
+		3D708B4F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h */; };
+		3D708B501674B07400AD7DEC /* DTCoreTextFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B401674B07400AD7DEC /* DTCoreTextFontDescriptor.m */; };
+		3D708B511674B07400AD7DEC /* DTCoreTextParagraphStyle.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B411674B07400AD7DEC /* DTCoreTextParagraphStyle.h */; };
+		3D708B521674B07400AD7DEC /* DTCoreTextParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B421674B07400AD7DEC /* DTCoreTextParagraphStyle.m */; };
+		3D708B541674B07400AD7DEC /* NSCharacterSet+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B441674B07400AD7DEC /* NSCharacterSet+HTML.h */; };
+		3D708B551674B07400AD7DEC /* NSCharacterSet+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B451674B07400AD7DEC /* NSCharacterSet+HTML.m */; };
+		3D708B561674B07400AD7DEC /* NSMutableAttributedString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B461674B07400AD7DEC /* NSMutableAttributedString+HTML.h */; };
+		3D708B571674B07400AD7DEC /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B471674B07400AD7DEC /* NSMutableAttributedString+HTML.m */; };
+		3D708B581674B07400AD7DEC /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B481674B07400AD7DEC /* NSString+HTML.h */; };
+		3D708B591674B07400AD7DEC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B491674B07400AD7DEC /* NSString+HTML.m */; };
+		3D708B5C1674B28D00AD7DEC /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D708B5B1674B28D00AD7DEC /* ApplicationServices.framework */; };
 		E7237A6A146112D100E22EA4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A69146112D100E22EA4 /* Cocoa.framework */; };
 		E7237A74146112D100E22EA4 /* SubRip.m in Sources */ = {isa = PBXBuildFile; fileRef = E7237A73146112D100E22EA4 /* SubRip.m */; };
 		E74B2155146113F800267DAD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E74B2154146113F800267DAD /* CoreMedia.framework */; };
@@ -51,6 +75,32 @@
 		3D4181C216651769006DC6F4 /* SubRip-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SubRip-Info.plist"; sourceTree = "<group>"; };
 		3D4181C416651769006DC6F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3D4181CE166518A5006DC6F4 /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+		3D41820816657676006DC6F4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		3D708B261674B05A00AD7DEC /* DTCoreText.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCoreText.h; sourceTree = "<group>"; };
+		3D708B271674B05A00AD7DEC /* JXSRTElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXSRTElement.h; sourceTree = "<group>"; };
+		3D708B281674B05A00AD7DEC /* JXSRTElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JXSRTElement.m; sourceTree = "<group>"; };
+		3D708B291674B05A00AD7DEC /* JXSRTTagsSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JXSRTTagsSupport.h; sourceTree = "<group>"; };
+		3D708B2A1674B05A00AD7DEC /* NSMutableAttributedString+SRTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+SRTString.h"; sourceTree = "<group>"; };
+		3D708B2B1674B05A00AD7DEC /* NSMutableAttributedString+SRTString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+SRTString.m"; sourceTree = "<group>"; };
+		3D708B2C1674B05A00AD7DEC /* NSScanner+SRTTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSScanner+SRTTags.h"; sourceTree = "<group>"; };
+		3D708B2D1674B05A00AD7DEC /* NSScanner+SRTTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSScanner+SRTTags.m"; sourceTree = "<group>"; };
+		3D708B3A1674B07400AD7DEC /* DTColor+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "DTColor+HTML.h"; sourceTree = "<group>"; };
+		3D708B3B1674B07400AD7DEC /* DTColor+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "DTColor+HTML.m"; sourceTree = "<group>"; };
+		3D708B3C1674B07400AD7DEC /* DTCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCompatibility.h; sourceTree = "<group>"; };
+		3D708B3D1674B07400AD7DEC /* DTCoreTextConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCoreTextConstants.h; sourceTree = "<group>"; };
+		3D708B3E1674B07400AD7DEC /* DTCoreTextConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCoreTextConstants.m; sourceTree = "<group>"; };
+		3D708B3F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCoreTextFontDescriptor.h; sourceTree = "<group>"; };
+		3D708B401674B07400AD7DEC /* DTCoreTextFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCoreTextFontDescriptor.m; sourceTree = "<group>"; };
+		3D708B411674B07400AD7DEC /* DTCoreTextParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DTCoreTextParagraphStyle.h; sourceTree = "<group>"; };
+		3D708B421674B07400AD7DEC /* DTCoreTextParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DTCoreTextParagraphStyle.m; sourceTree = "<group>"; };
+		3D708B431674B07400AD7DEC /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
+		3D708B441674B07400AD7DEC /* NSCharacterSet+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSCharacterSet+HTML.h"; sourceTree = "<group>"; };
+		3D708B451674B07400AD7DEC /* NSCharacterSet+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSCharacterSet+HTML.m"; sourceTree = "<group>"; };
+		3D708B461674B07400AD7DEC /* NSMutableAttributedString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSMutableAttributedString+HTML.h"; sourceTree = "<group>"; };
+		3D708B471674B07400AD7DEC /* NSMutableAttributedString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSMutableAttributedString+HTML.m"; sourceTree = "<group>"; };
+		3D708B481674B07400AD7DEC /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
+		3D708B491674B07400AD7DEC /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
+		3D708B5B1674B28D00AD7DEC /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
 		E7237A66146112D100E22EA4 /* SubRip.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = SubRip.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7237A69146112D100E22EA4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E7237A6C146112D100E22EA4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -78,6 +128,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3D708B5C1674B28D00AD7DEC /* ApplicationServices.framework in Frameworks */,
 				3D4181D1166518B2006DC6F4 /* AVFoundation.framework in Frameworks */,
 				3D4181D0166518AD006DC6F4 /* CoreMedia.framework in Frameworks */,
 				3D4181BF16651769006DC6F4 /* Cocoa.framework in Frameworks */,
@@ -126,11 +177,52 @@
 			path = "Test Files";
 			sourceTree = "<group>";
 		};
+		3D708B251674B05A00AD7DEC /* TagSupport */ = {
+			isa = PBXGroup;
+			children = (
+				3D708B291674B05A00AD7DEC /* JXSRTTagsSupport.h */,
+				3D708B261674B05A00AD7DEC /* DTCoreText.h */,
+				3D708B271674B05A00AD7DEC /* JXSRTElement.h */,
+				3D708B281674B05A00AD7DEC /* JXSRTElement.m */,
+				3D708B2A1674B05A00AD7DEC /* NSMutableAttributedString+SRTString.h */,
+				3D708B2B1674B05A00AD7DEC /* NSMutableAttributedString+SRTString.m */,
+				3D708B2C1674B05A00AD7DEC /* NSScanner+SRTTags.h */,
+				3D708B2D1674B05A00AD7DEC /* NSScanner+SRTTags.m */,
+				3D708B391674B07400AD7DEC /* DTCoreTextSubset */,
+			);
+			path = TagSupport;
+			sourceTree = "<group>";
+		};
+		3D708B391674B07400AD7DEC /* DTCoreTextSubset */ = {
+			isa = PBXGroup;
+			children = (
+				3D708B3A1674B07400AD7DEC /* DTColor+HTML.h */,
+				3D708B3B1674B07400AD7DEC /* DTColor+HTML.m */,
+				3D708B3C1674B07400AD7DEC /* DTCompatibility.h */,
+				3D708B3D1674B07400AD7DEC /* DTCoreTextConstants.h */,
+				3D708B3E1674B07400AD7DEC /* DTCoreTextConstants.m */,
+				3D708B3F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h */,
+				3D708B401674B07400AD7DEC /* DTCoreTextFontDescriptor.m */,
+				3D708B411674B07400AD7DEC /* DTCoreTextParagraphStyle.h */,
+				3D708B421674B07400AD7DEC /* DTCoreTextParagraphStyle.m */,
+				3D708B441674B07400AD7DEC /* NSCharacterSet+HTML.h */,
+				3D708B451674B07400AD7DEC /* NSCharacterSet+HTML.m */,
+				3D708B461674B07400AD7DEC /* NSMutableAttributedString+HTML.h */,
+				3D708B471674B07400AD7DEC /* NSMutableAttributedString+HTML.m */,
+				3D708B481674B07400AD7DEC /* NSString+HTML.h */,
+				3D708B491674B07400AD7DEC /* NSString+HTML.m */,
+				3D708B431674B07400AD7DEC /* LICENSE */,
+			);
+			name = DTCoreTextSubset;
+			path = External/DTCoreTextSubset;
+			sourceTree = SOURCE_ROOT;
+		};
 		E7237A5B146112D100E22EA4 = {
 			isa = PBXGroup;
 			children = (
 				E7237A6F146112D100E22EA4 /* SubRip */,
 				3D41819C166504CF006DC6F4 /* SubRipTest */,
+				3D708B251674B05A00AD7DEC /* TagSupport */,
 				E7237A68146112D100E22EA4 /* Frameworks */,
 				E7237A67146112D100E22EA4 /* Products */,
 			);
@@ -150,9 +242,11 @@
 			isa = PBXGroup;
 			children = (
 				3D4181CE166518A5006DC6F4 /* AVFoundation.framework */,
+				3D708B5B1674B28D00AD7DEC /* ApplicationServices.framework */,
 				E74B2154146113F800267DAD /* CoreMedia.framework */,
 				E7237A69146112D100E22EA4 /* Cocoa.framework */,
 				3D418199166504CF006DC6F4 /* SenTestingKit.framework */,
+				3D41820816657676006DC6F4 /* Foundation.framework */,
 				E7237A6B146112D100E22EA4 /* Other Frameworks */,
 			);
 			name = Frameworks;
@@ -198,6 +292,19 @@
 			files = (
 				3D4181D3166518C0006DC6F4 /* JXArcCompatibilityMacros.h in Headers */,
 				3D4181D2166518BB006DC6F4 /* SubRip.h in Headers */,
+				3D708B2F1674B05A00AD7DEC /* DTCoreText.h in Headers */,
+				3D708B301674B05A00AD7DEC /* JXSRTElement.h in Headers */,
+				3D708B321674B05A00AD7DEC /* JXSRTTagsSupport.h in Headers */,
+				3D708B331674B05A00AD7DEC /* NSMutableAttributedString+SRTString.h in Headers */,
+				3D708B351674B05A00AD7DEC /* NSScanner+SRTTags.h in Headers */,
+				3D708B4A1674B07400AD7DEC /* DTColor+HTML.h in Headers */,
+				3D708B4C1674B07400AD7DEC /* DTCompatibility.h in Headers */,
+				3D708B4D1674B07400AD7DEC /* DTCoreTextConstants.h in Headers */,
+				3D708B4F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h in Headers */,
+				3D708B511674B07400AD7DEC /* DTCoreTextParagraphStyle.h in Headers */,
+				3D708B541674B07400AD7DEC /* NSCharacterSet+HTML.h in Headers */,
+				3D708B561674B07400AD7DEC /* NSMutableAttributedString+HTML.h in Headers */,
+				3D708B581674B07400AD7DEC /* NSString+HTML.h in Headers */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -342,6 +449,16 @@
 			buildActionMask = 2147483647;
 			files = (
 				3D4181CD1665185A006DC6F4 /* SubRip.m in Sources */,
+				3D708B311674B05A00AD7DEC /* JXSRTElement.m in Sources */,
+				3D708B341674B05A00AD7DEC /* NSMutableAttributedString+SRTString.m in Sources */,
+				3D708B361674B05A00AD7DEC /* NSScanner+SRTTags.m in Sources */,
+				3D708B4B1674B07400AD7DEC /* DTColor+HTML.m in Sources */,
+				3D708B4E1674B07400AD7DEC /* DTCoreTextConstants.m in Sources */,
+				3D708B501674B07400AD7DEC /* DTCoreTextFontDescriptor.m in Sources */,
+				3D708B521674B07400AD7DEC /* DTCoreTextParagraphStyle.m in Sources */,
+				3D708B551674B07400AD7DEC /* NSCharacterSet+HTML.m in Sources */,
+				3D708B571674B07400AD7DEC /* NSMutableAttributedString+HTML.m in Sources */,
+				3D708B591674B07400AD7DEC /* NSString+HTML.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -423,6 +540,11 @@
 				FRAMEWORK_VERSION = A;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SubRip/SubRip-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"SUBRIP_TAG_SUPPORT=1",
+					"SUBRIP_SUBVIEWER_SUPPORT=1",
+					"$(inherited)",
+				);
 				INFOPLIST_FILE = "SubRip/SubRip-Info.plist";
 				INSTALL_PATH = "@rpath";
 				PRODUCT_NAME = SubRip;
@@ -470,7 +592,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
 				ONLY_ACTIVE_ARCH = YES;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Debug;
 		};
@@ -492,7 +614,7 @@
 				GCC_WARN_ABOUT_RETURN_TYPE = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				MACOSX_DEPLOYMENT_TARGET = 10.7;
-				SDKROOT = macosx;
+				SDKROOT = macosx10.7;
 			};
 			name = Release;
 		};

@@ -11,6 +11,7 @@
 #import <CoreMedia/CMTime.h>
 
 #import <SubRip/SubRip.h>
+#import "NSMutableAttributedString+SRTString.h"
 
 static NSString *testString1;
 
@@ -59,9 +60,92 @@ static NSString *testString1;
 	}
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
-	SubRipItem *item1 = subtitleItems[0];
+	SubRipItem *item1 = [subtitleItems objectAtIndex:0];
 	STAssertEqualObjects(item1, expectedItem1, @"Item 1 doesn’t match expectations.");
 	
+}
+
+#define VERBOSE_TEST	0
+
+- (void)testSRTString
+{
+	NSString *sourceSRTString = @""
+	"Another subtitle demonstrating tags:\n"
+	"<b>bold</b>, <i>italic</i>, <u>underlined</u>\n"
+	"<font color=\"#ff0000\">red text</font>";
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
+																				  attributes:nil];
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
+	
+	NSString *resultSRTString = string.srtString;
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
+	
+	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on SRT String Test differs");
+	
+	if (VERBOSE_TEST)  NSLog(@"\n------");
+}
+
+- (void)testNestedSRTString
+{
+	NSString *sourceSRTString = @""
+	"<b>bold, <i>bold and italic, <u>bold-italic-underlined</u></i></b>\n"
+	"<font color=\"#ff0000\">red text, </font><font color=\"#00ff00\">green text</font>";
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
+																				  attributes:nil];
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
+	
+	NSString *resultSRTString = string.srtString;
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
+	
+	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on nested SRT String Test differs");
+	
+	if (VERBOSE_TEST)  NSLog(@"\n------");
+}
+
+- (void)testNestedSRTString2
+{
+	NSString *sourceSRTString = @""
+	"<font color=\"#ff0000\"><b>red bold text</b>, </font><font color=\"#00ff00\"><b>bold green text</b></font>";
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
+																				  attributes:nil];
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
+	
+	NSString *resultSRTString = string.srtString;
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
+	
+	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on nested SRT String Test 2 differs");
+	
+	if (VERBOSE_TEST)  NSLog(@"\n------");
+}
+
+- (void)testAngleBrackets
+{
+	NSString *sourceSRTString = @""
+	"a < b + c\n"
+	"OR\n"
+	"a >= b + c";
+	
+	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
+																				  attributes:nil];
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
+	
+	NSString *resultSRTString = string.srtString;
+	
+	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
+	
+	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on SRT String Test differs");
+	
+	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
 
 @end
