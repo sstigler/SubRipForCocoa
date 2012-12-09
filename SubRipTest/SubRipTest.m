@@ -60,8 +60,32 @@ static NSString *testString1;
 	}
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
-	SubRipItem *item1 = [subtitleItems objectAtIndex:0];
-	STAssertEqualObjects(item1, expectedItem1, @"Item 1 doesn’t match expectations.");
+	SubRipItem *item0 = [subtitleItems objectAtIndex:0];
+	STAssertEqualObjects(item0, expectedItem1, @"Item 0 doesn’t match expectations.");
+	
+}
+
+#if SUBRIP_TAG_SUPPORT
+- (void)testTagParsingSupport
+{
+	NSError *error = nil;
+	
+	NSString *expectedText = @""
+	"Another subtitle demonstrating tags:\n"
+	"bold, italic, underlined\n"
+	"red text";
+	
+	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	[subRip parseTags];
+	
+	NSArray *subtitleItems = subRip.subtitleItems;
+	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
+	STAssertEqualObjects(item1.attributedText.string, expectedText, @"Item 1 attributedText.string doesn’t match expectations.");
 	
 }
 
@@ -147,5 +171,7 @@ static NSString *testString1;
 	
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
+
+#endif
 
 @end

@@ -262,6 +262,11 @@ NS_INLINE void closeTags(NSOrderedSet *closingTagsStack, NSMutableString *tagged
     }
 }
 
+@end
+
+
+@implementation NSAttributedString (SRTString)
+
 - (NSString *)srtString
 {
 	NSString *plainString = [self string];

@@ -41,6 +41,11 @@
  */
 + (NSMutableAttributedString *)attributedStringWithSRTString:(NSString *)string options:(NSDictionary *)options;
 
+@end
+
+
+@interface NSAttributedString (SRTString)
+
 /**
  Encodes the receiver into a tagged SRT string.
  

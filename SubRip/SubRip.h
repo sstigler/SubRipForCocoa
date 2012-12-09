@@ -42,7 +42,7 @@ typedef enum {
 @property(assign) CMTime endTime;
 @property(copy) NSString *text;
 #if SUBRIP_TAG_SUPPORT
-@property(readonly, copy) NSAttributedString *attributedText;
+@property(nonatomic, copy) NSAttributedString *attributedText;
 #endif
 
 @property(readonly, getter = startTimeString) NSString *startTimeString;

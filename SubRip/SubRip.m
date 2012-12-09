@@ -17,6 +17,10 @@
 
 #import "SubRip.h"
 
+#if SUBRIP_TAG_SUPPORT
+#import "NSMutableAttributedString+SRTString.h"
+#endif
+
 @implementation SubRip
 
 @dynamic totalCharacterCountOfText;
@@ -355,7 +359,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 #if SUBRIP_TAG_SUPPORT
 - (void)parseTags;
 {
-
+	_attributedText = [[NSMutableAttributedString alloc] initWithSRTString:_text
+																attributes:nil];
 }
 #endif
 
@@ -386,7 +391,13 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 
 -(NSString *)description {
-    return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, self.text];
+#if SUBRIP_TAG_SUPPORT
+	NSString *text = [_attributedText srtString];
+#else
+	NSString *text = self.text;
+#endif
+
+    return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, text];
 }
 
 - (BOOL)isEqual:(id)obj
@@ -447,6 +458,13 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     self.endTime = [SubRip parseIntoCMTime:timecodeString];
 }
 
+#if SUBRIP_TAG_SUPPORT
+-(void)setAttributedText:(NSAttributedString *)attributedText {
+	_attributedText = attributedText;
+	_text = [attributedText srtString];
+}
+#endif
+
 
 -(BOOL)containsString:(NSString *)str {
     NSRange searchResult = [_text rangeOfString:str options:NSCaseInsensitiveSearch];
@@ -474,14 +492,34 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 -(void)encodeWithCoder:(NSCoder *)encoder {
     [encoder encodeCMTime:_startTime forKey:@"startTime"];
     [encoder encodeCMTime:_endTime forKey:@"endTime"];
+#if SUBRIP_TAG_SUPPORT
+	BOOL didParseTags = (_attributedText != nil);
+    if (didParseTags) {
+		NSString *text = [_attributedText srtString];
+		[encoder encodeObject:text forKey:@"text"];
+	}
+	else {
+		[encoder encodeObject:_text forKey:@"text"];
+	}
+	[encoder encodeBool:didParseTags forKey:@"didParseTags"];
+#else
     [encoder encodeObject:_text forKey:@"text"];
+#endif
 }
 
 -(instancetype)initWithCoder:(NSCoder *)decoder {
     self = [self init];
     _startTime = [decoder decodeCMTimeForKey:@"startTime"];
     _endTime = [decoder decodeCMTimeForKey:@"endTime"];
+#if SUBRIP_TAG_SUPPORT
+	self.text = [decoder decodeObjectForKey:@"text"];
+	BOOL didParseTags = [decoder decodeBoolForKey:@"didParseTags"];
+	if (didParseTags) {
+		[self parseTags];
+	}
+#else
     self.text = [decoder decodeObjectForKey:@"text"];
+#endif
     return self;
 }
             
