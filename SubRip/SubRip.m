@@ -18,7 +18,7 @@
 #import "SubRip.h"
 
 #if SUBRIP_TAG_SUPPORT
-#import "NSMutableAttributedString+SRTString.h"
+#import <SubRip/NSMutableAttributedString+SRTString.h>
 #endif
 
 @implementation SubRip
