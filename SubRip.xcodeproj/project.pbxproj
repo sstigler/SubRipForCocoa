@@ -33,7 +33,7 @@
 		3D708B4A1674B07400AD7DEC /* DTColor+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3A1674B07400AD7DEC /* DTColor+HTML.h */; };
 		3D708B4B1674B07400AD7DEC /* DTColor+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B3B1674B07400AD7DEC /* DTColor+HTML.m */; };
 		3D708B4C1674B07400AD7DEC /* DTCompatibility.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3C1674B07400AD7DEC /* DTCompatibility.h */; };
-		3D708B4D1674B07400AD7DEC /* DTCoreTextConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3D1674B07400AD7DEC /* DTCoreTextConstants.h */; };
+		3D708B4D1674B07400AD7DEC /* DTCoreTextConstants.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3D1674B07400AD7DEC /* DTCoreTextConstants.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		3D708B4E1674B07400AD7DEC /* DTCoreTextConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B3E1674B07400AD7DEC /* DTCoreTextConstants.m */; };
 		3D708B4F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B3F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h */; };
 		3D708B501674B07400AD7DEC /* DTCoreTextFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B401674B07400AD7DEC /* DTCoreTextFontDescriptor.m */; };
@@ -292,6 +292,7 @@
 			files = (
 				3D4181D3166518C0006DC6F4 /* JXArcCompatibilityMacros.h in Headers */,
 				3D4181D2166518BB006DC6F4 /* SubRip.h in Headers */,
+				3D708B4D1674B07400AD7DEC /* DTCoreTextConstants.h in Headers */,
 				3D708B2F1674B05A00AD7DEC /* DTCoreText.h in Headers */,
 				3D708B301674B05A00AD7DEC /* JXSRTElement.h in Headers */,
 				3D708B321674B05A00AD7DEC /* JXSRTTagsSupport.h in Headers */,
@@ -299,7 +300,6 @@
 				3D708B351674B05A00AD7DEC /* NSScanner+SRTTags.h in Headers */,
 				3D708B4A1674B07400AD7DEC /* DTColor+HTML.h in Headers */,
 				3D708B4C1674B07400AD7DEC /* DTCompatibility.h in Headers */,
-				3D708B4D1674B07400AD7DEC /* DTCoreTextConstants.h in Headers */,
 				3D708B4F1674B07400AD7DEC /* DTCoreTextFontDescriptor.h in Headers */,
 				3D708B511674B07400AD7DEC /* DTCoreTextParagraphStyle.h in Headers */,
 				3D708B541674B07400AD7DEC /* NSCharacterSet+HTML.h in Headers */,

@@ -13,12 +13,7 @@
 
 @implementation NSMutableAttributedString (SRTString)
 
-- (id)initWithSRTString:(NSString *)string attributes:(NSDictionary **)docAttributes
-{
-	return [self initWithSRTString:string options:nil attributes:docAttributes];
-}
-
-- (id)initWithSRTString:(NSString *)srtString options:(NSDictionary *)options attributes:(NSDictionary **)docAttributes
+- (id)initWithSRTString:(NSString *)srtString options:(NSDictionary *)options
 {
 	// only with valid string
 	if (![srtString length])
@@ -240,7 +235,7 @@
 
 + (NSMutableAttributedString *)attributedStringWithSRTString:(NSString *)string options:(NSDictionary *)options;
 {
-	NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithSRTString:string options:options attributes:NULL];
+	NSMutableAttributedString *attrString = [[NSMutableAttributedString alloc] initWithSRTString:string options:options];
 	
 	return attrString;
 }

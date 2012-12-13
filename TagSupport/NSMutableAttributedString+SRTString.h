@@ -20,19 +20,10 @@
 /**
  Initializes and returns a new `NSMutableAttributedString` object from the tagged SRT string contained in the given object.
  @param string The HTML string from which to create the attributed string.
- @param docAttributes Currently not in used.
- @returns Returns an initialized object, or `nil` if the data can’t be decoded.
- */
-- (id)initWithSRTString:(NSString *)string attributes:(NSDictionary **)docAttributes;
-
-/**
- Initializes and returns a new `NSMutableAttributedString` object from the tagged SRT string contained in the given object.
- @param string The HTML string from which to create the attributed string.
  @param options Specifies how the document should be loaded. Contains values described in “Option keys for parsing SRT strings.”
- @param docAttributes Currently not in used.
  @returns Returns an initialized object, or `nil` if the data can’t be decoded.
  */
-- (id)initWithSRTString:(NSString *)string options:(NSDictionary *)options attributes:(NSDictionary **)docAttributes;
+- (id)initWithSRTString:(NSString *)string options:(NSDictionary *)options;
 
 /**
  Creates and returns an NSMutableAttributedString object initialized using the provided string

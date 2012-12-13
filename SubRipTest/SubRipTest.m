@@ -11,6 +11,7 @@
 #import <CoreMedia/CMTime.h>
 
 #import <SubRip/SubRip.h>
+#import <SubRip/DTCoreTextConstants.h>
 #import "NSMutableAttributedString+SRTString.h"
 
 static NSString *testString1;
@@ -88,7 +89,7 @@ static NSString *testTaggedSRTString1;
 		STFail(@"Couldn’t parse testString1.");
 	}
 	
-	[subRip parseTags]; // 	[subRip parseTagsWithOptions:];
+	[subRip parseTags];
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
@@ -104,11 +105,43 @@ static NSString *testTaggedSRTString1;
 											   startTime:CMTimeMakeWithSeconds(16.000, 1000)
 												 endTime:CMTimeMakeWithSeconds(18.000, 1000)];
 	
-	// This will also set item1.text to text with tags generated from the attributes.
+	// This will also set item1.text to text with tags generated based on the options.
 	item1.attributedText = [[NSMutableAttributedString alloc] initWithSRTString:testTaggedSRTString1
-																	 attributes:nil];
+																		options:nil];
 	
 	STAssertEqualObjects(item1.text, expectedText, @"Tag generation #1 from attributedText failed.");
+}
+
+- (void)testTagParsingWithOptionsSupport
+{
+	NSError *error = nil;
+	
+	CGFloat defaultSize = 16.0;
+	NSString *defaultFontName = @"Times";
+
+	NSFont *font = [NSFont fontWithName:defaultFontName
+								   size:defaultSize];
+	
+	NSDictionary *expectedAttributes = @{NSFontAttributeName : font};
+	
+	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	NSDictionary *srtStringParsingAttributes = @{
+		DTDefaultFontFamily : defaultFontName,
+		NSTextSizeMultiplierDocumentOption : @(16.0/12.0)
+	};
+	
+	[subRip parseTagsWithOptions:srtStringParsingAttributes];
+	
+	NSArray *subtitleItems = subRip.subtitleItems;
+	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
+	NSDictionary *attributes = [item1.attributedText attributesAtIndex:0 effectiveRange:NULL];
+	STAssertEqualObjects(attributes, expectedAttributes, @"Item 1 attributedText attributes don’t match expectations.");
+	
 }
 
 #define VERBOSE_TEST	0
@@ -118,7 +151,7 @@ static NSString *testTaggedSRTString1;
 	NSString *sourceSRTString = testTaggedSRTString1;
 	
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
-																				  attributes:nil];
+																					 options:nil];
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
 	
@@ -138,7 +171,7 @@ static NSString *testTaggedSRTString1;
 	"<font color=\"#ff0000\">red text, </font><font color=\"#00ff00\">green text</font>";
 	
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
-																				  attributes:nil];
+																					 options:nil];
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
 	
@@ -157,7 +190,7 @@ static NSString *testTaggedSRTString1;
 	"<font color=\"#ff0000\"><b>red bold text</b>, </font><font color=\"#00ff00\"><b>bold green text</b></font>";
 	
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
-																				  attributes:nil];
+																					 options:nil];
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
 	
@@ -178,7 +211,7 @@ static NSString *testTaggedSRTString1;
 	"a >= b + c";
 	
 	NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithSRTString:sourceSRTString
-																				  attributes:nil];
+																					 options:nil];
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", string.string);
 	

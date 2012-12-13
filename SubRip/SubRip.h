@@ -33,17 +33,16 @@ typedef enum {
     CMTime _endTime;
     NSString *_text;
     NSString *_uniqueID;
-#if SUBRIP_TAG_SUPPORT
+	
 	NSAttributedString *_attributedText;
-#endif
+	NSDictionary *_attributeOptions;
 }
 
 @property(assign) CMTime startTime;
 @property(assign) CMTime endTime;
 @property(copy) NSString *text;
-#if SUBRIP_TAG_SUPPORT
 @property(nonatomic, copy) NSAttributedString *attributedText;
-#endif
+@property(nonatomic, readonly, JX_STRONG) NSDictionary *attributeOptions;
 
 @property(readonly, getter = startTimeString) NSString *startTimeString;
 @property(readonly, getter = endTimeString) NSString *endTimeString;
@@ -53,9 +52,7 @@ typedef enum {
                    startTime:(CMTime)startTime
                      endTime:(CMTime)endTime;
 
-#if SUBRIP_TAG_SUPPORT
-- (void)parseTags;
-#endif
+- (void)parseTagsWithOptions:(NSDictionary *)options;
 
 -(NSString *)startTimeString;
 -(NSString *)endTimeString;
@@ -97,9 +94,8 @@ typedef enum {
 
 -(BOOL)_populateFromString:(NSString *)str;
 
-#if SUBRIP_TAG_SUPPORT
 - (void)parseTags;
-#endif
+- (void)parseTagsWithOptions:(NSDictionary *)options;
 
 -(NSString *)srtString;
 -(NSString *)srtStringWithLineBreaksInSubtitlesAllowed:(BOOL)lineBreaksAllowed;
