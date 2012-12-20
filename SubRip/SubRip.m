@@ -399,6 +399,15 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 }
 
 
+-(NSString *)startTimecodeString {
+    return srtTimecodeStringForCMTime(_startTime);
+}
+
+-(NSString *)endTimecodeString {
+    return srtTimecodeStringForCMTime(_endTime);
+}
+
+
 -(NSString *)description {
 #if SUBRIP_TAG_SUPPORT
 	NSString *text = [_attributedText srtString];

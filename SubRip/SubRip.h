@@ -54,8 +54,13 @@ typedef enum {
 
 - (void)parseTagsWithOptions:(NSDictionary *)options;
 
+// Without milliseconds!
 -(NSString *)startTimeString;
 -(NSString *)endTimeString;
+
+// SRT timecode strings
+-(NSString *)startTimecodeString;
+-(NSString *)endTimecodeString;
 
 -(NSString *)_convertCMTimeToString:(CMTime)theTime;
 
