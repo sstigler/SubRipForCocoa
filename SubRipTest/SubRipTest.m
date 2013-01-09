@@ -78,6 +78,39 @@ typedef struct _SubRipTestTimePositionPair {
 	NSUInteger index;
 } SubRipTestTimePositionPair;
 
+- (void)testTimeAndPosition
+{
+	NSError *error = nil;
+	
+	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	SubRipTestTimePositionPair timePositionPairs[] = {
+		{(CMTime){    0, 1000, 1}, NSNotFound},
+		{(CMTime){12000, 1000, 1}, 0},
+		{(CMTime){15123, 1000, 1}, NSNotFound},
+		{(CMTime){16000, 1000, 1}, 1},
+		{(CMTime){18000, 1000, 1}, NSNotFound},
+		{(CMTime){20000, 1000, 1}, 2},
+		{(CMTime){22000, 1000, 1}, NSNotFound}
+	};
+	
+	int timePositionPairCount = sizeof(timePositionPairs)/sizeof(timePositionPairs[0]);
+	
+	for (int i = 0; i < timePositionPairCount; i++) {
+		NSUInteger index;
+		CMTime time = timePositionPairs[i].time;
+		NSUInteger expectedIndex = timePositionPairs[i].index;
+		NSString *timeString = CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, time));
+		[subRip subRipItemForPointInTime:time index:&index];
+		
+		STAssertEquals(index, expectedIndex, @"Time test at %@ failed.", timeString);
+	}
+}
+
 - (void)testNextTimeAndPosition
 {
 	NSError *error = nil;

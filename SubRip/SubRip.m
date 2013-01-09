@@ -295,6 +295,44 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     }];
 }
 
+- (SubRipItem *)subRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index {
+    // Finds the first SubRipItem whose startTime <= desiredTime < endTime.
+    // Requires that we ensure the subtitleItems are ordered, because we are using binary search.
+    
+    NSUInteger subtitleItemsCount = _subtitleItems.count;
+    
+    // Custom binary search.
+    NSUInteger low = 0;
+    NSUInteger high = subtitleItemsCount - 1;
+    
+    while (low <= high) {
+        NSUInteger mid = (low + high) >> 1;
+        SubRipItem *thisSub = [_subtitleItems objectAtIndex:mid];
+        CMTime thisStartTime = thisSub.startTime;
+        
+        if (CMTIME_COMPARE_INLINE(thisStartTime, <=, desiredTime)) {
+            CMTime thisEndTime = thisSub.endTime;
+            if (CMTIME_COMPARE_INLINE(desiredTime, <, thisEndTime)) {
+                // desiredTime in range.
+                if (index != NULL)  *index = mid;
+                return thisSub;
+            }
+            else {
+                // Continue search in upper *half*.
+                low = mid + 1;
+            }
+        }
+        else /*if (CMTIME_COMPARE_INLINE(subStartTime, >, desiredTime))*/ {
+            if (mid == 0)  break; // Nothing found.
+            // Continue search in lower *half*.
+            high = mid - 1;
+        }
+    }
+    
+    if (index != NULL)  *index = NSNotFound;
+    return nil;
+}
+
 - (SubRipItem *)nextSubRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index {
 	// Finds the first SubRipItem whose startTime > desiredTime.
     // Requires that we ensure the subtitleItems are ordered, because we are using binary search.
