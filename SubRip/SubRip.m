@@ -83,9 +83,9 @@
 #if (JX_HAS_ARC == 0)
 - (void)dealloc
 {
-	self.subtitleItems = nil;
-	
-	[super dealloc];
+    self.subtitleItems = nil;
+    
+    [super dealloc];
 }
 #endif
 
@@ -97,7 +97,7 @@
     
     NSArray *secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@","];
 #if SUBRIP_SUBVIEWER_SUPPORT
-	if (secondsComponents.count < 2)  secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@"."];
+    if (secondsComponents.count < 2)  secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@"."];
 #endif
     NSInteger seconds = [(NSString *)[secondsComponents objectAtIndex:0] integerValue];
     
@@ -162,25 +162,25 @@
         }
         else {
 #if SUBRIP_SUBVIEWER_SUPPORT
-			NSString *currentText = cur.text;
-			NSRange currentTextRange = NSMakeRange(0, currentText.length);
-			NSString *subViewerLineBreak = @"[br]";
-			NSRange subViewerLineBreakRange = [currentText rangeOfString:subViewerLineBreak
-																 options:NSLiteralSearch
-																   range:currentTextRange];
-			
+            NSString *currentText = cur.text;
+            NSRange currentTextRange = NSMakeRange(0, currentText.length);
+            NSString *subViewerLineBreak = @"[br]";
+            NSRange subViewerLineBreakRange = [currentText rangeOfString:subViewerLineBreak
+                                                                 options:NSLiteralSearch
+                                                                   range:currentTextRange];
+            
             if (subViewerLineBreakRange.location != NSNotFound) {
-				NSRange subViewerLineBreakSearchRange = NSMakeRange(subViewerLineBreakRange.location,
-																	(currentTextRange.length - subViewerLineBreakRange.location));
-				
-				cur.text = [currentText stringByReplacingOccurrencesOfString:subViewerLineBreak
-																  withString:@"\n"
-																	 options:NSLiteralSearch
-																	   range:subViewerLineBreakSearchRange];
-			}
+                NSRange subViewerLineBreakSearchRange = NSMakeRange(subViewerLineBreakRange.location,
+                                                                    (currentTextRange.length - subViewerLineBreakRange.location));
+                
+                cur.text = [currentText stringByReplacingOccurrencesOfString:subViewerLineBreak
+                                                                  withString:@"\n"
+                                                                     options:NSLiteralSearch
+                                                                       range:subViewerLineBreakSearchRange];
+            }
 #endif
-			
-			[_subtitleItems addObject:cur];
+            
+            [_subtitleItems addObject:cur];
             JX_RELEASE(cur);
             cur = [SubRipItem new];
             scanPosition = SubRipScanPositionArrayIndex;
@@ -206,7 +206,7 @@
 
 - (void)parseTags;
 {
-	[self parseTagsWithOptions:nil];
+    [self parseTagsWithOptions:nil];
 }
 
 - (void)parseTagsWithOptions:(NSDictionary *)options;
@@ -220,14 +220,14 @@
 
 
 NSString * srtTimecodeStringForCMTime(CMTime time) {
-	double seconds = CMTimeGetSeconds(time);
-	double seconds_floor = floor(seconds);
-	long long seconds_floor_int = (long long)seconds_floor;
-	return [NSString stringWithFormat:@"%02d:%02d:%02d,%03d",
-			(int)floor(seconds / 60 / 60),						// H
-			(int)floor(seconds / 60),							// M
-			(int)floor(seconds_floor_int % 60),					// S
-			(int)round((seconds - seconds_floor) * 1000.0f)];	// cs
+    double seconds = CMTimeGetSeconds(time);
+    double seconds_floor = floor(seconds);
+    long long seconds_floor_int = (long long)seconds_floor;
+    return [NSString stringWithFormat:@"%02d:%02d:%02d,%03d",
+            (int)floor(seconds / 60 / 60),                        // H
+            (int)floor(seconds / 60),                            // M
+            (int)floor(seconds_floor_int % 60),                    // S
+            (int)round((seconds - seconds_floor) * 1000.0f)];    // cs
 
 }
 
@@ -325,13 +325,13 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 }
 
 - (SubRipItem *)nextSubRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index {
-	// Finds the first SubRipItem whose startTime > desiredTime.
+    // Finds the first SubRipItem whose startTime > desiredTime.
     // Requires that we ensure the subtitleItems are ordered, because we are using binary search.
-	// Donated by Peter Ljunglöf (SubTTS)
-	
+    // Donated by Peter Ljunglöf (SubTTS)
+    
     NSUInteger subtitleItemsCount = _subtitleItems.count;
-	
-	// Customized binary search.
+    
+    // Customized binary search.
     NSUInteger low = 0;
     NSUInteger high = subtitleItemsCount;
     
@@ -345,15 +345,15 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
             low = mid + 1;
         }
     }
-	
-	if (low >= subtitleItemsCount) {
+    
+    if (low >= subtitleItemsCount) {
         if (index != NULL)  *index = NSNotFound;
         return nil;
-	}
+    }
     else {
-		if (index != NULL)  *index = low;
-		return [_subtitleItems objectAtIndex:low];
-	}
+        if (index != NULL)  *index = low;
+        return [_subtitleItems objectAtIndex:low];
+    }
 }
 
 
@@ -423,10 +423,10 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 #if (JX_HAS_ARC == 0)
 - (void)dealloc
 {
-	[_text release];
-	[_uniqueID release];
-	
-	[super dealloc];
+    [_text release];
+    [_uniqueID release];
+    
+    [super dealloc];
 }
 #endif
 
@@ -434,11 +434,11 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 - (void)parseTagsWithOptions:(NSDictionary *)options;
 {
 #if SUBRIP_TAG_SUPPORT
-	_attributeOptions = options;
-	_attributedText = [[NSMutableAttributedString alloc] initWithSRTString:_text
-																   options:_attributeOptions];
+    _attributeOptions = options;
+    _attributedText = [[NSMutableAttributedString alloc] initWithSRTString:_text
+                                                                   options:_attributeOptions];
 #else
-	_attributedText = nil;
+    _attributedText = nil;
 #endif
 }
 
@@ -479,9 +479,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 -(NSString *)description {
 #if SUBRIP_TAG_SUPPORT
-	NSString *text = [_attributedText srtString];
+    NSString *text = [_attributedText srtString];
 #else
-	NSString *text = self.text;
+    NSString *text = self.text;
 #endif
 
     return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, text];
@@ -489,34 +489,34 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 - (BOOL)isEqual:(id)obj
 {
-	if (obj == nil) {
-		return NO;
-	}
-	
-	if (![obj isKindOfClass:[SubRipItem class]]) {
-		return NO;
-	}
+    if (obj == nil) {
+        return NO;
+    }
+    
+    if (![obj isKindOfClass:[SubRipItem class]]) {
+        return NO;
+    }
 
-	SubRipItem *other = (SubRipItem *)obj;
-	
-	id otherText = other.text;
-	
-	return ((CMTimeCompare(other.startTime, _startTime) == 0) &&
-			(CMTimeCompare(other.endTime, _endTime) == 0) &&
-			((otherText == _text) || [otherText isEqualTo:_text]));
+    SubRipItem *other = (SubRipItem *)obj;
+    
+    id otherText = other.text;
+    
+    return ((CMTimeCompare(other.startTime, _startTime) == 0) &&
+            (CMTimeCompare(other.endTime, _endTime) == 0) &&
+            ((otherText == _text) || [otherText isEqualTo:_text]));
 }
 
 - (BOOL)isEqualToSubRipItem:(SubRipItem *)other
 {
-	if (other == nil) {
-		return NO;
-	}
-	
-	id otherText = other.text;
-	
-	return ((CMTimeCompare(other.startTime, _startTime) == 0) &&
-			(CMTimeCompare(other.endTime, _endTime) == 0) &&
-			((otherText == _text) || [otherText isEqualTo:_text]));
+    if (other == nil) {
+        return NO;
+    }
+    
+    id otherText = other.text;
+    
+    return ((CMTimeCompare(other.startTime, _startTime) == 0) &&
+            (CMTimeCompare(other.endTime, _endTime) == 0) &&
+            ((otherText == _text) || [otherText isEqualTo:_text]));
 }
 
 
@@ -547,8 +547,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 #if SUBRIP_TAG_SUPPORT
 -(void)setAttributedText:(NSAttributedString *)attributedText {
-	_attributedText = attributedText;
-	_text = [attributedText srtString];
+    _attributedText = attributedText;
+    _text = [attributedText srtString];
 }
 #endif
 
@@ -581,9 +581,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     [encoder encodeCMTime:_endTime forKey:@"endTime"];
     [encoder encodeObject:_text forKey:@"text"];
 #if SUBRIP_TAG_SUPPORT
-	BOOL didParseTags = (_attributedText != nil);
-	[encoder encodeBool:didParseTags forKey:@"didParseTags"];
-	[encoder encodeObject:_attributeOptions forKey:@"attributeOptions"];
+    BOOL didParseTags = (_attributedText != nil);
+    [encoder encodeBool:didParseTags forKey:@"didParseTags"];
+    [encoder encodeObject:_attributeOptions forKey:@"attributeOptions"];
 #endif
 }
 
@@ -591,13 +591,13 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     self = [self init];
     _startTime = [decoder decodeCMTimeForKey:@"startTime"];
     _endTime = [decoder decodeCMTimeForKey:@"endTime"];
-	self.text = [decoder decodeObjectForKey:@"text"];
+    self.text = [decoder decodeObjectForKey:@"text"];
 #if SUBRIP_TAG_SUPPORT
-	NSDictionary *options = [decoder decodeObjectForKey:@"attributeOptions"];
-	BOOL didParseTags = [decoder decodeBoolForKey:@"didParseTags"];
-	if (didParseTags) {
-		[self parseTagsWithOptions:options];
-	}
+    NSDictionary *options = [decoder decodeObjectForKey:@"attributeOptions"];
+    BOOL didParseTags = [decoder decodeBoolForKey:@"didParseTags"];
+    if (didParseTags) {
+        [self parseTagsWithOptions:options];
+    }
 #endif
     return self;
 }

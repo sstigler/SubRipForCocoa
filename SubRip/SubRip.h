@@ -33,9 +33,9 @@ typedef enum {
     CMTime _endTime;
     NSString *_text;
     NSString *_uniqueID;
-	
-	NSAttributedString *_attributedText;
-	NSDictionary *_attributeOptions;
+    
+    NSAttributedString *_attributedText;
+    NSDictionary *_attributeOptions;
 }
 
 @property(assign) CMTime startTime;

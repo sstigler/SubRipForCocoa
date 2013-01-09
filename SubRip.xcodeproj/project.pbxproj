@@ -107,8 +107,8 @@
 		E7237A6D146112D100E22EA4 /* CoreData.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreData.framework; path = System/Library/Frameworks/CoreData.framework; sourceTree = SDKROOT; };
 		E7237A6E146112D100E22EA4 /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		E7237A71146112D100E22EA4 /* SubRip-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SubRip-Prefix.pch"; sourceTree = "<group>"; };
-		E7237A72146112D100E22EA4 /* SubRip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubRip.h; sourceTree = "<group>"; };
-		E7237A73146112D100E22EA4 /* SubRip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubRip.m; sourceTree = "<group>"; };
+		E7237A72146112D100E22EA4 /* SubRip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubRip.h; sourceTree = "<group>"; usesTabs = 0; };
+		E7237A73146112D100E22EA4 /* SubRip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubRip.m; sourceTree = "<group>"; usesTabs = 0; };
 		E74B2154146113F800267DAD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
