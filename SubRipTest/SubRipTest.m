@@ -73,6 +73,44 @@ static NSString *testTaggedSRTString1;
 	
 }
 
+typedef struct _SubRipTestTimePositionPair {
+	CMTime time;
+	NSUInteger index;
+} SubRipTestTimePositionPair;
+
+- (void)testNextTimeAndPosition
+{
+	NSError *error = nil;
+	
+	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	SubRipTestTimePositionPair timePositionPairs[] = {
+		{(CMTime){    0, 1000, 1}, 0},
+		{(CMTime){12000, 1000, 1}, 1},
+		{(CMTime){15123, 1000, 1}, 1},
+		{(CMTime){16000, 1000, 1}, 2},
+		{(CMTime){18000, 1000, 1}, 2},
+		{(CMTime){20000, 1000, 1}, NSNotFound},
+		{(CMTime){22000, 1000, 1}, NSNotFound}
+	};
+	
+	int timePositionPairCount = sizeof(timePositionPairs)/sizeof(timePositionPairs[0]);
+	
+	for (int i = 0; i < timePositionPairCount; i++) {
+		NSUInteger index;
+		CMTime time = timePositionPairs[i].time;
+		NSUInteger expectedIndex = timePositionPairs[i].index;
+		NSString *timeString = CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, time));
+		[subRip nextSubRipItemForPointInTime:time index:&index];
+		
+		STAssertEquals(index, expectedIndex, @"Time test at %@ failed.", timeString);
+	}
+}
+
 - (void)testCoding
 {
 	NSError *error = nil;

@@ -110,6 +110,8 @@ typedef enum {
 -(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)desiredTime DEPRECATED_ATTRIBUTE; // The name of this method doesn’t match what it does.
 -(NSUInteger)indexOfSubRipItemForPointInTime:(CMTime)desiredTime;
 
+- (SubRipItem *)subRipItemAtIndex:(NSUInteger)index; // In contrast to NSArray’s -objectAtIndex:, this returns nil if the index it out of bounds.
+- (SubRipItem *)nextSubRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index; // The index is optional: you can pass NULL.
 
 -(NSUInteger)indexOfSubRipItemWithCharacterIndex:(NSUInteger)idx;
 

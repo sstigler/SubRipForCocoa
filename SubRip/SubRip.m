@@ -269,6 +269,13 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return [NSString stringWithFormat:@"SRT file: %@", self.subtitleItems];
 }
 
+- (SubRipItem *)subRipItemAtIndex:(NSUInteger)index {
+    if (index >= _subtitleItems.count)
+        return nil;
+    else
+        return [_subtitleItems objectAtIndex:index];
+}
+
 -(NSUInteger)indexOfSubRipItemWithStartTime:(CMTime)desiredTime {
     return [self indexOfSubRipItemForPointInTime:desiredTime];
 }
@@ -287,6 +294,39 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
         }
     }];
 }
+
+- (SubRipItem *)nextSubRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index {
+	// Finds the first SubRipItem whose startTime > desiredTime.
+    // Requires that we ensure the subtitleItems are ordered, because we are using binary search.
+	// Donated by Peter Ljunglöf (SubTTS)
+	
+    NSUInteger subtitleItemsCount = _subtitleItems.count;
+	
+	// Customized binary search.
+    NSUInteger low = 0;
+    NSUInteger high = subtitleItemsCount;
+    
+    while (low < high) {
+        NSUInteger mid = (low + high) >> 1;
+        SubRipItem *sub = [_subtitleItems objectAtIndex:mid];
+        
+        if (CMTIME_COMPARE_INLINE(desiredTime, <, sub.startTime)) {
+            high = mid;
+        } else {
+            low = mid + 1;
+        }
+    }
+	
+	if (low >= subtitleItemsCount) {
+        if (index != NULL)  *index = NSNotFound;
+        return nil;
+	}
+    else {
+		if (index != NULL)  *index = low;
+		return [_subtitleItems objectAtIndex:low];
+	}
+}
+
 
 -(NSUInteger)indexOfSubRipItemWithCharacterIndex:(NSUInteger)idx {
     if (idx >= self.totalCharacterCountOfText) {
