@@ -91,10 +91,13 @@ typedef struct _SubRipTestTimePositionPair {
 	SubRipTestTimePositionPair timePositionPairs[] = {
 		{(CMTime){    0, 1000, 1}, NSNotFound},
 		{(CMTime){12000, 1000, 1}, 0},
+		{(CMTime){13000, 1000, 1}, 0},
 		{(CMTime){15123, 1000, 1}, NSNotFound},
 		{(CMTime){16000, 1000, 1}, 1},
+		{(CMTime){17000, 1000, 1}, 1},
 		{(CMTime){18000, 1000, 1}, NSNotFound},
 		{(CMTime){20000, 1000, 1}, 2},
+		{(CMTime){21000, 1000, 1}, 2},
 		{(CMTime){22000, 1000, 1}, NSNotFound}
 	};
 	
@@ -124,10 +127,13 @@ typedef struct _SubRipTestTimePositionPair {
 	SubRipTestTimePositionPair timePositionPairs[] = {
 		{(CMTime){    0, 1000, 1}, 0},
 		{(CMTime){12000, 1000, 1}, 1},
+		{(CMTime){13000, 1000, 1}, 1},
 		{(CMTime){15123, 1000, 1}, 1},
 		{(CMTime){16000, 1000, 1}, 2},
+		{(CMTime){17000, 1000, 1}, 2},
 		{(CMTime){18000, 1000, 1}, 2},
 		{(CMTime){20000, 1000, 1}, NSNotFound},
+		{(CMTime){21000, 1000, 1}, NSNotFound},
 		{(CMTime){22000, 1000, 1}, NSNotFound}
 	};
 	
