@@ -73,6 +73,23 @@ static NSString *testTaggedSRTString1;
 	
 }
 
+- (void)testCoding
+{
+	NSError *error = nil;
+	
+	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:subRip];
+	SubRip *subRipDecoded = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
+	NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:subRipDecoded];
+
+	STAssertEqualObjects(data1, data2, @"Coding test failed.");
+}
+
 #if SUBRIP_TAG_SUPPORT
 - (void)testTagParsingSupport
 {
