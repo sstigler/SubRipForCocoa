@@ -283,14 +283,14 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 -(NSUInteger)indexOfSubRipItemForPointInTime:(CMTime)desiredTime {
     // This is slower than necessary as it will traverse all subtitleItems: O(n). We could reimplement this using a binary search,
     // which would require that we ensure the subtitleItems are ordered.
-    return [self.subtitleItems indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
+    return [_subtitleItems indexOfObjectPassingTest:^BOOL(id obj, NSUInteger idx, BOOL *stop) {
         if ((CMTIME_COMPARE_INLINE(desiredTime, >=, [(SubRipItem *)obj startTime])) &&
             (CMTIME_COMPARE_INLINE(desiredTime, <=, [(SubRipItem *)obj endTime]))
             ) {
             *stop = YES;
-            return true;
+            return YES;
         } else {
-            return false;
+            return NO;
         }
     }];
 }
