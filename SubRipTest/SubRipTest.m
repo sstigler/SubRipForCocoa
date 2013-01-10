@@ -15,9 +15,31 @@
 #import "NSMutableAttributedString+SRTString.h"
 
 static NSString *testString1;
+static NSMutableArray *testStringArray;
+static NSArray *testStringNames;
+
 static NSString *testTaggedSRTString1;
 
 @implementation SubRipTest
+
+- (NSString *)loadTestFileWithName:(NSString *)testFileName fromBundle:(NSBundle *)testBundle error:(NSError **)error
+{
+	NSString *testString;
+	
+    testString = [[NSString alloc] initWithContentsOfURL:[testBundle URLForResource:testFileName withExtension:@"srt"]
+												 encoding:NSUTF8StringEncoding
+													error:&(*error)];
+	if (testString == nil) {
+		NSLog(@"%@", *error);
+	}
+#if 0
+	else {
+		NSLog(@"%@", testString);
+	}
+#endif
+	
+	return testString;
+}
 
 - (void)setUp
 {
@@ -26,18 +48,16 @@ static NSString *testTaggedSRTString1;
 	NSError *error = nil;
 	
 	NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
+	
 	// Test string from http://www.visualsubsync.org/help/srt
-	testString1 = [[NSString alloc] initWithContentsOfURL:[testBundle URLForResource:@"test" withExtension:@"srt"]
-												 encoding:NSUTF8StringEncoding
-													error:&error];
-	if (testString1 == nil) {
-		NSLog(@"%@", error);
+	testStringArray = [NSMutableArray array];
+	
+	testStringNames = [NSArray arrayWithObjects:@"test", @"test-newline", @"test-missing-trailing-newline", nil];
+	for (NSString *testFileName in testStringNames) {
+		[testStringArray addObject:[self loadTestFileWithName:testFileName fromBundle:testBundle error:&error]];
 	}
-#if 0
-	else {
-		NSLog(@"%@", subRip);
-	}
-#endif
+	
+	testString1 = [testStringArray objectAtIndex:0];
 	
 	testTaggedSRTString1 = @""
 	"Another subtitle demonstrating tags:\n"
@@ -71,6 +91,20 @@ static NSString *testTaggedSRTString1;
 	SubRipItem *item0 = [subtitleItems objectAtIndex:0];
 	STAssertEqualObjects(item0, expectedItem1, @"Item 0 doesn’t match expectations.");
 	
+}
+
+- (void)testParsing
+{
+	NSError *error = nil;
+	
+	for (NSUInteger i = 0; i < testStringArray.count; i++) {
+		NSString *testString = [testStringArray objectAtIndex:i];
+		SubRip *subRip = [[SubRip alloc] initWithString:testString];
+		if (subRip == nil) {
+			NSLog(@"%@", error);
+			STFail(@"Couldn’t parse %@.", [testStringNames objectAtIndex:i]);
+		}
+	}
 }
 
 typedef struct _SubRipTestTimePositionPair {
