@@ -239,9 +239,9 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                  subtitleNr, lineNr, beforeError, afterError);
 #endif
             if (error != NULL) {
-				*error = [[NSError alloc] initWithDomain: NSCocoaErrorDomain
-                                                    code: NSFileReadCorruptFileError
-                                                userInfo: nil];
+				*error = [[NSError alloc] initWithDomain:NSCocoaErrorDomain
+                                                    code:NSFileReadCorruptFileError
+                                                userInfo:nil];
 			}
             
             return NO;
