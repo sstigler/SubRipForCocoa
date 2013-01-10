@@ -633,13 +633,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 
 -(NSString *)description {
-#if SUBRIP_TAG_SUPPORT
-    NSString *text = [_attributedText srtString];
-#else
     NSString *text = self.text;
-#endif
 
-    return [NSString stringWithFormat:@"%@ ---> %@\n%@", self.startTimeString, self.endTimeString, text];
+    return [NSString stringWithFormat:@"%@ ---> %@: %@", self.startTimecodeString, self.endTimecodeString, text];
 }
 
 - (BOOL)isEqual:(id)obj
