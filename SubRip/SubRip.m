@@ -183,17 +183,19 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         [scanner setScanLocation:0];
     }
     
-    NSString *subText;
-    NSMutableArray *subTextLines;
     NSString *subTextLineSeparator = @"\n";
-    NSString *subTextLine;
-    SubRipTime start, end;
-    int subtitleNr_, subtitleNr = 0;
+    int subtitleNr = 0;
     int lineNr = 1;
     
     while (SCAN_LINEBREAK()); // Skip empty lines.
    
     while (![scanner isAtEnd]) {
+        NSString *subText;
+        NSMutableArray *subTextLines;
+        NSString *subTextLine;
+        SubRipTime start, end;
+        int subtitleNr_;
+
         subtitleNr++;
         
         BOOL ok = ([scanner scanInt:&subtitleNr_] && SCAN_LINEBREAK() &&
