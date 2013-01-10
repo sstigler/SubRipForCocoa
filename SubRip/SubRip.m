@@ -158,11 +158,11 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
     return success;
 }
 
-// returns YES if successful, NO if not succesful.
-// assumes that str is a correctly-formatted SRT file.
+// Returns YES if successful, NO if not.
 -(BOOL)_populateFromString:(NSString *)str
                      error:(NSError **)error {
 #if 1
+    // Should handle mal-formed SRT files. May fill error even if parsing was successful!
     // Basis for implementation donated by Peter Ljunglöf (SubTTS)
 #   define SCAN_LINEBREAK() scanLinebreak(scanner, linebreakString, lineNr)
 #   define SCAN_STRING(str) scanString(scanner, (str))
@@ -187,7 +187,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
     int subtitleNr = 0;
     int lineNr = 1;
     
-    while (SCAN_LINEBREAK()); // Skip empty lines.
+    while (SCAN_LINEBREAK()); // Skip leading empty lines.
    
     while (![scanner isAtEnd]) {
         NSString *subText;
@@ -221,7 +221,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 #endif
                    [scanner scanInt:&end.milliseconds] &&
                    (
-                    SCAN_LINEBREAK() || ([scanner scanUpToString:linebreakString intoString:NULL] && SCAN_LINEBREAK() /* Scan past position for now. */)
+                    SCAN_LINEBREAK() || ([scanner scanUpToString:linebreakString intoString:NULL] && SCAN_LINEBREAK() /* Scan past position information for now. */)
                    ) &&
                    [scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])
                    );
@@ -252,6 +252,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         }
         
         subTextLines = [NSMutableArray arrayWithObject:subTextLine];
+        // Accumulate multi-line text if any.
         while ([scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])) {
             [subTextLines addObject:subTextLine];
         }
@@ -263,7 +264,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         SubRipItem *item = [[SubRipItem alloc] initWithText:subText startTime:startTime endTime:endTime];
         [_subtitleItems addObject:item];
         
-        while (SCAN_LINEBREAK());
+        while (SCAN_LINEBREAK()); // Skip trailing empty lines.
     }
     
 #if DEBUG
@@ -279,6 +280,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 #   undef SCAN_LINEBREAK
 #   undef SCAN_STRING
 #else
+    // Assumes that str is a correctly-formatted SRT file.
     NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
     
     __block SubRipItem *cur = [SubRipItem new];
