@@ -144,9 +144,139 @@ NS_INLINE CMTime convertSubRipTimeToCMTime(SubRipTime subRipTime) {
 }
 
 
+-(BOOL)_populateFromString:(NSString *)str {
+    return [self _populateFromString:str error:NULL];
+}
+
+NS_INLINE BOOL scanLinebreak(NSScanner *scanner, NSString *linebreakString, int linenr) {
+    BOOL success = ([scanner scanString:linebreakString intoString:NULL] && (++linenr >= 0));
+    return success;
+}
+
+NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
+    BOOL success = [scanner scanString:str intoString:NULL];
+    return success;
+}
+
 // returns YES if successful, NO if not succesful.
 // assumes that str is a correctly-formatted SRT file.
--(BOOL)_populateFromString:(NSString *)str {
+-(BOOL)_populateFromString:(NSString *)str
+                     error:(NSError **)error {
+#if 1
+    // Basis for implementation donated by Peter Ljunglöf (SubTTS)
+#   define SCAN_LINEBREAK() scanLinebreak(scanner, linebreakString, lineNr)
+#   define SCAN_STRING(str) scanString(scanner, (str))
+
+    NSScanner *scanner = [NSScanner scannerWithString:str];
+    [scanner setCharactersToBeSkipped:[NSCharacterSet whitespaceCharacterSet]];
+    
+    // Auto-detect linebreakString
+    NSString *linebreakString = nil;
+    {
+        NSCharacterSet *newlineCharacterSet = [NSCharacterSet newlineCharacterSet];
+        BOOL ok = ([scanner scanUpToCharactersFromSet:newlineCharacterSet intoString:NULL] &&
+                   [scanner scanCharactersFromSet:newlineCharacterSet intoString:&linebreakString]);
+        if (ok == NO) {
+            NSLog(@"Parse error in SRT string: no line break found!");
+            linebreakString = @"\n";
+        }
+        [scanner setScanLocation:0];
+    }
+    
+    NSString *subText;
+    NSMutableArray *subTextLines;
+    NSString *subTextLineSeparator = @"\n";
+    NSString *subTextLine;
+    SubRipTime start, end;
+    int subtitleNr_, subtitleNr = 0;
+    int lineNr = 1;
+    
+    while (SCAN_LINEBREAK()); // Skip empty lines.
+   
+    while (![scanner isAtEnd]) {
+        subtitleNr++;
+        
+        BOOL ok = ([scanner scanInt:&subtitleNr_] && SCAN_LINEBREAK() &&
+                   [scanner scanInt:&start.hours] && SCAN_STRING(@":") &&
+                   [scanner scanInt:&start.minutes] && SCAN_STRING(@":") &&
+                   [scanner scanInt:&start.seconds] &&
+#if SUBRIP_SUBVIEWER_SUPPORT
+                   (SCAN_STRING(@",") || SCAN_STRING(@".")) &&
+#else
+                   SCAN_STRING(@",") &&
+#endif
+                   [scanner scanInt:&start.milliseconds] &&
+                   
+                   SCAN_STRING(@"-->") &&
+                   
+                   [scanner scanInt:&end.hours] && SCAN_STRING(@":") &&
+                   [scanner scanInt:&end.minutes] && SCAN_STRING(@":") &&
+                   [scanner scanInt:&end.seconds] &&
+#if SUBRIP_SUBVIEWER_SUPPORT
+                   (SCAN_STRING(@",") || SCAN_STRING(@".")) &&
+#else
+                   SCAN_STRING(@",") &&
+#endif
+                   [scanner scanInt:&end.milliseconds] &&
+                   (
+                    SCAN_LINEBREAK() || ([scanner scanUpToString:linebreakString intoString:NULL] && SCAN_LINEBREAK() /* Scan past position for now. */)
+                   ) &&
+                   [scanner scanUpToString:linebreakString intoString:&subTextLine] && SCAN_LINEBREAK()
+                   );
+        
+        if (!ok) {
+#if 0
+            NSUInteger contextLength = 20;
+            NSString *beforeError = [str substringToIndex:[scanner scanLocation]];
+            if ([beforeError length] > contextLength)
+                beforeError = [beforeError substringFromIndex: [beforeError length]-contextLength];
+            NSString *afterError = [str substringFromIndex: [scanner scanLocation]];
+            if ([afterError length] > contextLength)
+                afterError = [afterError substringToIndex: contextLength];
+            WARN(@"Parse error in subtitle #%d (line %d):\n%@<HERE>%@",
+                 subtitleNr, lineNr, beforeError, afterError);
+#endif
+            if (error != NULL) {
+				*error = [[NSError alloc] initWithDomain: NSCocoaErrorDomain
+                                                    code: NSFileReadCorruptFileError
+                                                userInfo: nil];
+			}
+            
+            return NO;
+        }
+        if (subtitleNr != subtitleNr_) {
+            //WARN(@"Subtitle nr mismatch (line %d): got %d, expected %d", lineNr, subtitleNr_, subtitleNr);
+            subtitleNr = subtitleNr_;
+        }
+        
+        subTextLines = [NSMutableArray arrayWithObject:subTextLine];
+        while ([scanner scanUpToString:linebreakString intoString:&subTextLine] && SCAN_LINEBREAK()) {
+            [subTextLines addObject:subTextLine];
+        }
+        subText = [subTextLines componentsJoinedByString:subTextLineSeparator];
+        
+        CMTime startTime = convertSubRipTimeToCMTime(start);
+        CMTime endTime = convertSubRipTimeToCMTime(end);
+
+        SubRipItem *item = [[SubRipItem alloc] initWithText:subText startTime:startTime endTime:endTime];
+        [_subtitleItems addObject:item];
+        
+        while (SCAN_LINEBREAK());
+    }
+    
+#if DEBUG
+    NSLog(@"Read %d = %lu subtitles", subtitleNr, [_subtitleItems count]);
+    SubRipItem* sub = [_subtitleItems objectAtIndex:0];
+    NSLog(@"FIRST: '%@'", sub);
+    sub = [_subtitleItems lastObject];
+    NSLog(@"LAST: '%@'", sub);
+#endif
+    
+    return YES;
+
+#   undef SCAN_LINEBREAK
+#   undef SCAN_STRING
+#else
     NSCharacterSet *alphanumericCharacterSet = [NSCharacterSet alphanumericCharacterSet];
     
     __block SubRipItem *cur = [SubRipItem new];
