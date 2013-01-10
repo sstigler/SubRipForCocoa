@@ -89,6 +89,18 @@
 }
 #endif
 
+
+typedef struct _SubRipTime {
+    int hours;
+    int minutes;
+    int seconds;
+    int milliseconds;
+} SubRipTime;
+
+NS_INLINE int totalSecondsForHoursMinutesSeconds(int hours, int minutes, int seconds) {
+    return (hours * 3600) + (minutes * 60) + seconds;
+}
+
 + (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(int *)totalNumSeconds milliseconds:(int *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
@@ -102,7 +114,14 @@
     int seconds = [(NSString *)[secondsComponents objectAtIndex:0] intValue];
     
     *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] intValue];
-    *totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
+    *totalNumSeconds = totalSecondsForHoursMinutesSeconds(hours, minutes, seconds);
+}
+
+NS_INLINE CMTime convertSecondsMillisecondsToCMTime(int seconds, int milliseconds) {
+    CMTime secondsTime = CMTimeMake(seconds, 1);
+    CMTime millisecondsTime = CMTimeMake(milliseconds, 1000);
+    CMTime time = CMTimeAdd(secondsTime, millisecondsTime);
+    return time;
 }
 
 + (CMTime)parseTimecodeStringIntoCMTime:(NSString *)timecodeString {
@@ -113,12 +132,17 @@
                     intoSeconds:&totalNumSeconds
                    milliseconds:&milliseconds];
     
-    CMTime startSeconds = CMTimeMake(totalNumSeconds, 1);
-    CMTime millisecondsCMTime = CMTimeMake(milliseconds, 1000);
-    CMTime time = CMTimeAdd(startSeconds, millisecondsCMTime);
+    CMTime time = convertSecondsMillisecondsToCMTime(totalNumSeconds, milliseconds);
     
     return time;
 }
+
+NS_INLINE CMTime convertSubRipTimeToCMTime(SubRipTime subRipTime) {
+    int totalSeconds = totalSecondsForHoursMinutesSeconds(subRipTime.hours, subRipTime.minutes, subRipTime.seconds);
+    CMTime time = convertSecondsMillisecondsToCMTime(totalSeconds, subRipTime.milliseconds);
+    return time;
+}
+
 
 // returns YES if successful, NO if not succesful.
 // assumes that str is a correctly-formatted SRT file.
