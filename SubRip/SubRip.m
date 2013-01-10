@@ -21,6 +21,13 @@
 #import <SubRip/NSMutableAttributedString+SRTString.h>
 #endif
 
+typedef enum {
+    SubRipScanPositionArrayIndex,
+    SubRipScanPositionTimes,
+    SubRipScanPositionText
+} SubRipScanPosition;
+
+
 @implementation SubRip
 
 @dynamic totalCharacterCountOfText;

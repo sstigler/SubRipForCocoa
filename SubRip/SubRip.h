@@ -22,12 +22,6 @@
 
 #import "JXArcCompatibilityMacros.h"
 
-typedef enum {
-    SubRipScanPositionArrayIndex,
-    SubRipScanPositionTimes,
-    SubRipScanPositionText
-} SubRipScanPosition;
-
 @interface SubRipItem : NSObject < NSCoding > {
     CMTime _startTime;
     CMTime _endTime;
