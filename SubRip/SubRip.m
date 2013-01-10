@@ -89,25 +89,25 @@
 }
 #endif
 
-+ (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(NSInteger *)totalNumSeconds milliseconds:(NSInteger *)milliseconds {
++ (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(int *)totalNumSeconds milliseconds:(int *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
-    NSInteger hours = [(NSString *)[timeComponents objectAtIndex:0] integerValue];
-    NSInteger minutes = [(NSString *)[timeComponents objectAtIndex:1] integerValue];
+    int hours = [(NSString *)[timeComponents objectAtIndex:0] intValue];
+    int minutes = [(NSString *)[timeComponents objectAtIndex:1] intValue];
     
     NSArray *secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@","];
 #if SUBRIP_SUBVIEWER_SUPPORT
     if (secondsComponents.count < 2)  secondsComponents = [(NSString *)[timeComponents objectAtIndex:2] componentsSeparatedByString:@"."];
 #endif
-    NSInteger seconds = [(NSString *)[secondsComponents objectAtIndex:0] integerValue];
+    int seconds = [(NSString *)[secondsComponents objectAtIndex:0] intValue];
     
-    *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] integerValue];
+    *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] intValue];
     *totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
 }
 
 + (CMTime)parseTimecodeStringIntoCMTime:(NSString *)timecodeString {
-    NSInteger milliseconds;
-    NSInteger totalNumSeconds;
+    int milliseconds;
+    int totalNumSeconds;
     
     [SubRip parseTimecodeString:timecodeString
                     intoSeconds:&totalNumSeconds
