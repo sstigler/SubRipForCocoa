@@ -223,7 +223,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    (
                     SCAN_LINEBREAK() || ([scanner scanUpToString:linebreakString intoString:NULL] && SCAN_LINEBREAK() /* Scan past position for now. */)
                    ) &&
-                   [scanner scanUpToString:linebreakString intoString:&subTextLine] && SCAN_LINEBREAK()
+                   [scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])
                    );
         
         if (!ok) {
@@ -252,7 +252,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         }
         
         subTextLines = [NSMutableArray arrayWithObject:subTextLine];
-        while ([scanner scanUpToString:linebreakString intoString:&subTextLine] && SCAN_LINEBREAK()) {
+        while ([scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])) {
             [subTextLines addObject:subTextLine];
         }
         subText = [subTextLines componentsJoinedByString:subTextLineSeparator];
