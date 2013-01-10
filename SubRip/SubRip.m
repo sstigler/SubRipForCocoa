@@ -105,7 +105,7 @@
     *totalNumSeconds = (hours * 3600) + (minutes * 60) + seconds;
 }
 
-+ (CMTime)parseIntoCMTime:(NSString *)timecodeString {
++ (CMTime)parseTimecodeStringIntoCMTime:(NSString *)timecodeString {
     NSInteger milliseconds;
     NSInteger totalNumSeconds;
     
@@ -143,8 +143,8 @@
                 NSString *beginning = [times objectAtIndex:0];
                 NSString *ending = [times objectAtIndex:1];
                 
-                cur.startTime = [SubRip parseIntoCMTime:beginning];
-                cur.endTime = [SubRip parseIntoCMTime:ending];
+                cur.startTime = [SubRip parseTimecodeStringIntoCMTime:beginning];
+                cur.endTime = [SubRip parseTimecodeStringIntoCMTime:ending];
                 
                 scanPosition = SubRipScanPositionText;
                 actionAlreadyTaken = YES;
@@ -202,6 +202,7 @@
     }
     
     return YES;
+#endif
 }
 
 - (void)parseTags;
@@ -538,11 +539,11 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 
 -(void)setStartTimeFromString:(NSString *)timecodeString {
-    self.startTime = [SubRip parseIntoCMTime:timecodeString];
+    self.startTime = [SubRip parseTimecodeStringIntoCMTime:timecodeString];
 }
 
 -(void)setEndTimeFromString:(NSString *)timecodeString {
-    self.endTime = [SubRip parseIntoCMTime:timecodeString];
+    self.endTime = [SubRip parseTimecodeStringIntoCMTime:timecodeString];
 }
 
 #if SUBRIP_TAG_SUPPORT
