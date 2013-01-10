@@ -18,6 +18,8 @@ static NSString *testString1;
 static NSMutableArray *testStringArray;
 static NSArray *testStringNames;
 
+static NSString *malformedTestString1;
+
 static NSString *testTaggedSRTString1;
 
 @implementation SubRipTest
@@ -59,6 +61,8 @@ static NSString *testTaggedSRTString1;
 	
 	testString1 = [testStringArray objectAtIndex:0];
 	
+	malformedTestString1 = [self loadTestFileWithName:@"test-malformed" fromBundle:testBundle error:&error];
+
 	testTaggedSRTString1 = @""
 	"Another subtitle demonstrating tags:\n"
 	"<b>bold</b>, <i>italic</i>, <u>underlined</u>\n"
@@ -105,6 +109,17 @@ static NSString *testTaggedSRTString1;
 			STFail(@"Couldn’t parse %@.", [testStringNames objectAtIndex:i]);
 		}
 	}
+	
+	SubRip *subRip = [[SubRip alloc] initWithString:malformedTestString1
+											  error:&error];
+	if (subRip != nil) {
+		STFail(@"Could parse malformedTestString1.");
+	}
+#if 0
+	else {
+		NSLog(@"%@", error);
+	}
+#endif
 }
 
 typedef struct _SubRipTestTimePositionPair {

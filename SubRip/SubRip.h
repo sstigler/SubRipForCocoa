@@ -89,6 +89,8 @@
 -(instancetype)initWithData:(NSData *)data;
 -(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
 -(instancetype)initWithString:(NSString *)str;
+-(instancetype)initWithString:(NSString *)str
+                        error:(NSError **)error;
 -(instancetype)initWithSubtitleItems:(NSMutableArray *)subtitleItems;
 
 -(BOOL)_populateFromString:(NSString *)str;
@@ -116,3 +118,5 @@
 -(instancetype)initWithCoder:(NSCoder *)decoder;
 
 @end
+
+extern const int kJXCouldNotParseSRT;

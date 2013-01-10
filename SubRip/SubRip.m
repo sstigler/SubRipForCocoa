@@ -21,6 +21,10 @@
 #import <SubRip/NSMutableAttributedString+SRTString.h>
 #endif
 
+NSString * const    SubRipErrorDomain                       = @"de.geheimwerk.Error.SubRip";
+
+const int kJXCouldNotParseSRT           = 1009;
+
 typedef enum {
     SubRipScanPositionArrayIndex,
     SubRipScanPositionTimes,
@@ -63,11 +67,18 @@ typedef enum {
 }
 
 -(instancetype)initWithString:(NSString *)str {
+    return [self initWithString:str
+                          error:NULL];
+}
+
+-(instancetype)initWithString:(NSString *)str
+                        error:(NSError **)error {
     self = [super init];
     
     if (self) {
         self.subtitleItems = [NSMutableArray arrayWithCapacity:100];
-        BOOL success = [self _populateFromString:str];
+        BOOL success = [self _populateFromString:str
+                                           error:error];
         if (!success) {
             JX_RELEASE(self);
             return nil;
@@ -234,27 +245,34 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    );
         
         if (!ok) {
-#if 0
-            NSUInteger contextLength = 20;
-            NSString *beforeError = [str substringToIndex:[scanner scanLocation]];
-            if ([beforeError length] > contextLength)
-                beforeError = [beforeError substringFromIndex: [beforeError length]-contextLength];
-            NSString *afterError = [str substringFromIndex: [scanner scanLocation]];
-            if ([afterError length] > contextLength)
-                afterError = [afterError substringToIndex: contextLength];
-            WARN(@"Parse error in subtitle #%d (line %d):\n%@<HERE>%@",
-                 subtitleNr, lineNr, beforeError, afterError);
-#endif
             if (error != NULL) {
-				*error = [[NSError alloc] initWithDomain:NSCocoaErrorDomain
-                                                    code:NSFileReadCorruptFileError
-                                                userInfo:nil];
-			}
+                const NSUInteger contextLength = 20;
+                NSUInteger strLength = str.length;
+                NSUInteger errorLocation = [scanner scanLocation];
+                
+                NSRange beforeRange, afterRange;
+                
+                beforeRange.length = MIN(contextLength, errorLocation);
+                beforeRange.location = errorLocation - beforeRange.length;
+                NSString *beforeError = [str substringWithRange:beforeRange];
+                
+                afterRange.length = MIN(contextLength, (strLength - errorLocation));
+                afterRange.location = errorLocation;
+                NSString *afterError = [str substringWithRange:afterRange];
+                
+                NSString *errorDescription = [NSString stringWithFormat:NSLocalizedString(@"The SRT subtitles could not be parsed: error in subtitle #%d (line %d):\n%@<HERE>%@", @"Cannot parse SRT file"),
+                                              subtitleNr, lineNr, beforeError, afterError];
+                NSDictionary *errorDetail = [NSDictionary dictionaryWithObjectsAndKeys:
+                                             errorDescription, NSLocalizedDescriptionKey,
+                                             nil];
+                *error = [NSError errorWithDomain:SubRipErrorDomain code:kJXCouldNotParseSRT userInfo:errorDetail];
+            }
             
             return NO;
         }
+        
         if (subtitleNr != subtitleNr_) {
-            //WARN(@"Subtitle nr mismatch (line %d): got %d, expected %d", lineNr, subtitleNr_, subtitleNr);
+            NSLog(@"Subtitle # mismatch (line %d): got %d, expected %d. ", lineNr, subtitleNr_, subtitleNr);
             subtitleNr = subtitleNr_;
         }
         
@@ -274,7 +292,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         while (SCAN_LINEBREAK()); // Skip trailing empty lines.
     }
     
-#if DEBUG
+#if 0
     NSLog(@"Read %d = %lu subtitles", subtitleNr, [_subtitleItems count]);
     SubRipItem* sub = [_subtitleItems objectAtIndex:0];
     NSLog(@"FIRST: '%@'", sub);
