@@ -110,8 +110,8 @@
     NSInteger totalNumSeconds;
     
     [SubRip parseTimecodeString:timecodeString
-                  intoSeconds:&totalNumSeconds
-                 milliseconds:&milliseconds];
+                    intoSeconds:&totalNumSeconds
+                   milliseconds:&milliseconds];
     
     CMTime startSeconds = CMTimeMake(totalNumSeconds, 1);
     CMTime millisecondsCMTime = CMTimeMake(milliseconds, 1000);
