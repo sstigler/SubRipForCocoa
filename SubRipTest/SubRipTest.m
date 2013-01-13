@@ -24,13 +24,15 @@ static NSString *testTaggedSRTString1;
 
 @implementation SubRipTest
 
-- (NSString *)loadTestFileWithName:(NSString *)testFileName fromBundle:(NSBundle *)testBundle error:(NSError **)error
+- (NSString *)loadTestFileWithName:(NSString *)testFileName
+						fromBundle:(NSBundle *)testBundle
+							 error:(NSError **)error
 {
 	NSString *testString;
 	
     testString = [[NSString alloc] initWithContentsOfURL:[testBundle URLForResource:testFileName withExtension:@"srt"]
-												 encoding:NSUTF8StringEncoding
-													error:&(*error)];
+												encoding:NSUTF8StringEncoding
+												   error:&(*error)];
 	if (testString == nil) {
 		NSLog(@"%@", *error);
 	}
@@ -62,12 +64,12 @@ static NSString *testTaggedSRTString1;
 	testString1 = [testStringArray objectAtIndex:0];
 	
 	malformedTestString1 = [self loadTestFileWithName:@"test-malformed" fromBundle:testBundle error:&error];
-
+	
 	testTaggedSRTString1 = @""
 	"Another subtitle demonstrating tags:\n"
 	"<b>bold</b>, <i>italic</i>, <u>underlined</u>\n"
 	"<font color=\"#ff0000\">red text</font>";
-
+	
 }
 
 - (void)tearDown
@@ -94,7 +96,6 @@ static NSString *testTaggedSRTString1;
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item0 = [subtitleItems objectAtIndex:0];
 	STAssertEqualObjects(item0, expectedItem1, @"Item 0 doesn’t match expectations.");
-	
 }
 
 - (void)testParsing
@@ -212,7 +213,7 @@ typedef struct _SubRipTestTimePositionPair {
 	NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:subRip];
 	SubRip *subRipDecoded = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 	NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:subRipDecoded];
-
+	
 	STAssertEqualObjects(data1, data2, @"Coding test failed.");
 }
 
@@ -261,7 +262,7 @@ typedef struct _SubRipTestTimePositionPair {
 	
 	CGFloat defaultSize = 16.0;
 	NSString *defaultFontName = @"Times";
-
+	
 	NSFont *font = [NSFont fontWithName:defaultFontName
 								   size:defaultSize];
 	
