@@ -312,6 +312,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 
         SubRipItem *item = [[SubRipItem alloc] initWithText:subText startTime:startTime endTime:endTime];
         [_subtitleItems addObject:item];
+        JX_RELEASE(item);
         
         while (SCAN_LINEBREAK()); // Skip trailing empty lines.
     }
@@ -618,6 +619,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 {
     [_text release];
     [_uniqueID release];
+
+    [_attributeOptions release];
+    [_attributedText release];
     
     [super dealloc];
 }
