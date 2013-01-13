@@ -166,6 +166,26 @@ NS_INLINE CMTime convertSubRipTimeToCMTime(SubRipTime subRipTime) {
     return [self _populateFromString:str error:NULL];
 }
 
+NS_INLINE NSString * convertSubViewerLineBreaks(NSString *currentText) {
+    NSRange currentTextRange = NSMakeRange(0, currentText.length);
+    NSString *subViewerLineBreak = @"[br]";
+    NSRange subViewerLineBreakRange = [currentText rangeOfString:subViewerLineBreak
+                                                         options:NSLiteralSearch
+                                                           range:currentTextRange];
+    
+    if (subViewerLineBreakRange.location != NSNotFound) {
+        NSRange subViewerLineBreakSearchRange = NSMakeRange(subViewerLineBreakRange.location,
+                                                            (currentTextRange.length - subViewerLineBreakRange.location));
+        
+        currentText = [currentText stringByReplacingOccurrencesOfString:subViewerLineBreak
+                                                             withString:@"\n"
+                                                                options:NSLiteralSearch
+                                                                  range:subViewerLineBreakSearchRange];
+    }
+    
+    return currentText;
+}
+
 NS_INLINE BOOL scanLinebreak(NSScanner *scanner, NSString *linebreakString, int linenr) {
     BOOL success = ([scanner scanString:linebreakString intoString:NULL] && (++linenr >= 0));
     return success;
@@ -276,6 +296,10 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
             subtitleNr = subtitleNr_;
         }
         
+#if SUBRIP_SUBVIEWER_SUPPORT
+        subTextLine = convertSubViewerLineBreaks(subTextLine);
+#endif
+
         subTextLines = [NSMutableArray arrayWithObject:subTextLine];
         // Accumulate multi-line text if any.
         while ([scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])) {
@@ -345,22 +369,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         }
         else {
 #if SUBRIP_SUBVIEWER_SUPPORT
-            NSString *currentText = cur.text;
-            NSRange currentTextRange = NSMakeRange(0, currentText.length);
-            NSString *subViewerLineBreak = @"[br]";
-            NSRange subViewerLineBreakRange = [currentText rangeOfString:subViewerLineBreak
-                                                                 options:NSLiteralSearch
-                                                                   range:currentTextRange];
-            
-            if (subViewerLineBreakRange.location != NSNotFound) {
-                NSRange subViewerLineBreakSearchRange = NSMakeRange(subViewerLineBreakRange.location,
-                                                                    (currentTextRange.length - subViewerLineBreakRange.location));
-                
-                cur.text = [currentText stringByReplacingOccurrencesOfString:subViewerLineBreak
-                                                                  withString:@"\n"
-                                                                     options:NSLiteralSearch
-                                                                       range:subViewerLineBreakSearchRange];
-            }
+            cur.text = convertSubViewerLineBreaks(cur.text);
 #endif
             
             [_subtitleItems addObject:cur];
