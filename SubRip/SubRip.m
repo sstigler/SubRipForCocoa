@@ -305,7 +305,17 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         while ([scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])) {
             [subTextLines addObject:subTextLine];
         }
-        subText = [subTextLines componentsJoinedByString:subTextLineSeparator];
+        
+        if (subTextLines.count == 1) {
+            subText = [subTextLines objectAtIndex:0];
+            subText = [subText stringByReplacingOccurrencesOfString:@"|"
+                                                         withString:@"\n"
+                                                            options:NSLiteralSearch
+                                                              range:NSMakeRange(0, subText.length)];
+        }
+        else {
+            subText = [subTextLines componentsJoinedByString:subTextLineSeparator];
+        }
         
         CMTime startTime = convertSubRipTimeToCMTime(start);
         CMTime endTime = convertSubRipTimeToCMTime(end);
@@ -429,7 +439,9 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     NSString *srtText = item.text;
     if (lineBreaksAllowed == NO) {
         srtText = [srtText stringByReplacingOccurrencesOfString:@"\n"
-                                                     withString:@"|"];
+                                                     withString:@"|"
+                                                        options:NSLiteralSearch
+                                                          range:NSMakeRange(0, srtText.length)];
     }
     
     NSString *srtBlock = [NSString stringWithFormat:@"%@ --> %@\n%@",
