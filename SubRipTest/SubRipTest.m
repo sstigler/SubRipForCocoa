@@ -305,7 +305,7 @@ typedef struct _SubRipTestTimeIndexPair {
 
 #define VERBOSE_TEST	0
 
-- (void)testSRTString
+- (void)testConvertSRTString
 {
 	NSString *sourceSRTString = testTaggedSRTString1;
 	
@@ -323,7 +323,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
 
-- (void)testNestedSRTString
+- (void)testConvertNestedSRTString
 {
 	NSString *sourceSRTString = @""
 	"<b>bold, <i>bold and italic, <u>bold-italic-underlined</u></i></b>\n"
@@ -343,7 +343,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
 
-- (void)testNestedSRTString2
+- (void)testConvertNestedSRTString2
 {
 	NSString *sourceSRTString = @""
 	"<font color=\"#ff0000\"><b>red bold text</b>, </font><font color=\"#00ff00\"><b>bold green text</b></font>";
@@ -362,7 +362,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
 
-- (void)testAngleBrackets
+- (void)testConvertAngleBrackets
 {
 	NSString *sourceSRTString = @""
 	"a < b + c\n"
