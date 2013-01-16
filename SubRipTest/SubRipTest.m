@@ -123,6 +123,23 @@ static NSString *testTaggedSRTString1;
 #endif
 }
 
+- (void)testPosition
+{
+	NSError *error = nil;
+	
+	CGRect expectedFrame = CGRectMake(40, 20, 560, 30);
+
+	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	NSArray *subtitleItems = subRip.subtitleItems;
+	SubRipItem *item2 = [subtitleItems objectAtIndex:2];
+	STAssertTrue(CGRectEqualToRect(item2.frame, expectedFrame), @"Item 2’s frame doesn’t match expectations.");
+}
+
 typedef struct _SubRipTestTimePositionPair {
 	CMTime time;
 	NSUInteger index;

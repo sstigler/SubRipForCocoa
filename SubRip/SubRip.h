@@ -30,6 +30,8 @@
     
     NSAttributedString *_attributedText;
     NSDictionary *_attributeOptions;
+    
+    CGRect _frame;
 }
 
 @property(assign) CMTime startTime;
@@ -41,6 +43,8 @@
 @property(readonly, getter = startTimeString) NSString *startTimeString;
 @property(readonly, getter = endTimeString) NSString *endTimeString;
 @property(readonly) NSString *uniqueID;
+
+@property (nonatomic, readwrite) CGRect frame;
 
 - (instancetype)initWithText:(NSString *)text
                    startTime:(CMTime)startTime
@@ -57,6 +61,8 @@
 -(NSString *)endTimecodeString;
 
 -(NSString *)_convertCMTimeToString:(CMTime)theTime;
+
+-(NSString *)positionString;
 
 -(NSString *)description;
 

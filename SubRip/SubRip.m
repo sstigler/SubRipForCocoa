@@ -162,6 +162,28 @@ NS_INLINE CMTime convertSubRipTimeToCMTime(SubRipTime subRipTime) {
 }
 
 
+typedef struct _SubRipPosition {
+    int x1;
+    int x2;
+    int y1;
+    int y2;
+} SubRipPosition;
+
+NS_INLINE CGRect convertSubRipPositionToCGRect(SubRipPosition position) {
+    CGRect rect = CGRectMake(position.x1, position.y1, (position.x2 - position.x1), (position.y2 - position.y1));
+    return rect;
+}
+
+NS_INLINE SubRipPosition convertCGRectToSubRipPosition(CGRect rect) {
+    SubRipPosition position;
+    position.x1 = rect.origin.x;
+    position.x2 = rect.origin.x + rect.size.width;
+    position.y1 = rect.origin.y;
+    position.y2 = rect.origin.y + rect.size.height;
+    return position;
+}
+
+
 -(BOOL)_populateFromString:(NSString *)str {
     return [self _populateFromString:str error:NULL];
 }
@@ -232,6 +254,8 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         NSMutableArray *subTextLines;
         NSString *subTextLine;
         SubRipTime start, end;
+        BOOL hasPosition = NO;
+        SubRipPosition position;
         int subtitleNr_;
 
         subtitleNr++;
@@ -247,7 +271,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 #endif
                    [scanner scanInt:&start.milliseconds] &&
                    
-                   SCAN_STRING(@"-->") &&
+                   SCAN_STRING(@"-->") && // We are skipping whitepace!
                    
                    [scanner scanInt:&end.hours] && SCAN_STRING(@":") &&
                    [scanner scanInt:&end.minutes] && SCAN_STRING(@":") &&
@@ -259,7 +283,18 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 #endif
                    [scanner scanInt:&end.milliseconds] &&
                    (
-                    SCAN_LINEBREAK() || ([scanner scanUpToString:linebreakString intoString:NULL] && SCAN_LINEBREAK() /* Scan past position information for now. */)
+                    SCAN_LINEBREAK() ||
+                    (// If there is no line break, this could be position information.  
+                     [scanner scanString:@"X1:" intoString:NULL] &&
+                     [scanner scanInt:&position.x1] &&
+                     [scanner scanString:@"X2:" intoString:NULL] &&
+                     [scanner scanInt:&position.x2] &&
+                     [scanner scanString:@"Y1:" intoString:NULL] &&
+                     [scanner scanInt:&position.y1] &&
+                     [scanner scanString:@"Y2:" intoString:NULL] &&
+                     [scanner scanInt:&position.y2] &&
+                     SCAN_LINEBREAK() &&
+                     (hasPosition = YES))
                    ) &&
                    [scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])
                    );
@@ -321,6 +356,9 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         CMTime endTime = convertSubRipTimeToCMTime(end);
 
         SubRipItem *item = [[SubRipItem alloc] initWithText:subText startTime:startTime endTime:endTime];
+        if (hasPosition) {
+            item.frame = convertSubRipPositionToCGRect(position);
+        }
         [_subtitleItems addObject:item];
         JX_RELEASE(item);
         
@@ -444,9 +482,11 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
                                                           range:NSMakeRange(0, srtText.length)];
     }
     
-    NSString *srtBlock = [NSString stringWithFormat:@"%@ --> %@\n%@",
+    NSString *srtBlock = [NSString stringWithFormat:@"%@ --> %@%@\n%@",
                           srtTimecodeStringForCMTime(item.startTime),
-                          srtTimecodeStringForCMTime(item.endTime), srtText];
+                          srtTimecodeStringForCMTime(item.endTime),
+                          item.positionString,
+                          srtText];
     
     return srtBlock;
 }
@@ -600,6 +640,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 @implementation SubRipItem
 
 @synthesize startTime = _startTime, endTime = _endTime, text = _text, uniqueID = _uniqueID;
+@synthesize frame = _frame;
 #if SUBRIP_TAG_SUPPORT
 @synthesize attributedText = _attributedText;
 @synthesize attributeOptions = _attributeOptions;
@@ -622,6 +663,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
         self.text = text;
         _startTime = startTime;
         _endTime = endTime;
+        _frame = CGRectZero;
     }
     return self;
 }
@@ -686,10 +728,27 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 }
 
 
+-(NSString *)positionString {
+    if (CGRectIsEmpty(_frame)) {
+        return @"";
+    }
+    else {
+        SubRipPosition position = convertCGRectToSubRipPosition(_frame);
+        NSString *str = [NSString stringWithFormat:@"  X1:%d X2:%d Y1:%d Y2:%d",
+                         position.x1,
+                         position.x2,
+                         position.y1,
+                         position.y2];
+    return str;
+    }
+}
+
+
 -(NSString *)description {
     NSString *text = self.text;
+    NSString *position = self.positionString;
 
-    return [NSString stringWithFormat:@"%@ ---> %@: %@", self.startTimecodeString, self.endTimecodeString, text];
+    return [NSString stringWithFormat:@"%@ ---> %@%@: %@", self.startTimecodeString, self.endTimecodeString, position, text];
 }
 
 - (BOOL)isEqual:(id)obj
