@@ -519,6 +519,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
         srtNum++;
     }
     
+    [srtText deleteCharactersInRange:NSMakeRange((srtText.length - 1), 1)]; // Delete last newline. 
+    
     return srtText;
 }
 

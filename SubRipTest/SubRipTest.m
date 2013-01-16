@@ -138,6 +138,23 @@ static NSString *testTaggedSRTString1;
 	STAssertTrue(CGRectEqualToRect(item2.frame, expectedFrame), @"Item 2’s frame doesn’t match expectations.");
 }
 
+- (void)testSRTString
+{
+	NSError *error = nil;
+	
+	NSString *expectedString = [testStringsDict objectForKey:@"test-newline"];
+
+	SubRip *subRip = [[SubRip alloc] initWithString:expectedString];
+	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	NSString *srtString = subRip.srtString;
+	
+	STAssertEqualObjects(srtString, expectedString, @"Item 0 doesn’t match expectations.");
+}
+
 typedef struct _SubRipTestTimeIndexPair {
 	CMTime time;
 	NSUInteger index;
