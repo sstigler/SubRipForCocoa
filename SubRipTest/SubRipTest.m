@@ -15,8 +15,7 @@
 #import "NSMutableAttributedString+SRTString.h"
 
 static NSString *testString1;
-static NSMutableArray *testStringArray;
-static NSArray *testStringNames;
+static NSMutableDictionary *testStringsDict;
 
 static NSString *malformedTestString1;
 
@@ -54,14 +53,14 @@ static NSString *testTaggedSRTString1;
 	NSBundle *testBundle = [NSBundle bundleForClass:[self class]];
 	
 	// Test string from http://www.visualsubsync.org/help/srt
-	testStringArray = [NSMutableArray array];
+	testStringsDict = [NSMutableDictionary dictionary];
 	
-	testStringNames = [NSArray arrayWithObjects:@"test", @"test-newline", @"test-missing-trailing-newline", nil];
+	NSArray *testStringNames = [NSArray arrayWithObjects:@"test", @"test-newline", @"test-missing-trailing-newline", nil];
 	for (NSString *testFileName in testStringNames) {
-		[testStringArray addObject:[self loadTestFileWithName:testFileName fromBundle:testBundle error:&error]];
+		[testStringsDict setObject:[self loadTestFileWithName:testFileName fromBundle:testBundle error:&error] forKey:testFileName];
 	}
 	
-	testString1 = [testStringArray objectAtIndex:0];
+	testString1 = [testStringsDict objectForKey:@"test"];
 	
 	malformedTestString1 = [self loadTestFileWithName:@"test-malformed" fromBundle:testBundle error:&error];
 	
@@ -102,14 +101,13 @@ static NSString *testTaggedSRTString1;
 {
 	NSError *error = nil;
 	
-	for (NSUInteger i = 0; i < testStringArray.count; i++) {
-		NSString *testString = [testStringArray objectAtIndex:i];
+	[testStringsDict enumerateKeysAndObjectsUsingBlock:^(NSString *testStringName, NSString *testString, BOOL *stop) {
 		SubRip *subRip = [[SubRip alloc] initWithString:testString];
 		if (subRip == nil) {
 			NSLog(@"%@", error);
-			STFail(@"Couldn’t parse %@.", [testStringNames objectAtIndex:i]);
+			STFail(@"Couldn’t parse %@.", testStringName);
 		}
-	}
+	}];
 	
 	SubRip *subRip = [[SubRip alloc] initWithString:malformedTestString1
 											  error:&error];
