@@ -428,10 +428,10 @@ NSString * srtTimecodeStringForCMTime(CMTime time) {
     double seconds_floor = floor(seconds);
     long long seconds_floor_int = (long long)seconds_floor;
     return [NSString stringWithFormat:@"%02d:%02d:%02d,%03d",
-            (int)floor(seconds / 60 / 60),                        // H
-            (int)floor(seconds / 60),                            // M
-            (int)floor(seconds_floor_int % 60),                    // S
-            (int)round((seconds - seconds_floor) * 1000.0f)];    // cs
+            (int)floor(seconds / 60 / 60),                      // H
+            (int)floor(seconds / 60),                           // M
+            (int)floor(seconds_floor_int % 60),                 // S
+            (int)round((seconds - seconds_floor) * 1000.0f)];   // cs
 
 }
 
@@ -445,8 +445,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     }
     
     NSString *srtBlock = [NSString stringWithFormat:@"%@ --> %@\n%@",
-            srtTimecodeStringForCMTime(item.startTime),
-            srtTimecodeStringForCMTime(item.endTime), srtText];
+                          srtTimecodeStringForCMTime(item.startTime),
+                          srtTimecodeStringForCMTime(item.endTime), srtText];
     
     return srtBlock;
 }
