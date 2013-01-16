@@ -462,15 +462,26 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 
 
 NSString * srtTimecodeStringForCMTime(CMTime time) {
-    double seconds = CMTimeGetSeconds(time);
-    double seconds_floor = floor(seconds);
-    long long seconds_floor_int = (long long)seconds_floor;
+    const int32_t millisecondTimescale = 1000;
+    
+    int32_t timescale = time.timescale;
+    if (timescale != millisecondTimescale) {
+        time = CMTimeConvertScale(time, millisecondTimescale, kCMTimeRoundingMethod_RoundTowardZero);
+    }
+    
+    CMTimeValue total_milliseconds = time.value;
+    CMTimeValue milliseconds = total_milliseconds % millisecondTimescale;
+    CMTimeValue total_seconds = (total_milliseconds - milliseconds) / millisecondTimescale;
+    CMTimeValue seconds = total_seconds % 60;
+    CMTimeValue total_minutes = (total_seconds - seconds) / 60;
+    CMTimeValue minutes = total_minutes % 60;
+    CMTimeValue hours = (total_minutes - minutes) / 60;
+    
     return [NSString stringWithFormat:@"%02d:%02d:%02d,%03d",
-            (int)floor(seconds / 60 / 60),                      // H
-            (int)floor(seconds / 60),                           // M
-            (int)floor(seconds_floor_int % 60),                 // S
-            (int)round((seconds - seconds_floor) * 1000.0f)];   // cs
-
+            (int)hours,
+            (int)minutes,
+            (int)seconds,
+            (int)milliseconds];
 }
 
 NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowed) {
