@@ -140,12 +140,12 @@ static NSString *testTaggedSRTString1;
 	STAssertTrue(CGRectEqualToRect(item2.frame, expectedFrame), @"Item 2’s frame doesn’t match expectations.");
 }
 
-typedef struct _SubRipTestTimePositionPair {
+typedef struct _SubRipTestTimeIndexPair {
 	CMTime time;
 	NSUInteger index;
-} SubRipTestTimePositionPair;
+} SubRipTestTimeIndexPair;
 
-- (void)testTimeAndPosition
+- (void)testTimeAndIndex
 {
 	NSError *error = nil;
 	
@@ -155,7 +155,7 @@ typedef struct _SubRipTestTimePositionPair {
 		STFail(@"Couldn’t parse testString1.");
 	}
 	
-	SubRipTestTimePositionPair timePositionPairs[] = {
+	SubRipTestTimeIndexPair timeIndexPairs[] = {
 		{(CMTime){    0, 1000, 1}, NSNotFound},
 		{(CMTime){12000, 1000, 1}, 0},
 		{(CMTime){13000, 1000, 1}, 0},
@@ -168,12 +168,12 @@ typedef struct _SubRipTestTimePositionPair {
 		{(CMTime){22000, 1000, 1}, NSNotFound}
 	};
 	
-	int timePositionPairCount = sizeof(timePositionPairs)/sizeof(timePositionPairs[0]);
+	int timeIndexPairCount = sizeof(timeIndexPairs)/sizeof(timeIndexPairs[0]);
 	
-	for (int i = 0; i < timePositionPairCount; i++) {
+	for (int i = 0; i < timeIndexPairCount; i++) {
 		NSUInteger index;
-		CMTime time = timePositionPairs[i].time;
-		NSUInteger expectedIndex = timePositionPairs[i].index;
+		CMTime time = timeIndexPairs[i].time;
+		NSUInteger expectedIndex = timeIndexPairs[i].index;
 		NSString *timeString = CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, time));
 		[subRip subRipItemForPointInTime:time index:&index];
 		
@@ -181,7 +181,7 @@ typedef struct _SubRipTestTimePositionPair {
 	}
 }
 
-- (void)testNextTimeAndPosition
+- (void)testNextTimeAndIndex
 {
 	NSError *error = nil;
 	
@@ -191,7 +191,7 @@ typedef struct _SubRipTestTimePositionPair {
 		STFail(@"Couldn’t parse testString1.");
 	}
 	
-	SubRipTestTimePositionPair timePositionPairs[] = {
+	SubRipTestTimeIndexPair timeIndexPairs[] = {
 		{(CMTime){    0, 1000, 1}, 0},
 		{(CMTime){12000, 1000, 1}, 1},
 		{(CMTime){13000, 1000, 1}, 1},
@@ -204,12 +204,12 @@ typedef struct _SubRipTestTimePositionPair {
 		{(CMTime){22000, 1000, 1}, NSNotFound}
 	};
 	
-	int timePositionPairCount = sizeof(timePositionPairs)/sizeof(timePositionPairs[0]);
+	int timeIndexPairCount = sizeof(timeIndexPairs)/sizeof(timeIndexPairs[0]);
 	
-	for (int i = 0; i < timePositionPairCount; i++) {
+	for (int i = 0; i < timeIndexPairCount; i++) {
 		NSUInteger index;
-		CMTime time = timePositionPairs[i].time;
-		NSUInteger expectedIndex = timePositionPairs[i].index;
+		CMTime time = timeIndexPairs[i].time;
+		NSUInteger expectedIndex = timeIndexPairs[i].index;
 		NSString *timeString = CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, time));
 		[subRip nextSubRipItemForPointInTime:time index:&index];
 		
