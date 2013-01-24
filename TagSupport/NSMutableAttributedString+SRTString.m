@@ -279,11 +279,11 @@ NS_INLINE void closeTags(NSOrderedSet *closingTagsStack, NSMutableString *tagged
 	
 	NSUInteger plainStringRangeEnd = NSMaxRange(plainStringRange);
 	
+	NSMutableOrderedSet *closingTags = [NSMutableOrderedSet orderedSet];
+	NSMutableOrderedSet *openingTags = [NSMutableOrderedSet orderedSet];
+	
 	while (index < plainStringRangeEnd)
 	{
-		NSMutableOrderedSet *closingTags = [NSMutableOrderedSet orderedSet];
-		NSMutableOrderedSet *openingTags = [NSMutableOrderedSet orderedSet];
-
 		NSDictionary *attributes = [self attributesAtIndex:index
 									 longestEffectiveRange:&effectiveRange
 												   inRange:plainStringRange];
@@ -388,6 +388,9 @@ NS_INLINE void closeTags(NSOrderedSet *closingTagsStack, NSMutableString *tagged
 		[openTagsStack unionOrderedSet:openingTags];
 		
 		[taggedString appendString:currentSubString];
+
+		[closingTags removeAllObjects];
+		[openingTags removeAllObjects];
 	}
 	
 	closeTags([openTagsStack reversedOrderedSet], taggedString);
