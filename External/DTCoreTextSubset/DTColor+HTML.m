@@ -508,11 +508,11 @@ static NSDictionary *colorLookup = nil;
 		return [NSColor colorWithDeviceRed:components[0] green:components[1] blue:components[2] alpha:components[3]];
 	}
 	
-	// neigher grayscale nor rgba
+	// neither grayscale nor RGBA
 	return nil;
 }
 
-// From https://gist.github.com/1593255
+// Based on https://gist.github.com/1593255
 - (CGColorRef)CGColor
 {
 	CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
@@ -522,11 +522,13 @@ static NSDictionary *colorLookup = nil;
 	CGFloat colorValues[4];
 	[selfCopy getRed:&colorValues[0] green:&colorValues[1] blue:&colorValues[2] alpha:&colorValues[3]];
 	
-	CGColorRef color = CGColorCreate(colorSpace, colorValues);
+	CGColorRef cgColor = CGColorCreate(colorSpace, colorValues);
 	
 	CGColorSpaceRelease(colorSpace);
 	
-	return color;
+	id __autoreleasing color = (id)CFBridgingRelease(cgColor);
+
+	return (__bridge CGColorRef)(color);
 }
 #endif
 
