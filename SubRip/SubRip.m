@@ -462,9 +462,9 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 
 
 NSString * srtTimecodeStringForCMTime(CMTime time) {
-    const int32_t millisecondTimescale = 1000;
+    const CMTimeScale millisecondTimescale = 1000;
     
-    int32_t timescale = time.timescale;
+    CMTimeScale timescale = time.timescale;
     if (timescale != millisecondTimescale) {
         time = CMTimeConvertScale(time, millisecondTimescale, kCMTimeRoundingMethod_RoundTowardZero);
     }
