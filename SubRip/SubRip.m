@@ -500,11 +500,24 @@ NSString * srtTimecodeStringForCMTime(CMTime time) {
 
 NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowed) {
     NSString *srtText = item.text;
+    
     if (lineBreaksAllowed == NO) {
         srtText = [srtText stringByReplacingOccurrencesOfString:@"\n"
                                                      withString:@"|"
                                                         options:NSLiteralSearch
                                                           range:NSMakeRange(0, srtText.length)];
+    }
+    else {
+        NSString * const emptyLine = @"\n\n";
+        NSRange firstEmptyLineRange = [srtText rangeOfString:emptyLine options:NSLiteralSearch];
+        if (firstEmptyLineRange.location != NSNotFound) {
+            NSRange replacementRange = NSMakeRange(firstEmptyLineRange.location,
+                                                   srtText.length - firstEmptyLineRange.location);
+            srtText = [srtText stringByReplacingOccurrencesOfString:emptyLine
+                                                         withString:@"\n{\\empty_line}\n"
+                                                            options:NSLiteralSearch
+                                                              range:replacementRange];
+        }
     }
     
     NSString *srtBlock = [NSString stringWithFormat:@"%@ --> %@%@\n%@",
