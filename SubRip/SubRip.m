@@ -848,18 +848,18 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
             if (searchResult.location == NSNotFound) {
                 searchResult = [[self endTimeString] rangeOfString:str options:NSCaseInsensitiveSearch];
                 if (searchResult.location == NSNotFound) {
-                    return false;
+                    return NO;
                 } else {
-                    return true;
+                    return YES;
                 }
             } else {
-                return true;
+                return YES;
             }
         } else {
-            return false;
+            return NO;
         }
     } else {
-        return true;
+        return YES;
     }
 }
 
