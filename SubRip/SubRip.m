@@ -257,6 +257,8 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
     int subtitleNr = 0;
     int lineNr = 1;
     
+    NSRegularExpression *tagRe;
+   
     while (SCAN_LINEBREAK()); // Skip leading empty lines.
    
     while (![scanner isAtEnd]) {
@@ -366,6 +368,38 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
             subText = [subTextLines componentsJoinedByString:subTextLineSeparator];
         }
         
+        // Curly braces enclosed tag processing
+        {
+            NSString * const tagStart = @"{";
+            
+            NSRange searchRange = NSMakeRange(0, subText.length);
+            
+            NSRange tagStartRange = [subText rangeOfString:tagStart options:NSLiteralSearch range:searchRange];
+            
+            if (tagStartRange.location != NSNotFound) {
+                searchRange = NSMakeRange(tagStartRange.location, subText.length - tagStartRange.location);
+                NSMutableString *subTextMutable = [subText mutableCopy];
+                
+                // Remove all
+                if (tagRe == nil) {
+                    NSString * const tagPattern = @"\\{(\\\\|Y:)[^\\{]+\\}";
+                    
+                    tagRe = [[NSRegularExpression alloc] initWithPattern:tagPattern
+                                                                 options:0
+                                                                   error:error];
+                    if (tagRe == nil)  NSLog(@"%@", *error);
+                }
+                
+                [tagRe replaceMatchesInString:subTextMutable
+                                      options:0
+                                        range:searchRange
+                                 withTemplate:@""];
+                
+                subText = JX_AUTORELEASE([subTextMutable copy]);
+                JX_RELEASE(subTextMutable);
+            }
+        }
+    
         CMTime startTime = convertSubRipTimeToCMTime(start);
         CMTime endTime = convertSubRipTimeToCMTime(end);
 
@@ -379,6 +413,8 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         while (SCAN_LINEBREAK()); // Skip trailing empty lines.
     }
     
+    JX_RELEASE(tagRe);
+
 #if 0
     NSLog(@"Read %d = %lu subtitles", subtitleNr, [_subtitleItems count]);
     SubRipItem* sub = [_subtitleItems objectAtIndex:0];
