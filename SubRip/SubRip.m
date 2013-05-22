@@ -281,7 +281,11 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
 #endif
                    [scanner scanInt:&start.milliseconds] &&
                    
+#if SUBRIP_SUBVIEWER_SUPPORT
+                   (SCAN_STRING(@"-->") || SCAN_STRING(@",")) &&
+#else
                    SCAN_STRING(@"-->") && // We are skipping whitepace!
+#endif
                    
                    [scanner scanInt:&end.hours] && SCAN_STRING(@":") &&
                    [scanner scanInt:&end.minutes] && SCAN_STRING(@":") &&
