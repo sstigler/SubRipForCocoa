@@ -94,6 +94,7 @@
 -(instancetype)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error;
 -(instancetype)initWithData:(NSData *)data;
 -(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding;
+-(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding error:(NSError **)error;
 -(instancetype)initWithString:(NSString *)str;
 -(instancetype)initWithString:(NSString *)str
                         error:(NSError **)error;

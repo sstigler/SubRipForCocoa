@@ -47,14 +47,14 @@ typedef enum {
 }
 
 -(instancetype)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
-    if ([fileURL checkResourceIsReachableAndReturnError:error] == YES) {
-        NSData *data = [NSData dataWithContentsOfURL:fileURL
-                                             options:NSDataReadingMappedIfSafe
-                                               error:error];
-        return [self initWithData:data encoding:encoding];
-    } else {
-        return nil;
-    }
+    NSString *str = [NSString stringWithContentsOfURL:fileURL
+                                             encoding:encoding
+                                                error:error];
+    
+    if (str == nil)  return nil;
+    
+    return [self initWithString:str
+                          error:error];
 }
 
 -(instancetype)initWithData:(NSData *)data {
@@ -63,7 +63,17 @@ typedef enum {
 
 -(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding {
     NSString *str = JX_AUTORELEASE([[NSString alloc] initWithData:data encoding:encoding]);
-    return [self initWithString:str];
+    return [self initWithString:str
+                          error:NULL];
+}
+
+-(instancetype)initWithData:(NSData *)data encoding:(NSStringEncoding)encoding error:(NSError **)error {
+    NSString *str = JX_AUTORELEASE([[NSString alloc] initWithData:data encoding:encoding]);
+    
+    if (str == nil)  return nil;
+    
+    return [self initWithString:str
+                          error:error];
 }
 
 -(instancetype)initWithString:(NSString *)str {
