@@ -284,6 +284,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         subtitleNr++;
         
         BOOL ok = ([scanner scanInt:&subtitleNr_] && SCAN_LINEBREAK() &&
+                   // Start time
                    [scanner scanInt:&start.hours] && SCAN_STRING(@":") &&
                    [scanner scanInt:&start.minutes] && SCAN_STRING(@":") &&
                    [scanner scanInt:&start.seconds] &&
@@ -297,12 +298,14 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    ) || YES) // We either find milliseconds or we ignore them.
                    &&
                    
+                   // Start/End separator
 #if SUBRIP_SUBVIEWER_SUPPORT
                    (SCAN_STRING(@"-->") || SCAN_STRING(@",")) &&
 #else
                    SCAN_STRING(@"-->") && // We are skipping whitepace!
 #endif
                    
+                   // End time
                    [scanner scanInt:&end.hours] && SCAN_STRING(@":") &&
                    [scanner scanInt:&end.minutes] && SCAN_STRING(@":") &&
                    [scanner scanInt:&end.seconds] &&
@@ -316,6 +319,7 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    ) || YES) // We either find milliseconds or we ignore them.
                    &&
                    
+                   // Optional position
                    (
                     SCAN_LINEBREAK() ||
                     (// If there is no line break, this could be position information.  
@@ -329,7 +333,10 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                      [scanner scanInt:&position.y2] &&
                      SCAN_LINEBREAK() &&
                      (hasPosition = YES))
-                   ) &&
+                   )
+                   &&
+                   
+                   // Subtitle text and end of event
                    [scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])
                    );
         
