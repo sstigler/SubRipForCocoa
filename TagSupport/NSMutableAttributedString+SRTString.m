@@ -15,10 +15,9 @@
 
 - (id)initWithSRTString:(NSString *)srtString options:(NSDictionary *)options
 {
-	// only with valid string
-	if (![srtString length])
+	if (srtString.length == 0)
 	{
-		return nil;
+		return [[NSMutableAttributedString alloc] initWithString:@""];
 	}
 	
 	// custom option to scale text

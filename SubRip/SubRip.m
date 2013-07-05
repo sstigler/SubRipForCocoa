@@ -337,7 +337,10 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    &&
                    
                    // Subtitle text
-                   [scanner scanUpToString:linebreakString intoString:&subTextLine]
+                   (
+                    [scanner scanUpToString:linebreakString intoString:&subTextLine] || // We either find subtitle text…
+                    (subTextLine = @"") // … or we assume empty text.
+                   )
                    &&
                    
                    // End of event
