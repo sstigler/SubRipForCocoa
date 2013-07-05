@@ -141,13 +141,23 @@ NS_INLINE int totalSecondsForHoursMinutesSeconds(int hours, int minutes, int sec
 #endif
     int seconds = [(NSString *)[secondsComponents objectAtIndex:0] intValue];
     
-    *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] intValue];
+    if (secondsComponents.count < 2) {
+        *milliseconds = -1;
+    }
+    else {
+        *milliseconds = [(NSString *)[secondsComponents objectAtIndex:1] intValue];
+    }
     *totalNumSeconds = totalSecondsForHoursMinutesSeconds(hours, minutes, seconds);
 }
 
 NS_INLINE CMTime convertSecondsMillisecondsToCMTime(int seconds, int milliseconds) {
     CMTime secondsTime = CMTimeMake(seconds, 1);
-    CMTime millisecondsTime = CMTimeMake(milliseconds, 1000);
+    CMTime millisecondsTime;
+    if (milliseconds == -1) {
+        millisecondsTime = CMTimeMake(0, 1000);
+    } else {
+        millisecondsTime = CMTimeMake(milliseconds, 1000);
+    }
     CMTime time = CMTimeAdd(secondsTime, millisecondsTime);
     return time;
 }
@@ -265,7 +275,8 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         NSString *subText;
         NSMutableArray *subTextLines;
         NSString *subTextLine;
-        SubRipTime start, end;
+        SubRipTime start = {-1, -1, -1, -1};
+        SubRipTime end = {-1, -1, -1, -1};
         BOOL hasPosition = NO;
         SubRipPosition position;
         int subtitleNr_;
@@ -276,12 +287,15 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    [scanner scanInt:&start.hours] && SCAN_STRING(@":") &&
                    [scanner scanInt:&start.minutes] && SCAN_STRING(@":") &&
                    [scanner scanInt:&start.seconds] &&
+                   ((
 #if SUBRIP_SUBVIEWER_SUPPORT
-                   (SCAN_STRING(@",") || SCAN_STRING(@".")) &&
+                    (SCAN_STRING(@",") || SCAN_STRING(@".")) &&
 #else
-                   SCAN_STRING(@",") &&
+                    SCAN_STRING(@",") &&
 #endif
-                   [scanner scanInt:&start.milliseconds] &&
+                    [scanner scanInt:&start.milliseconds]
+                   ) || YES) // We either find milliseconds or we ignore them.
+                   &&
                    
 #if SUBRIP_SUBVIEWER_SUPPORT
                    (SCAN_STRING(@"-->") || SCAN_STRING(@",")) &&
@@ -292,12 +306,16 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    [scanner scanInt:&end.hours] && SCAN_STRING(@":") &&
                    [scanner scanInt:&end.minutes] && SCAN_STRING(@":") &&
                    [scanner scanInt:&end.seconds] &&
+                   ((
 #if SUBRIP_SUBVIEWER_SUPPORT
-                   (SCAN_STRING(@",") || SCAN_STRING(@".")) &&
+                    (SCAN_STRING(@",") || SCAN_STRING(@".")) &&
 #else
-                   SCAN_STRING(@",") &&
+                    SCAN_STRING(@",") &&
 #endif
-                   [scanner scanInt:&end.milliseconds] &&
+                    [scanner scanInt:&end.milliseconds]
+                   ) || YES) // We either find milliseconds or we ignore them.
+                   &&
+                   
                    (
                     SCAN_LINEBREAK() ||
                     (// If there is no line break, this could be position information.  
