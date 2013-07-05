@@ -49,6 +49,8 @@
 		3D708B581674B07400AD7DEC /* NSString+HTML.h in Headers */ = {isa = PBXBuildFile; fileRef = 3D708B481674B07400AD7DEC /* NSString+HTML.h */; };
 		3D708B591674B07400AD7DEC /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D708B491674B07400AD7DEC /* NSString+HTML.m */; };
 		3D708B5C1674B28D00AD7DEC /* ApplicationServices.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D708B5B1674B28D00AD7DEC /* ApplicationServices.framework */; };
+		3DCDF7701786FF6D00AE6A23 /* test-empty-text.srt in Resources */ = {isa = PBXBuildFile; fileRef = 3DCDF76E1786FF6D00AE6A23 /* test-empty-text.srt */; };
+		3DCDF7711786FF6D00AE6A23 /* test-missing-milliseconds.srt in Resources */ = {isa = PBXBuildFile; fileRef = 3DCDF76F1786FF6D00AE6A23 /* test-missing-milliseconds.srt */; };
 		E7237A6A146112D100E22EA4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A69146112D100E22EA4 /* Cocoa.framework */; };
 		E7237A74146112D100E22EA4 /* SubRip.m in Sources */ = {isa = PBXBuildFile; fileRef = E7237A73146112D100E22EA4 /* SubRip.m */; };
 		E74B2155146113F800267DAD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E74B2154146113F800267DAD /* CoreMedia.framework */; };
@@ -107,6 +109,8 @@
 		3D708B481674B07400AD7DEC /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSString+HTML.h"; sourceTree = "<group>"; };
 		3D708B491674B07400AD7DEC /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSString+HTML.m"; sourceTree = "<group>"; };
 		3D708B5B1674B28D00AD7DEC /* ApplicationServices.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ApplicationServices.framework; path = System/Library/Frameworks/ApplicationServices.framework; sourceTree = SDKROOT; };
+		3DCDF76E1786FF6D00AE6A23 /* test-empty-text.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-empty-text.srt"; sourceTree = "<group>"; };
+		3DCDF76F1786FF6D00AE6A23 /* test-missing-milliseconds.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-missing-milliseconds.srt"; sourceTree = "<group>"; };
 		E7237A66146112D100E22EA4 /* SubRip.dylib */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.dylib"; includeInIndex = 0; path = SubRip.dylib; sourceTree = BUILT_PRODUCTS_DIR; };
 		E7237A69146112D100E22EA4 /* Cocoa.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Cocoa.framework; path = System/Library/Frameworks/Cocoa.framework; sourceTree = SDKROOT; };
 		E7237A6C146112D100E22EA4 /* AppKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AppKit.framework; path = System/Library/Frameworks/AppKit.framework; sourceTree = SDKROOT; };
@@ -178,10 +182,12 @@
 		3D4181AC166506D3006DC6F4 /* Test Files */ = {
 			isa = PBXGroup;
 			children = (
-				3D4181AD166506D3006DC6F4 /* test.srt */,
+				3DCDF76E1786FF6D00AE6A23 /* test-empty-text.srt */,
 				3D263605169F21BA004184E3 /* test-malformed.srt */,
+				3DCDF76F1786FF6D00AE6A23 /* test-missing-milliseconds.srt */,
 				3D2635D5169EF3E1004184E3 /* test-missing-trailing-newline.srt */,
 				3D2635D6169EF3E1004184E3 /* test-newline.srt */,
+				3D4181AD166506D3006DC6F4 /* test.srt */,
 			);
 			path = "Test Files";
 			sourceTree = "<group>";
@@ -418,6 +424,8 @@
 				3D2635D7169EF3E1004184E3 /* test-missing-trailing-newline.srt in Resources */,
 				3D2635D8169EF3E1004184E3 /* test-newline.srt in Resources */,
 				3D263606169F21BA004184E3 /* test-malformed.srt in Resources */,
+				3DCDF7701786FF6D00AE6A23 /* test-empty-text.srt in Resources */,
+				3DCDF7711786FF6D00AE6A23 /* test-missing-milliseconds.srt in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

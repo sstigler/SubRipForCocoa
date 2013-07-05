@@ -55,7 +55,7 @@ static NSString *testTaggedSRTString1;
 	// Test string from http://www.visualsubsync.org/help/srt
 	testStringsDict = [NSMutableDictionary dictionary];
 	
-	NSArray *testStringNames = [NSArray arrayWithObjects:@"test", @"test-newline", @"test-missing-trailing-newline", nil];
+	NSArray *testStringNames = [NSArray arrayWithObjects:@"test", @"test-newline", @"test-missing-trailing-newline", @"test-missing-milliseconds", @"test-empty-text", nil];
 	for (NSString *testFileName in testStringNames) {
 		[testStringsDict setObject:[self loadTestFileWithName:testFileName fromBundle:testBundle error:&error] forKey:testFileName];
 	}
