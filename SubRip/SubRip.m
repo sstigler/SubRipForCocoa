@@ -336,8 +336,12 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
                    )
                    &&
                    
-                   // Subtitle text and end of event
-                   [scanner scanUpToString:linebreakString intoString:&subTextLine] && (SCAN_LINEBREAK() || [scanner isAtEnd])
+                   // Subtitle text
+                   [scanner scanUpToString:linebreakString intoString:&subTextLine]
+                   &&
+                   
+                   // End of event
+                   (SCAN_LINEBREAK() || [scanner isAtEnd])
                    );
         
         if (!ok) {
