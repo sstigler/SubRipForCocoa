@@ -209,7 +209,10 @@ NS_INLINE SubRipPosition convertCGRectToSubRipPosition(CGRect rect) {
 }
 
 NS_INLINE NSString * convertSubViewerLineBreaks(NSString *currentText) {
-    NSRange currentTextRange = NSMakeRange(0, currentText.length);
+    NSUInteger currentTextLength = currentText.length;
+    if (currentTextLength == 0)  return currentText;
+    
+    NSRange currentTextRange = NSMakeRange(0, currentTextLength);
     NSString *subViewerLineBreak = @"[br]";
     NSRange subViewerLineBreakRange = [currentText rangeOfString:subViewerLineBreak
                                                          options:NSLiteralSearch
