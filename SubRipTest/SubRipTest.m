@@ -269,7 +269,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
-	STAssertEqualObjects(item1.attributedText.string, expectedText, @"Item 1 attributedText.string doesn’t match expectations.");
+	STAssertEqualObjects(item1.attributedText.string, expectedText, @"Tag Parsing: Item 1 attributedText.string doesn’t match expectations.");
 	
 }
 
