@@ -153,13 +153,14 @@ NS_INLINE int totalSecondsForHoursMinutesSeconds(int hours, int minutes, int sec
 NS_INLINE CMTime convertSecondsMillisecondsToCMTime(int seconds, int milliseconds) {
     CMTime secondsTime = CMTimeMake(seconds, 1);
     CMTime millisecondsTime;
+    
     if (milliseconds == -1) {
-        millisecondsTime = CMTimeMake(0, 1000);
+        return secondsTime;
     } else {
         millisecondsTime = CMTimeMake(milliseconds, 1000);
+        CMTime time = CMTimeAdd(secondsTime, millisecondsTime);
+        return time;
     }
-    CMTime time = CMTimeAdd(secondsTime, millisecondsTime);
-    return time;
 }
 
 + (CMTime)parseTimecodeStringIntoCMTime:(NSString *)timecodeString {
