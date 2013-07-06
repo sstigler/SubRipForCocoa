@@ -270,7 +270,41 @@ typedef struct _SubRipTestTimeIndexPair {
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
 	STAssertEqualObjects(item1.attributedText.string, expectedText, @"Tag Parsing: Item 1 attributedText.string doesn’t match expectations.");
+}
+
+- (void)testTagParsingSupportEmpty
+{
+	NSError *error = nil;
 	
+	NSString *expectedString0 = @"";
+	NSAttributedString *expectedText0 = [[NSAttributedString alloc] initWithString:@""];
+
+	NSString *expectedString1 = @"And I can’t see.";
+	
+	NSString *testString2 = [testStringsDict objectForKey:@"test-empty-text"];
+    SubRip *subRip = [[SubRip alloc] initWithString:testString2];
+    
+ 	if (subRip == nil) {
+		NSLog(@"%@", error);
+		STFail(@"Couldn’t parse testString1.");
+	}
+	
+	[subRip parseTags];
+	
+	NSArray *subtitleItems = subRip.subtitleItems;
+	SubRipItem *item0 = [subtitleItems objectAtIndex:0];
+	NSAttributedString *text0 = item0.attributedText;
+	STAssertEqualObjects(text0, expectedText0, @"Tag Parsing (Empty): Item 0 attributedText doesn’t match expectations.");
+	STAssertEqualObjects(text0.string, expectedString0, @"Tag Parsing (Empty): Item 0 attributedText.string doesn’t match expectations.");
+	
+	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
+	STAssertEqualObjects(item1.attributedText.string, expectedString1, @"Tag Parsing (Empty): Item 1 attributedText.string doesn’t match expectations.");
+	
+	SubRipItem *item2 = [subtitleItems objectAtIndex:2];
+	NSAttributedString *text2 = item2.attributedText;
+	STAssertEqualObjects(text2, expectedText0, @"Tag Parsing (Empty): Item 2 attributedText doesn’t match expectations.");
+	STAssertEqualObjects(text2.string, expectedString0, @"Tag Parsing (Empty): Item 2 attributedText.string doesn’t match expectations.");
+
 }
 
 - (void)testTagGenerationSupport
