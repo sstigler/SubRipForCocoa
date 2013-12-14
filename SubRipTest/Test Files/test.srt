@@ -1,0 +1,13 @@
+1
+00:00:12,000 --> 00:00:15,123
+This is the first subtitle
+
+2
+00:00:16,000 --> 00:00:18,000
+Another subtitle demonstrating tags:
+<b>bold</b>, <i>italic</i>, <u>underlined</u>
+<font color="#ff0000">red text</font>
+
+3
+00:00:20,000 --> 00:00:22,000  X1:40 X2:600 Y1:20 Y2:50
+Another subtitle demonstrating position.
