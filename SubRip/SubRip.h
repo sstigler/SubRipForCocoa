@@ -23,15 +23,8 @@
 #import "JXArcCompatibilityMacros.h"
 
 @interface SubRipItem : NSObject < NSCoding > {
-    CMTime _startTime;
-    CMTime _endTime;
-    NSString *_text;
     NSString *_uniqueID;
-    
-    NSAttributedString *_attributedText;
     NSDictionary *_attributeOptions;
-    
-    CGRect _frame;
 }
 
 @property(assign) CMTime startTime;
@@ -44,7 +37,7 @@
 @property(readonly, getter = endTimeString) NSString *endTimeString;
 @property(readonly) NSString *uniqueID;
 
-@property (nonatomic, readwrite) CGRect frame;
+@property (nonatomic, assign) CGRect frame;
 
 - (instancetype)initWithText:(NSString *)text
                    startTime:(CMTime)startTime

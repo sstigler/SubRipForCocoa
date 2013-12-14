@@ -21,7 +21,7 @@
 #import <SubRip/NSMutableAttributedString+SRTString.h>
 #endif
 
-NSString * const    SubRipErrorDomain                       = @"de.geheimwerk.Error.SubRip";
+NSString* const    SubRipErrorDomain                       = @"de.geheimwerk.Error.SubRip";
 
 const int kJXCouldNotParseSRT           = 1009;
 
@@ -125,11 +125,14 @@ typedef struct _SubRipTime {
     int milliseconds;
 } SubRipTime;
 
-NS_INLINE int totalSecondsForHoursMinutesSeconds(int hours, int minutes, int seconds) {
+NS_INLINE int totalSecondsForHoursMinutesSeconds(int hours, int minutes, int seconds)
+{
     return (hours * 3600) + (minutes * 60) + seconds;
 }
 
-+ (void)parseTimecodeString:(NSString *)timecodeString intoSeconds:(int *)totalNumSeconds milliseconds:(int *)milliseconds {
++ (void)parseTimecodeString:(NSString *)timecodeString
+                intoSeconds:(int *)totalNumSeconds
+               milliseconds:(int *)milliseconds {
     NSArray *timeComponents = [timecodeString componentsSeparatedByString:@":"];
     
     int hours = [(NSString *)[timeComponents objectAtIndex:0] intValue];
@@ -555,6 +558,13 @@ NSString * srtTimecodeStringForCMTime(CMTime time) {
         time = CMTimeConvertScale(time, millisecondTimescale, kCMTimeRoundingMethod_RoundTowardZero);
     }
     
+    static NSDateFormatter* timeFormatter = nil;
+    if (timeFormatter == nil)
+    {
+        timeFormatter = [[NSDateFormatter alloc] init];
+        
+    }
+    
     CMTimeValue total_milliseconds = time.value;
     CMTimeValue milliseconds = total_milliseconds % millisecondTimescale;
     CMTimeValue total_seconds = (total_milliseconds - milliseconds) / millisecondTimescale;
@@ -682,7 +692,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     return nil;
 }
 
-- (SubRipItem *)nextSubRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index {
+- (SubRipItem *)nextSubRipItemForPointInTime:(CMTime)desiredTime index:(NSUInteger *)index
+{
     // Finds the first SubRipItem whose startTime > desiredTime.
     // Requires that we ensure the subtitleItems are ordered, because we are using binary search.
     // Donated by Peter Ljunglöf (SubTTS)
@@ -751,27 +762,30 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 @implementation SubRipItem
 
-@synthesize startTime = _startTime, endTime = _endTime, text = _text, uniqueID = _uniqueID;
-@synthesize frame = _frame;
+@synthesize uniqueID = _uniqueID;
+
 #if SUBRIP_TAG_SUPPORT
 @synthesize attributedText = _attributedText;
 @synthesize attributeOptions = _attributeOptions;
 #endif
-@dynamic startTimeString, endTimeString;
 
-- (instancetype)init {
+
+- (instancetype)init
+{
     self = [super init];
-    if (self) {
+    if (self != nil)
+    {
         _uniqueID = JX_RETAIN([[NSProcessInfo processInfo] globallyUniqueString]);
     }
     return self;
 }
 
+
 - (instancetype)initWithText:(NSString *)text
                    startTime:(CMTime)startTime
                      endTime:(CMTime)endTime {
     self = [self init];
-    if (self) {
+    if (self != nil) {
         self.text = text;
         _startTime = startTime;
         _endTime = endTime;
@@ -779,6 +793,7 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     }
     return self;
 }
+
 
 #if (JX_HAS_ARC == 0)
 - (void)dealloc
@@ -806,21 +821,24 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 }
 
 
--(NSString *)startTimeString {
+- (NSString *)startTimeString
+{
     return [self _convertCMTimeToString:_startTime];
 }
 
--(NSString *)endTimeString {
+- (NSString *)endTimeString
+{
     return [self _convertCMTimeToString:_endTime];
 }
 
 
--(NSString *)_convertCMTimeToString:(CMTime)theTime {
+- (NSString *)_convertCMTimeToString:(CMTime)theTime
+{
     // Need a string of format "hh:mm:ss". (No milliseconds.)
     NSTimeInterval seconds = (NSTimeInterval)CMTimeGetSeconds(theTime);
     NSDate *date1 = JX_AUTORELEASE([NSDate new]);
     NSDate *date2 = [NSDate dateWithTimeInterval:seconds sinceDate:date1];
-    unsigned int unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
+    NSCalendarUnit unitFlags = NSHourCalendarUnit | NSMinuteCalendarUnit | NSSecondCalendarUnit;
     NSDateComponents *converted = [[NSCalendar currentCalendar] components:unitFlags fromDate:date1 toDate:date2 options:0];
     
     NSString *str = [NSString stringWithFormat:@"%02d:%02d:%02d",
@@ -840,11 +858,14 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 }
 
 
--(NSString *)positionString {
-    if (CGRectIsEmpty(_frame)) {
+-(NSString *)positionString
+{
+    if (CGRectIsEmpty(_frame))
+    {
         return @"";
     }
-    else {
+    else
+    {
         SubRipPosition position = convertCGRectToSubRipPosition(_frame);
         NSString *str = [NSString stringWithFormat:@"  X1:%d X2:%d Y1:%d Y2:%d",
                          position.x1,
@@ -884,7 +905,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 
 - (BOOL)isEqualToSubRipItem:(SubRipItem *)other
 {
-    if (other == nil) {
+    if (other == nil)
+    {
         return NO;
     }
     
@@ -896,19 +918,23 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 }
 
 
--(NSInteger)startTimeInSeconds {
+-(NSInteger)startTimeInSeconds
+{
     return (NSInteger)CMTimeGetSeconds(_startTime);
 }
 
--(NSInteger)endTimeInSeconds {
+-(NSInteger)endTimeInSeconds
+{
     return (NSInteger)CMTimeGetSeconds(_endTime);
 }
 
--(double)startTimeDouble {
+-(double)startTimeDouble
+{
     return (double)CMTimeGetSeconds(_startTime);
 }
 
--(double)endTimeDouble {
+-(double)endTimeDouble
+{
     return (double)CMTimeGetSeconds(_endTime);
 }
 
@@ -917,19 +943,22 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     self.startTime = [SubRip parseTimecodeStringIntoCMTime:timecodeString];
 }
 
--(void)setEndTimeFromString:(NSString *)timecodeString {
+-(void)setEndTimeFromString:(NSString *)timecodeString
+{
     self.endTime = [SubRip parseTimecodeStringIntoCMTime:timecodeString];
 }
 
 #if SUBRIP_TAG_SUPPORT
--(void)setAttributedText:(NSAttributedString *)attributedText {
+- (void)setAttributedText:(NSAttributedString *)attributedText
+{
     _attributedText = attributedText;
     _text = [attributedText srtString];
 }
 #endif
 
 
--(BOOL)containsString:(NSString *)str {
+- (BOOL)containsString:(NSString *)str
+{
     NSRange searchResult = [_text rangeOfString:str options:NSCaseInsensitiveSearch];
     if (searchResult.location == NSNotFound) {
         if ([str length] < 9) {
@@ -952,7 +981,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
     }
 }
 
--(void)encodeWithCoder:(NSCoder *)encoder {
+- (void)encodeWithCoder:(NSCoder *)encoder
+{
     [encoder encodeCMTime:_startTime forKey:@"startTime"];
     [encoder encodeCMTime:_endTime forKey:@"endTime"];
     [encoder encodeObject:_text forKey:@"text"];
@@ -963,7 +993,8 @@ NS_INLINE NSString * subRipItem2SRTBlock(SubRipItem *item, BOOL lineBreaksAllowe
 #endif
 }
 
--(instancetype)initWithCoder:(NSCoder *)decoder {
+- (instancetype)initWithCoder:(NSCoder *)decoder
+{
     self = [self init];
     _startTime = [decoder decodeCMTimeForKey:@"startTime"];
     _endTime = [decoder decodeCMTimeForKey:@"endTime"];
