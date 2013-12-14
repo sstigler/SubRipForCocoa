@@ -38,15 +38,38 @@ typedef enum {
 @synthesize subtitleItems = _subtitleItems;
 
 -(instancetype)initWithFile:(NSString *)filePath {
-    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath]) {
-        NSData *data = [NSData dataWithContentsOfFile:filePath];
-        return [self initWithData:data encoding:NSUTF8StringEncoding];
-    } else {
+    if ([[NSFileManager defaultManager] fileExistsAtPath:filePath])
+    {
+        NSStringEncoding encoding;
+        NSError *error = nil;
+        NSString* string = [[NSString alloc] initWithContentsOfFile:filePath
+                                                           usedEncoding:&encoding
+                                                              error:&error];
+        if ([error code] == 264) // couldn't determine file encoding
+        {
+            error = nil;
+            string = [[NSString alloc] initWithContentsOfFile:filePath
+                                                     encoding:NSISOLatin1StringEncoding
+                                                        error:&error];
+        }
+        
+        if (string == nil)
+        {
+            NSLog(@"%@", [error localizedDescription]);
+            return nil;
+        } else
+        {
+            return [self initWithString:string error:NULL];
+        }
+    } else
+    {
         return nil;
     }
 }
 
--(instancetype)initWithURL:(NSURL *)fileURL encoding:(NSStringEncoding)encoding error:(NSError **)error {
+-(instancetype)initWithURL:(NSURL *)fileURL
+                  encoding:(NSStringEncoding)encoding
+                     error:(NSError **)error {
     NSString *str = [NSString stringWithContentsOfURL:fileURL
                                              encoding:encoding
                                                 error:error];
