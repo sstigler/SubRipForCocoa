@@ -581,13 +581,6 @@ NSString * srtTimecodeStringForCMTime(CMTime time) {
         time = CMTimeConvertScale(time, millisecondTimescale, kCMTimeRoundingMethod_RoundTowardZero);
     }
     
-    static NSDateFormatter* timeFormatter = nil;
-    if (timeFormatter == nil)
-    {
-        timeFormatter = [[NSDateFormatter alloc] init];
-        
-    }
-    
     CMTimeValue total_milliseconds = time.value;
     CMTimeValue milliseconds = total_milliseconds % millisecondTimescale;
     CMTimeValue total_seconds = (total_milliseconds - milliseconds) / millisecondTimescale;
