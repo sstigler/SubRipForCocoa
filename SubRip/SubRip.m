@@ -45,7 +45,7 @@ typedef enum {
         NSString* string = [[NSString alloc] initWithContentsOfFile:filePath
                                                            usedEncoding:&encoding
                                                               error:&error];
-        if ([error code] == 264) // couldn't determine file encoding
+        if ([error code] == NSFileReadUnknownStringEncodingError) // couldn't determine file encoding
         {
             error = nil;
             string = [[NSString alloc] initWithContentsOfFile:filePath
