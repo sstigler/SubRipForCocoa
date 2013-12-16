@@ -89,12 +89,12 @@ static NSString *testTaggedSRTString1;
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item0 = [subtitleItems objectAtIndex:0];
-	STAssertEqualObjects(item0, expectedItem1, @"Item 0 doesn’t match expectations.");
+	XCTAssertEqualObjects(item0, expectedItem1, @"Item 0 doesn’t match expectations.");
 }
 
 - (void)testParsing
@@ -105,14 +105,14 @@ static NSString *testTaggedSRTString1;
 		SubRip *subRip = [[SubRip alloc] initWithString:testString];
 		if (subRip == nil) {
 			NSLog(@"%@", error);
-			STFail(@"Couldn’t parse %@.", testStringName);
+			XCTFail(@"Couldn’t parse %@.", testStringName);
 		}
 	}];
 	
 	SubRip *subRip = [[SubRip alloc] initWithString:malformedTestString1
 											  error:&error];
 	if (subRip != nil) {
-		STFail(@"Could parse malformedTestString1.");
+		XCTFail(@"Could parse malformedTestString1.");
 	}
 #if 0
 	else {
@@ -130,12 +130,12 @@ static NSString *testTaggedSRTString1;
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item2 = [subtitleItems objectAtIndex:2];
-	STAssertTrue(CGRectEqualToRect(item2.frame, expectedFrame), @"Item 2’s frame doesn’t match expectations.");
+	XCTAssertTrue(CGRectEqualToRect(item2.frame, expectedFrame), @"Item 2’s frame doesn’t match expectations.");
 }
 
 - (void)testSRTString
@@ -147,12 +147,12 @@ static NSString *testTaggedSRTString1;
 	SubRip *subRip = [[SubRip alloc] initWithString:expectedString];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	NSString *srtString = subRip.srtString;
 	
-	STAssertEqualObjects(srtString, expectedString, @"Item 0 doesn’t match expectations.");
+	XCTAssertEqualObjects(srtString, expectedString, @"Item 0 doesn’t match expectations.");
 }
 
 typedef struct _SubRipTestTimeIndexPair {
@@ -167,7 +167,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	SubRipTestTimeIndexPair timeIndexPairs[] = {
@@ -192,7 +192,7 @@ typedef struct _SubRipTestTimeIndexPair {
 		NSString *timeString = CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, time));
 		[subRip subRipItemForPointInTime:time index:&index];
 		
-		STAssertEquals(index, expectedIndex, @"Time test at %@ failed.", timeString);
+		XCTAssertEqual(index, expectedIndex, @"Time test at %@ failed.", timeString);
 	}
 }
 
@@ -203,7 +203,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	SubRipTestTimeIndexPair timeIndexPairs[] = {
@@ -228,7 +228,7 @@ typedef struct _SubRipTestTimeIndexPair {
 		NSString *timeString = CFBridgingRelease(CMTimeCopyDescription(kCFAllocatorDefault, time));
 		[subRip nextSubRipItemForPointInTime:time index:&index];
 		
-		STAssertEquals(index, expectedIndex, @"Time test at %@ failed.", timeString);
+		XCTAssertEqual(index, expectedIndex, @"Time test at %@ failed.", timeString);
 	}
 }
 
@@ -239,14 +239,14 @@ typedef struct _SubRipTestTimeIndexPair {
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	NSData *data1 = [NSKeyedArchiver archivedDataWithRootObject:subRip];
 	SubRip *subRipDecoded = [NSKeyedUnarchiver unarchiveObjectWithData:data1];
 	NSData *data2 = [NSKeyedArchiver archivedDataWithRootObject:subRipDecoded];
 	
-	STAssertEqualObjects(data1, data2, @"Coding test failed.");
+	XCTAssertEqualObjects(data1, data2, @"Coding test failed.");
 }
 
 #if SUBRIP_TAG_SUPPORT
@@ -262,14 +262,14 @@ typedef struct _SubRipTestTimeIndexPair {
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	[subRip parseTags];
 	
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
-	STAssertEqualObjects(item1.attributedText.string, expectedText, @"Tag Parsing: Item 1 attributedText.string doesn’t match expectations.");
+	XCTAssertEqualObjects(item1.attributedText.string, expectedText, @"Tag Parsing: Item 1 attributedText.string doesn’t match expectations.");
 }
 
 - (void)testTagParsingSupportEmpty
@@ -286,7 +286,7 @@ typedef struct _SubRipTestTimeIndexPair {
     
  	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	[subRip parseTags];
@@ -294,16 +294,16 @@ typedef struct _SubRipTestTimeIndexPair {
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item0 = [subtitleItems objectAtIndex:0];
 	NSAttributedString *text0 = item0.attributedText;
-	STAssertEqualObjects(text0, expectedText0, @"Tag Parsing (Empty): Item 0 attributedText doesn’t match expectations.");
-	STAssertEqualObjects(text0.string, expectedString0, @"Tag Parsing (Empty): Item 0 attributedText.string doesn’t match expectations.");
+	XCTAssertEqualObjects(text0, expectedText0, @"Tag Parsing (Empty): Item 0 attributedText doesn’t match expectations.");
+	XCTAssertEqualObjects(text0.string, expectedString0, @"Tag Parsing (Empty): Item 0 attributedText.string doesn’t match expectations.");
 	
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
-	STAssertEqualObjects(item1.attributedText.string, expectedString1, @"Tag Parsing (Empty): Item 1 attributedText.string doesn’t match expectations.");
+	XCTAssertEqualObjects(item1.attributedText.string, expectedString1, @"Tag Parsing (Empty): Item 1 attributedText.string doesn’t match expectations.");
 	
 	SubRipItem *item2 = [subtitleItems objectAtIndex:2];
 	NSAttributedString *text2 = item2.attributedText;
-	STAssertEqualObjects(text2, expectedText0, @"Tag Parsing (Empty): Item 2 attributedText doesn’t match expectations.");
-	STAssertEqualObjects(text2.string, expectedString0, @"Tag Parsing (Empty): Item 2 attributedText.string doesn’t match expectations.");
+	XCTAssertEqualObjects(text2, expectedText0, @"Tag Parsing (Empty): Item 2 attributedText doesn’t match expectations.");
+	XCTAssertEqualObjects(text2.string, expectedString0, @"Tag Parsing (Empty): Item 2 attributedText.string doesn’t match expectations.");
 
 }
 
@@ -319,7 +319,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	item1.attributedText = [[NSMutableAttributedString alloc] initWithSRTString:testTaggedSRTString1
 																		options:nil];
 	
-	STAssertEqualObjects(item1.text, expectedText, @"Tag generation #1 from attributedText failed.");
+	XCTAssertEqualObjects(item1.text, expectedText, @"Tag generation #1 from attributedText failed.");
 }
 
 - (void)testTagParsingWithOptionsSupport
@@ -337,7 +337,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	SubRip *subRip = [[SubRip alloc] initWithString:testString1];
 	if (subRip == nil) {
 		NSLog(@"%@", error);
-		STFail(@"Couldn’t parse testString1.");
+		XCTFail(@"Couldn’t parse testString1.");
 	}
 	
 	NSDictionary *srtStringParsingAttributes = @{
@@ -350,7 +350,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	NSArray *subtitleItems = subRip.subtitleItems;
 	SubRipItem *item1 = [subtitleItems objectAtIndex:1];
 	NSDictionary *attributes = [item1.attributedText attributesAtIndex:0 effectiveRange:NULL];
-	STAssertEqualObjects(attributes, expectedAttributes, @"Item 1 attributedText attributes don’t match expectations.");
+	XCTAssertEqualObjects(attributes, expectedAttributes, @"Item 1 attributedText attributes don’t match expectations.");
 	
 }
 
@@ -369,7 +369,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
 	
-	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on SRT String Test differs");
+	XCTAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on SRT String Test differs");
 	
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
@@ -389,7 +389,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
 	
-	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on nested SRT String Test differs");
+	XCTAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on nested SRT String Test differs");
 	
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
@@ -408,7 +408,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
 	
-	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on nested SRT String Test 2 differs");
+	XCTAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on nested SRT String Test 2 differs");
 	
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }
@@ -429,7 +429,7 @@ typedef struct _SubRipTestTimeIndexPair {
 	
 	if (VERBOSE_TEST)  NSLog(@"\n---\n%@\n---", resultSRTString);
 	
-	STAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on SRT String Test differs");
+	XCTAssertEqualObjects(sourceSRTString, resultSRTString, @"Output on SRT String Test differs");
 	
 	if (VERBOSE_TEST)  NSLog(@"\n------");
 }

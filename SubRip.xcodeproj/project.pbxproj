@@ -10,7 +10,6 @@
 		3D2635D7169EF3E1004184E3 /* test-missing-trailing-newline.srt in Resources */ = {isa = PBXBuildFile; fileRef = 3D2635D5169EF3E1004184E3 /* test-missing-trailing-newline.srt */; };
 		3D2635D8169EF3E1004184E3 /* test-newline.srt in Resources */ = {isa = PBXBuildFile; fileRef = 3D2635D6169EF3E1004184E3 /* test-newline.srt */; };
 		3D263606169F21BA004184E3 /* test-malformed.srt in Resources */ = {isa = PBXBuildFile; fileRef = 3D263605169F21BA004184E3 /* test-malformed.srt */; };
-		3D41819A166504CF006DC6F4 /* SenTestingKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3D418199166504CF006DC6F4 /* SenTestingKit.framework */; };
 		3D41819B166504CF006DC6F4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A69146112D100E22EA4 /* Cocoa.framework */; };
 		3D4181A1166504CF006DC6F4 /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 3D41819F166504CF006DC6F4 /* InfoPlist.strings */; };
 		3D4181A4166504CF006DC6F4 /* SubRipTest.m in Sources */ = {isa = PBXBuildFile; fileRef = 3D4181A3166504CF006DC6F4 /* SubRipTest.m */; };
@@ -54,6 +53,7 @@
 		E7237A6A146112D100E22EA4 /* Cocoa.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7237A69146112D100E22EA4 /* Cocoa.framework */; };
 		E7237A74146112D100E22EA4 /* SubRip.m in Sources */ = {isa = PBXBuildFile; fileRef = E7237A73146112D100E22EA4 /* SubRip.m */; };
 		E74B2155146113F800267DAD /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E74B2154146113F800267DAD /* CoreMedia.framework */; };
+		F58F061F185EBCD0004E9CC5 /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F58F061E185EBCD0004E9CC5 /* XCTest.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -71,8 +71,7 @@
 		3D2635D6169EF3E1004184E3 /* test-newline.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-newline.srt"; sourceTree = "<group>"; };
 		3D263605169F21BA004184E3 /* test-malformed.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-malformed.srt"; sourceTree = "<group>"; };
 		3D41816A166503DC006DC6F4 /* JXArcCompatibilityMacros.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JXArcCompatibilityMacros.h; sourceTree = "<group>"; };
-		3D418198166504CF006DC6F4 /* SubRipTest.octest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubRipTest.octest; sourceTree = BUILT_PRODUCTS_DIR; };
-		3D418199166504CF006DC6F4 /* SenTestingKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SenTestingKit.framework; path = Library/Frameworks/SenTestingKit.framework; sourceTree = DEVELOPER_DIR; };
+		3D418198166504CF006DC6F4 /* SubRipTest.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubRipTest.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		3D41819E166504CF006DC6F4 /* SubRipTest-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SubRipTest-Info.plist"; sourceTree = "<group>"; };
 		3D4181A0166504CF006DC6F4 /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		3D4181A2166504CF006DC6F4 /* SubRipTest.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubRipTest.h; sourceTree = "<group>"; };
@@ -120,6 +119,7 @@
 		E7237A72146112D100E22EA4 /* SubRip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubRip.h; sourceTree = "<group>"; usesTabs = 0; };
 		E7237A73146112D100E22EA4 /* SubRip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubRip.m; sourceTree = "<group>"; usesTabs = 0; };
 		E74B2154146113F800267DAD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		F58F061E185EBCD0004E9CC5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -127,8 +127,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F58F061F185EBCD0004E9CC5 /* XCTest.framework in Frameworks */,
 				3D4181D61665193B006DC6F4 /* SubRip.framework in Frameworks */,
-				3D41819A166504CF006DC6F4 /* SenTestingKit.framework in Frameworks */,
 				3D41819B166504CF006DC6F4 /* Cocoa.framework in Frameworks */,
 				3D4181AF16650C26006DC6F4 /* CoreMedia.framework in Frameworks */,
 			);
@@ -247,7 +247,7 @@
 			isa = PBXGroup;
 			children = (
 				E7237A66146112D100E22EA4 /* SubRip.dylib */,
-				3D418198166504CF006DC6F4 /* SubRipTest.octest */,
+				3D418198166504CF006DC6F4 /* SubRipTest.xctest */,
 				3D4181BE16651769006DC6F4 /* SubRip.framework */,
 			);
 			name = Products;
@@ -256,11 +256,11 @@
 		E7237A68146112D100E22EA4 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F58F061E185EBCD0004E9CC5 /* XCTest.framework */,
 				3D4181CE166518A5006DC6F4 /* AVFoundation.framework */,
 				3D708B5B1674B28D00AD7DEC /* ApplicationServices.framework */,
 				E74B2154146113F800267DAD /* CoreMedia.framework */,
 				E7237A69146112D100E22EA4 /* Cocoa.framework */,
-				3D418199166504CF006DC6F4 /* SenTestingKit.framework */,
 				3D41820816657676006DC6F4 /* Foundation.framework */,
 				E7237A6B146112D100E22EA4 /* Other Frameworks */,
 			);
@@ -349,8 +349,8 @@
 			);
 			name = SubRipTest;
 			productName = SubRipTest;
-			productReference = 3D418198166504CF006DC6F4 /* SubRipTest.octest */;
-			productType = "com.apple.product-type.bundle";
+			productReference = 3D418198166504CF006DC6F4 /* SubRipTest.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
 		};
 		3D4181BD16651769006DC6F4 /* SubRip.framework */ = {
 			isa = PBXNativeTarget;
@@ -526,7 +526,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SubRipTest/SubRipTest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -537,7 +541,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "SubRipTest/SubRipTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Debug;
 		};
@@ -547,7 +550,11 @@
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				COMBINE_HIDPI_IMAGES = YES;
-				FRAMEWORK_SEARCH_PATHS = "\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\"";
+				FRAMEWORK_SEARCH_PATHS = (
+					"\\\"$(DEVELOPER_LIBRARY_DIR)/Frameworks\\\"",
+					"$(inherited)",
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+				);
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "SubRipTest/SubRipTest-Prefix.pch";
 				GCC_PREPROCESSOR_DEFINITIONS = (
@@ -557,7 +564,6 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES;
 				INFOPLIST_FILE = "SubRipTest/SubRipTest-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				WRAPPER_EXTENSION = octest;
 			};
 			name = Release;
 		};
