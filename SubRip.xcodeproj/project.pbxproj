@@ -119,6 +119,7 @@
 		E7237A72146112D100E22EA4 /* SubRip.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = SubRip.h; sourceTree = "<group>"; usesTabs = 0; };
 		E7237A73146112D100E22EA4 /* SubRip.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = SubRip.m; sourceTree = "<group>"; usesTabs = 0; };
 		E74B2154146113F800267DAD /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		F58240B718A7458500E8966F /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = LICENSE; sourceTree = "<group>"; };
 		F58F061E185EBCD0004E9CC5 /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
 /* End PBXFileReference section */
 
@@ -235,6 +236,7 @@
 		E7237A5B146112D100E22EA4 = {
 			isa = PBXGroup;
 			children = (
+				F58240B718A7458500E8966F /* LICENSE */,
 				E7237A6F146112D100E22EA4 /* SubRip */,
 				3D41819C166504CF006DC6F4 /* SubRipTest */,
 				3D708B251674B05A00AD7DEC /* TagSupport */,
