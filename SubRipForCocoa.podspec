@@ -1,13 +1,13 @@
 Pod::Spec.new do |s|
 
-  s.name         = "SubRip for Mac"
+  s.name         = "SubRipForCocoa"
   s.version      = "1.0.0"
   s.summary      = "An Objective-C parser for SRT files."
-  s.homepage     = "https://github.com/sstigler/SubRip-for-Mac"
+  s.homepage     = "https://github.com/sstigler/SubRipForCocoa"
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
   s.authors		 = { "Sam Stigler" => "sstigler1985@mac.com", "Jan Weiß" => '' }
   s.platform     = :osx, '10.7';
-  s.source       = { :git => "git@github.com:sstigler/SubRip-for-Mac.git", :tag => "1.0.0" }
+  s.source       = { :git => "https://github.com/sstigler/SubRipForCocoa.git", :tag => "1.0.0" }
   s.source_files = 'SubRip/**/*', 'TagSupport/**/*', 'External/**/*'
   s.private_header_files = 'TagSupport/**/*.h', 'External/**/*.h'
   s.framework  = 'CoreMedia'
