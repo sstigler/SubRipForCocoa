@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "SubRipForCocoa"
-  s.version      = "1.0.0"
+  s.version      = "1.0.1"
   s.summary      = "An Objective-C parser for SRT files."
   s.homepage     = "https://github.com/sstigler/SubRipForCocoa"
   s.license      = { :type => 'BSD', :file => 'LICENSE' }
