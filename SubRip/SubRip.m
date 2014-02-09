@@ -18,7 +18,7 @@
 #import "SubRip.h"
 
 #if SUBRIP_TAG_SUPPORT
-#import <SubRip/NSMutableAttributedString+SRTString.h>
+#import "NSMutableAttributedString+SRTString.h"
 #endif
 
 NSString* const    SubRipErrorDomain                       = @"de.geheimwerk.Error.SubRip";
