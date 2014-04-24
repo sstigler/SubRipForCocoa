@@ -13,6 +13,5 @@ Pod::Spec.new do |s|
   s.framework  = 'CoreMedia'
   s.requires_arc = false
   s.xcconfig = { 'GCC_PREPROCESSOR_DEFINITIONS' => '$(inherited) SUBRIP_TAG_SUPPORT=1 SUBRIP_SUBVIEWER_SUPPORT=1' }
-  s.dependency 'DTCoreText'
 
 end
