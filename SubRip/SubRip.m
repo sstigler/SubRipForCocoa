@@ -475,8 +475,6 @@ NS_INLINE BOOL scanString(NSScanner *scanner, NSString *str) {
         while (SCAN_LINEBREAK()); // Skip trailing empty lines.
     }
     
-    JX_RELEASE(tagRe);
-
 #if 0
     NSLog(@"Read %d = %lu subtitles", subtitleNr, [_subtitleItems count]);
     SubRipItem* sub = [_subtitleItems objectAtIndex:0];
