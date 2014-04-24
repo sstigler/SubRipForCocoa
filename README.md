@@ -6,21 +6,11 @@ A parser for .srt files writing in Objective-C.
 Usage
 -----
 
-Add “SubRip.xcodeproj” to your project (preferably into “Frameworks” to keep things tidy).
+Import the project using [CocoaPods](http://www.cocoapods.org):
 
-In your target’s “Build Phases”:
+    pod 'SubRipForCocoa', '~> 1.0'
 
-* Add Build Phase (+-button pull-down menu) > Copy Files
-* Destination: Frameworks
-* Change name to “Copy Frameworks” to keep things clean
+And add the header to your code:
 
-Add “SubRip.framework” to the following build phases (via the +-buttons):
-
-* “Target Dependencies”
-* “Link Binary With Libraries”
-* “Copy Frameworks” (created above)
-
-And finally add the header to your code:
-
-    #import <SubRip/SubRip.h>
+    #import <SubRipForCocoa/SubRip.h>
 
