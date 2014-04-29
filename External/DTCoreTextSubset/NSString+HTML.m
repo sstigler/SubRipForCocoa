@@ -7,7 +7,8 @@
 //
 
 #import "NSString+HTML.h"
-#import "DTCoreText.h"
+#import "DTCoreTextConstants.h"
+#import "DTCoreTextFontDescriptor.h"
 
 
 static NSDictionary *entityLookup = nil;

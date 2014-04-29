@@ -10,8 +10,8 @@
 
 #import <CoreMedia/CMTime.h>
 
-#import <SubRip/SubRip.h>
-#import <SubRip/DTCoreTextConstants.h>
+#import "SubRip.h"
+#import "DTCoreTextConstants.h"
 #import "NSMutableAttributedString+SRTString.h"
 
 static NSString *testString1;

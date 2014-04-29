@@ -1,0 +1,534 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		E7142607190F56F00072963B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7142606190F56F00072963B /* Foundation.framework */; };
+		E714260A190F56F00072963B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142609190F56F00072963B /* main.m */; };
+		E714260E190F56F00072963B /* SubRipTestHarness.1 in CopyFiles */ = {isa = PBXBuildFile; fileRef = E714260D190F56F00072963B /* SubRipTestHarness.1 */; };
+		E714261A190F57090072963B /* XCTest.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7142619190F57090072963B /* XCTest.framework */; };
+		E7142620190F57090072963B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = E714261E190F57090072963B /* InfoPlist.strings */; };
+		E714262B190F57290072963B /* SubRipTest.m in Sources */ = {isa = PBXBuildFile; fileRef = E714262A190F57290072963B /* SubRipTest.m */; };
+		E714262F190F57410072963B /* SubRip.m in Sources */ = {isa = PBXBuildFile; fileRef = E714262C190F57410072963B /* SubRip.m */; };
+		E7142635190F57A90072963B /* NSMutableAttributedString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142634190F57A90072963B /* NSMutableAttributedString+HTML.m */; };
+		E7142638190F57C50072963B /* DTCoreTextConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142637190F57C50072963B /* DTCoreTextConstants.m */; };
+		E7142645190F57DF0072963B /* DTColor+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = E714263A190F57DF0072963B /* DTColor+HTML.m */; };
+		E7142646190F57DF0072963B /* DTCoreTextFontDescriptor.m in Sources */ = {isa = PBXBuildFile; fileRef = E714263D190F57DF0072963B /* DTCoreTextFontDescriptor.m */; };
+		E7142647190F57DF0072963B /* DTCoreTextParagraphStyle.m in Sources */ = {isa = PBXBuildFile; fileRef = E714263F190F57DF0072963B /* DTCoreTextParagraphStyle.m */; };
+		E7142648190F57DF0072963B /* LICENSE in Resources */ = {isa = PBXBuildFile; fileRef = E7142640190F57DF0072963B /* LICENSE */; };
+		E7142649190F57DF0072963B /* NSCharacterSet+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142642190F57DF0072963B /* NSCharacterSet+HTML.m */; };
+		E714264A190F57DF0072963B /* NSString+HTML.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142644190F57DF0072963B /* NSString+HTML.m */; };
+		E7142653190F58590072963B /* JXSRTElement.m in Sources */ = {isa = PBXBuildFile; fileRef = E714264D190F58590072963B /* JXSRTElement.m */; };
+		E7142654190F58590072963B /* NSMutableAttributedString+SRTString.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142650190F58590072963B /* NSMutableAttributedString+SRTString.m */; };
+		E7142655190F58590072963B /* NSScanner+SRTTags.m in Sources */ = {isa = PBXBuildFile; fileRef = E7142652190F58590072963B /* NSScanner+SRTTags.m */; };
+		E714265D190F58B80072963B /* test-empty-text.srt in Resources */ = {isa = PBXBuildFile; fileRef = E7142657190F58B80072963B /* test-empty-text.srt */; };
+		E714265E190F58B80072963B /* test-malformed.srt in Resources */ = {isa = PBXBuildFile; fileRef = E7142658190F58B80072963B /* test-malformed.srt */; };
+		E714265F190F58B80072963B /* test-missing-milliseconds.srt in Resources */ = {isa = PBXBuildFile; fileRef = E7142659190F58B80072963B /* test-missing-milliseconds.srt */; };
+		E7142660190F58B80072963B /* test-missing-trailing-newline.srt in Resources */ = {isa = PBXBuildFile; fileRef = E714265A190F58B80072963B /* test-missing-trailing-newline.srt */; };
+		E7142661190F58B80072963B /* test-newline.srt in Resources */ = {isa = PBXBuildFile; fileRef = E714265B190F58B80072963B /* test-newline.srt */; };
+		E7142662190F58B80072963B /* test.srt in Resources */ = {isa = PBXBuildFile; fileRef = E714265C190F58B80072963B /* test.srt */; };
+		E7142664190F59180072963B /* CoreMedia.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7142663190F59180072963B /* CoreMedia.framework */; };
+		E7142666190F595F0072963B /* AVFoundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7142665190F595F0072963B /* AVFoundation.framework */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		E7142624190F57090072963B /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = E71425FB190F56F00072963B /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = E7142602190F56F00072963B;
+			remoteInfo = SubRipTestHarness;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		E7142601190F56F00072963B /* CopyFiles */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = /usr/share/man/man1/;
+			dstSubfolderSpec = 0;
+			files = (
+				E714260E190F56F00072963B /* SubRipTestHarness.1 in CopyFiles */,
+			);
+			runOnlyForDeploymentPostprocessing = 1;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		E7142603190F56F00072963B /* SubRipTestHarness */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = SubRipTestHarness; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7142606190F56F00072963B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		E7142609190F56F00072963B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		E714260C190F56F00072963B /* SubRipTestHarness-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SubRipTestHarness-Prefix.pch"; sourceTree = "<group>"; };
+		E714260D190F56F00072963B /* SubRipTestHarness.1 */ = {isa = PBXFileReference; lastKnownFileType = text.man; path = SubRipTestHarness.1; sourceTree = "<group>"; };
+		E7142618190F57090072963B /* SubRipTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = SubRipTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		E7142619190F57090072963B /* XCTest.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = XCTest.framework; path = Library/Frameworks/XCTest.framework; sourceTree = DEVELOPER_DIR; };
+		E714261D190F57090072963B /* SubRipTests-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "SubRipTests-Info.plist"; sourceTree = "<group>"; };
+		E714261F190F57090072963B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		E7142623190F57090072963B /* SubRipTests-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SubRipTests-Prefix.pch"; sourceTree = "<group>"; };
+		E7142629190F57290072963B /* SubRipTest.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubRipTest.h; path = ../../SubRipTest/SubRipTest.h; sourceTree = "<group>"; };
+		E714262A190F57290072963B /* SubRipTest.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubRipTest.m; path = ../../SubRipTest/SubRipTest.m; sourceTree = "<group>"; };
+		E714262C190F57410072963B /* SubRip.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = SubRip.m; path = ../../SubRip/SubRip.m; sourceTree = "<group>"; };
+		E714262D190F57410072963B /* SubRip.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = SubRip.h; path = ../../SubRip/SubRip.h; sourceTree = "<group>"; };
+		E714262E190F57410072963B /* JXArcCompatibilityMacros.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXArcCompatibilityMacros.h; path = ../../SubRip/JXArcCompatibilityMacros.h; sourceTree = "<group>"; };
+		E7142633190F57A90072963B /* NSMutableAttributedString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableAttributedString+HTML.h"; path = "../../External/DTCoreTextSubset/NSMutableAttributedString+HTML.h"; sourceTree = "<group>"; };
+		E7142634190F57A90072963B /* NSMutableAttributedString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableAttributedString+HTML.m"; path = "../../External/DTCoreTextSubset/NSMutableAttributedString+HTML.m"; sourceTree = "<group>"; };
+		E7142636190F57C50072963B /* DTCoreTextConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCoreTextConstants.h; path = ../../External/DTCoreTextSubset/DTCoreTextConstants.h; sourceTree = "<group>"; };
+		E7142637190F57C50072963B /* DTCoreTextConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCoreTextConstants.m; path = ../../External/DTCoreTextSubset/DTCoreTextConstants.m; sourceTree = "<group>"; };
+		E7142639190F57DF0072963B /* DTColor+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "DTColor+HTML.h"; path = "../../External/DTCoreTextSubset/DTColor+HTML.h"; sourceTree = "<group>"; };
+		E714263A190F57DF0072963B /* DTColor+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "DTColor+HTML.m"; path = "../../External/DTCoreTextSubset/DTColor+HTML.m"; sourceTree = "<group>"; };
+		E714263B190F57DF0072963B /* DTCompatibility.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCompatibility.h; path = ../../External/DTCoreTextSubset/DTCompatibility.h; sourceTree = "<group>"; };
+		E714263C190F57DF0072963B /* DTCoreTextFontDescriptor.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCoreTextFontDescriptor.h; path = ../../External/DTCoreTextSubset/DTCoreTextFontDescriptor.h; sourceTree = "<group>"; };
+		E714263D190F57DF0072963B /* DTCoreTextFontDescriptor.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCoreTextFontDescriptor.m; path = ../../External/DTCoreTextSubset/DTCoreTextFontDescriptor.m; sourceTree = "<group>"; };
+		E714263E190F57DF0072963B /* DTCoreTextParagraphStyle.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = DTCoreTextParagraphStyle.h; path = ../../External/DTCoreTextSubset/DTCoreTextParagraphStyle.h; sourceTree = "<group>"; };
+		E714263F190F57DF0072963B /* DTCoreTextParagraphStyle.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = DTCoreTextParagraphStyle.m; path = ../../External/DTCoreTextSubset/DTCoreTextParagraphStyle.m; sourceTree = "<group>"; };
+		E7142640190F57DF0072963B /* LICENSE */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; name = LICENSE; path = ../../External/DTCoreTextSubset/LICENSE; sourceTree = "<group>"; };
+		E7142641190F57DF0072963B /* NSCharacterSet+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSCharacterSet+HTML.h"; path = "../../External/DTCoreTextSubset/NSCharacterSet+HTML.h"; sourceTree = "<group>"; };
+		E7142642190F57DF0072963B /* NSCharacterSet+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSCharacterSet+HTML.m"; path = "../../External/DTCoreTextSubset/NSCharacterSet+HTML.m"; sourceTree = "<group>"; };
+		E7142643190F57DF0072963B /* NSString+HTML.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+HTML.h"; path = "../../External/DTCoreTextSubset/NSString+HTML.h"; sourceTree = "<group>"; };
+		E7142644190F57DF0072963B /* NSString+HTML.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+HTML.m"; path = "../../External/DTCoreTextSubset/NSString+HTML.m"; sourceTree = "<group>"; };
+		E714264B190F58590072963B /* JXSRTTagsSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXSRTTagsSupport.h; path = ../../TagSupport/JXSRTTagsSupport.h; sourceTree = "<group>"; };
+		E714264C190F58590072963B /* JXSRTElement.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXSRTElement.h; path = ../../TagSupport/JXSRTElement.h; sourceTree = "<group>"; };
+		E714264D190F58590072963B /* JXSRTElement.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = JXSRTElement.m; path = ../../TagSupport/JXSRTElement.m; sourceTree = "<group>"; };
+		E714264E190F58590072963B /* JXSRTTagsSupport.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = JXSRTTagsSupport.h; path = ../../TagSupport/JXSRTTagsSupport.h; sourceTree = "<group>"; };
+		E714264F190F58590072963B /* NSMutableAttributedString+SRTString.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSMutableAttributedString+SRTString.h"; path = "../../TagSupport/NSMutableAttributedString+SRTString.h"; sourceTree = "<group>"; };
+		E7142650190F58590072963B /* NSMutableAttributedString+SRTString.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSMutableAttributedString+SRTString.m"; path = "../../TagSupport/NSMutableAttributedString+SRTString.m"; sourceTree = "<group>"; };
+		E7142651190F58590072963B /* NSScanner+SRTTags.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSScanner+SRTTags.h"; path = "../../TagSupport/NSScanner+SRTTags.h"; sourceTree = "<group>"; };
+		E7142652190F58590072963B /* NSScanner+SRTTags.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSScanner+SRTTags.m"; path = "../../TagSupport/NSScanner+SRTTags.m"; sourceTree = "<group>"; };
+		E7142657190F58B80072963B /* test-empty-text.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-empty-text.srt"; sourceTree = "<group>"; };
+		E7142658190F58B80072963B /* test-malformed.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-malformed.srt"; sourceTree = "<group>"; };
+		E7142659190F58B80072963B /* test-missing-milliseconds.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-missing-milliseconds.srt"; sourceTree = "<group>"; };
+		E714265A190F58B80072963B /* test-missing-trailing-newline.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-missing-trailing-newline.srt"; sourceTree = "<group>"; };
+		E714265B190F58B80072963B /* test-newline.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = "test-newline.srt"; sourceTree = "<group>"; };
+		E714265C190F58B80072963B /* test.srt */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = test.srt; sourceTree = "<group>"; };
+		E7142663190F59180072963B /* CoreMedia.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreMedia.framework; path = System/Library/Frameworks/CoreMedia.framework; sourceTree = SDKROOT; };
+		E7142665190F595F0072963B /* AVFoundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = AVFoundation.framework; path = System/Library/Frameworks/AVFoundation.framework; sourceTree = SDKROOT; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		E7142600190F56F00072963B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7142607190F56F00072963B /* Foundation.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7142615190F57090072963B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7142666190F595F0072963B /* AVFoundation.framework in Frameworks */,
+				E7142664190F59180072963B /* CoreMedia.framework in Frameworks */,
+				E714261A190F57090072963B /* XCTest.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		E71425FA190F56F00072963B = {
+			isa = PBXGroup;
+			children = (
+				E7142608190F56F00072963B /* SubRipTestHarness */,
+				E714261B190F57090072963B /* SubRipTests */,
+				E7142605190F56F00072963B /* Frameworks */,
+				E7142604190F56F00072963B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		E7142604190F56F00072963B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				E7142603190F56F00072963B /* SubRipTestHarness */,
+				E7142618190F57090072963B /* SubRipTests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		E7142605190F56F00072963B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				E7142665190F595F0072963B /* AVFoundation.framework */,
+				E7142663190F59180072963B /* CoreMedia.framework */,
+				E7142606190F56F00072963B /* Foundation.framework */,
+				E7142619190F57090072963B /* XCTest.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7142608190F56F00072963B /* SubRipTestHarness */ = {
+			isa = PBXGroup;
+			children = (
+				E7142609190F56F00072963B /* main.m */,
+				E714260D190F56F00072963B /* SubRipTestHarness.1 */,
+				E714260B190F56F00072963B /* Supporting Files */,
+			);
+			path = SubRipTestHarness;
+			sourceTree = "<group>";
+		};
+		E714260B190F56F00072963B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7142656190F58B80072963B /* Test Files */,
+				E714264B190F58590072963B /* JXSRTTagsSupport.h */,
+				E714264C190F58590072963B /* JXSRTElement.h */,
+				E714264D190F58590072963B /* JXSRTElement.m */,
+				E714264E190F58590072963B /* JXSRTTagsSupport.h */,
+				E714264F190F58590072963B /* NSMutableAttributedString+SRTString.h */,
+				E7142650190F58590072963B /* NSMutableAttributedString+SRTString.m */,
+				E7142651190F58590072963B /* NSScanner+SRTTags.h */,
+				E7142652190F58590072963B /* NSScanner+SRTTags.m */,
+				E7142639190F57DF0072963B /* DTColor+HTML.h */,
+				E714263A190F57DF0072963B /* DTColor+HTML.m */,
+				E714263B190F57DF0072963B /* DTCompatibility.h */,
+				E714263C190F57DF0072963B /* DTCoreTextFontDescriptor.h */,
+				E714263D190F57DF0072963B /* DTCoreTextFontDescriptor.m */,
+				E714263E190F57DF0072963B /* DTCoreTextParagraphStyle.h */,
+				E714263F190F57DF0072963B /* DTCoreTextParagraphStyle.m */,
+				E7142640190F57DF0072963B /* LICENSE */,
+				E7142641190F57DF0072963B /* NSCharacterSet+HTML.h */,
+				E7142642190F57DF0072963B /* NSCharacterSet+HTML.m */,
+				E7142643190F57DF0072963B /* NSString+HTML.h */,
+				E7142644190F57DF0072963B /* NSString+HTML.m */,
+				E7142636190F57C50072963B /* DTCoreTextConstants.h */,
+				E7142637190F57C50072963B /* DTCoreTextConstants.m */,
+				E7142633190F57A90072963B /* NSMutableAttributedString+HTML.h */,
+				E7142634190F57A90072963B /* NSMutableAttributedString+HTML.m */,
+				E714262C190F57410072963B /* SubRip.m */,
+				E714262D190F57410072963B /* SubRip.h */,
+				E714262E190F57410072963B /* JXArcCompatibilityMacros.h */,
+				E714260C190F56F00072963B /* SubRipTestHarness-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E714261B190F57090072963B /* SubRipTests */ = {
+			isa = PBXGroup;
+			children = (
+				E7142629190F57290072963B /* SubRipTest.h */,
+				E714262A190F57290072963B /* SubRipTest.m */,
+				E714261C190F57090072963B /* Supporting Files */,
+			);
+			path = SubRipTests;
+			sourceTree = "<group>";
+		};
+		E714261C190F57090072963B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				E714261D190F57090072963B /* SubRipTests-Info.plist */,
+				E714261E190F57090072963B /* InfoPlist.strings */,
+				E7142623190F57090072963B /* SubRipTests-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		E7142656190F58B80072963B /* Test Files */ = {
+			isa = PBXGroup;
+			children = (
+				E7142657190F58B80072963B /* test-empty-text.srt */,
+				E7142658190F58B80072963B /* test-malformed.srt */,
+				E7142659190F58B80072963B /* test-missing-milliseconds.srt */,
+				E714265A190F58B80072963B /* test-missing-trailing-newline.srt */,
+				E714265B190F58B80072963B /* test-newline.srt */,
+				E714265C190F58B80072963B /* test.srt */,
+			);
+			name = "Test Files";
+			path = "../../SubRipTest/Test Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		E7142602190F56F00072963B /* SubRipTestHarness */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7142611190F56F00072963B /* Build configuration list for PBXNativeTarget "SubRipTestHarness" */;
+			buildPhases = (
+				E71425FF190F56F00072963B /* Sources */,
+				E7142600190F56F00072963B /* Frameworks */,
+				E7142601190F56F00072963B /* CopyFiles */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = SubRipTestHarness;
+			productName = SubRipTestHarness;
+			productReference = E7142603190F56F00072963B /* SubRipTestHarness */;
+			productType = "com.apple.product-type.tool";
+		};
+		E7142617190F57090072963B /* SubRipTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = E7142626190F57090072963B /* Build configuration list for PBXNativeTarget "SubRipTests" */;
+			buildPhases = (
+				E7142614190F57090072963B /* Sources */,
+				E7142615190F57090072963B /* Frameworks */,
+				E7142616190F57090072963B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				E7142625190F57090072963B /* PBXTargetDependency */,
+			);
+			name = SubRipTests;
+			productName = SubRipTests;
+			productReference = E7142618190F57090072963B /* SubRipTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		E71425FB190F56F00072963B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				LastUpgradeCheck = 0510;
+				ORGANIZATIONNAME = "Sam Stigler";
+				TargetAttributes = {
+					E7142617190F57090072963B = {
+						TestTargetID = E7142602190F56F00072963B;
+					};
+				};
+			};
+			buildConfigurationList = E71425FE190F56F00072963B /* Build configuration list for PBXProject "SubRipTestHarness" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = E71425FA190F56F00072963B;
+			productRefGroup = E7142604190F56F00072963B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				E7142602190F56F00072963B /* SubRipTestHarness */,
+				E7142617190F57090072963B /* SubRipTests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		E7142616190F57090072963B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7142661190F58B80072963B /* test-newline.srt in Resources */,
+				E7142648190F57DF0072963B /* LICENSE in Resources */,
+				E714265E190F58B80072963B /* test-malformed.srt in Resources */,
+				E714265F190F58B80072963B /* test-missing-milliseconds.srt in Resources */,
+				E7142660190F58B80072963B /* test-missing-trailing-newline.srt in Resources */,
+				E714265D190F58B80072963B /* test-empty-text.srt in Resources */,
+				E7142620190F57090072963B /* InfoPlist.strings in Resources */,
+				E7142662190F58B80072963B /* test.srt in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		E71425FF190F56F00072963B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E714260A190F56F00072963B /* main.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		E7142614190F57090072963B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				E7142653190F58590072963B /* JXSRTElement.m in Sources */,
+				E714262F190F57410072963B /* SubRip.m in Sources */,
+				E7142635190F57A90072963B /* NSMutableAttributedString+HTML.m in Sources */,
+				E7142654190F58590072963B /* NSMutableAttributedString+SRTString.m in Sources */,
+				E7142655190F58590072963B /* NSScanner+SRTTags.m in Sources */,
+				E7142649190F57DF0072963B /* NSCharacterSet+HTML.m in Sources */,
+				E714262B190F57290072963B /* SubRipTest.m in Sources */,
+				E714264A190F57DF0072963B /* NSString+HTML.m in Sources */,
+				E7142646190F57DF0072963B /* DTCoreTextFontDescriptor.m in Sources */,
+				E7142638190F57C50072963B /* DTCoreTextConstants.m in Sources */,
+				E7142647190F57DF0072963B /* DTCoreTextParagraphStyle.m in Sources */,
+				E7142645190F57DF0072963B /* DTColor+HTML.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		E7142625190F57090072963B /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = E7142602190F56F00072963B /* SubRipTestHarness */;
+			targetProxy = E7142624190F57090072963B /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXVariantGroup section */
+		E714261E190F57090072963B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				E714261F190F57090072963B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		E714260F190F56F00072963B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = macosx;
+			};
+			name = Debug;
+		};
+		E7142610190F56F00072963B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = YES;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_ENABLE_OBJC_EXCEPTIONS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				MACOSX_DEPLOYMENT_TARGET = 10.9;
+				SDKROOT = macosx;
+			};
+			name = Release;
+		};
+		E7142612190F56F00072963B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SubRipTestHarness/SubRipTestHarness-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Debug;
+		};
+		E7142613190F56F00072963B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SubRipTestHarness/SubRipTestHarness-Prefix.pch";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+			};
+			name = Release;
+		};
+		E7142627190F57090072963B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SubRipTests/SubRipTests-Prefix.pch";
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				INFOPLIST_FILE = "SubRipTests/SubRipTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Debug;
+		};
+		E7142628190F57090072963B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(DEVELOPER_FRAMEWORKS_DIR)",
+					"$(inherited)",
+				);
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "SubRipTests/SubRipTests-Prefix.pch";
+				INFOPLIST_FILE = "SubRipTests/SubRipTests-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = xctest;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		E71425FE190F56F00072963B /* Build configuration list for PBXProject "SubRipTestHarness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E714260F190F56F00072963B /* Debug */,
+				E7142610190F56F00072963B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		E7142611190F56F00072963B /* Build configuration list for PBXNativeTarget "SubRipTestHarness" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7142612190F56F00072963B /* Debug */,
+				E7142613190F56F00072963B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+		E7142626190F57090072963B /* Build configuration list for PBXNativeTarget "SubRipTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				E7142627190F57090072963B /* Debug */,
+				E7142628190F57090072963B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = E71425FB190F56F00072963B /* Project object */;
+}
