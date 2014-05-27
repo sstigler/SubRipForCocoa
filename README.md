@@ -19,3 +19,5 @@ Requirements
 -------------
 
 Mac OS X v10.7 or later. Doesn't currently support iOS.
+
+_Please note that version 1.0.2 is the last one that supports manual memory management. Future versions (starting with 1.1) will require ARC._
