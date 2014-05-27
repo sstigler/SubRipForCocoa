@@ -250,6 +250,7 @@
 				E71425FF190F56F00072963B /* Sources */,
 				E7142600190F56F00072963B /* Frameworks */,
 				E7142601190F56F00072963B /* CopyFiles */,
+				E799C2E5193414750090BA5F /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -327,6 +328,22 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		E799C2E5193414750090BA5F /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "if [[ -z ${SKIP_OBJCLEAN} || ${SKIP_OBJCLEAN} != 1 ]]; then\nif [[ -d \"${LOCAL_APPS_DIR}/Objective-Clean.app\" ]]; then\n\"${LOCAL_APPS_DIR}\"/Objective-Clean.app/Contents/Resources/ObjClean.app/Contents/MacOS/ObjClean \"${SRCROOT}\"\nelse\necho \"warning: You have to install and set up Objective-Clean to use its features!\"\nfi\nfi";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		E71425FF190F56F00072963B /* Sources */ = {
@@ -519,6 +536,7 @@
 				E7142613190F56F00072963B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		E7142626190F57090072963B /* Build configuration list for PBXNativeTarget "SubRipTests" */ = {
 			isa = XCConfigurationList;
@@ -527,6 +545,7 @@
 				E7142628190F57090072963B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
